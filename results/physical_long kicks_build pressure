@@ -1,0 +1,54 @@
+                            stat         r             p      grad
+0                          score  0.810680  6.482851e-48  1.099455
+33                         tries  0.773037  5.321742e-41  1.036647
+34                   conversions  0.693517  5.176832e-30  0.861224
+1                      half_time  0.515386  5.769648e-15  0.655356
+6                    line_breaks  0.462713  5.263675e-12  0.650516
+4                 all_run_metres  0.423104  4.327678e-10  0.540812
+29               completion_rate  0.333210  1.426583e-06  0.354453
+9             kick_return_metres  0.320788  3.635950e-06  0.348141
+8           average_set_distance  0.276688  7.304401e-05  0.306227
+2             time_in_possession  0.253141  2.985006e-04  0.337889
+5            post_contact_metres  0.252001  3.184986e-04  0.298577
+20                  tackles_made -0.248163  3.953858e-04 -0.396222
+22                    intercepts  0.365100  6.384289e-04  0.457833
+31                  kick_defusal  0.237156  7.216181e-04  0.226999
+3                       all_runs  0.217334  1.992609e-03  0.269672
+24                        errors -0.209598  3.988956e-03 -0.198116
+15                kicking_metres  0.195879  5.439943e-03  0.204284
+35            conversions_missed  0.186774  8.092805e-03  0.192715
+7                  tackle_breaks  0.185936  8.387209e-03  0.288976
+21                missed_tackles -0.161453  2.237271e-02 -0.260047
+10                      offloads -0.156623  2.677426e-02 -0.190566
+11                      receipts  0.156590  2.680709e-02  0.198471
+14                         kicks  0.149054  3.515964e-02  0.171989
+18                      grubbers -0.148956  3.528213e-02 -0.142904
+13                  dummy_passes -0.141536  4.559236e-02 -0.138879
+27             inside_ten_metres  0.152297  9.263999e-02  0.142183
+16              forced_drop_outs -0.105734  1.361937e-01 -0.090515
+26            ruck_infringements  0.124511  1.471544e-01  0.128493
+25            penalties_conceded -0.100669  1.560856e-01 -0.111900
+30       average_play_ball_speed  0.097731  1.797740e-01  0.100429
+36                 penalty_goals  0.090375  2.031285e-01  0.080344
+17                         bombs  0.085431  2.290501e-01  0.077655
+23           ineffective_tackles  0.045588  5.215214e-01  0.059134
+12                  total_passes  0.042563  5.495547e-01  0.049169
+37          penalty_goals_missed  0.042114  5.537754e-01  0.033808
+19                  forty_twenty  0.090465  6.108846e-01  0.069873
+32              effective_tackle -0.035876  6.140138e-01 -0.059821
+42         two_point_field_goals  0.033443  6.382643e-01  0.046588
+28             interchanges_used  0.031406  6.695976e-01  0.034927
+38                      sin_bins  0.029826  6.750287e-01  0.030789
+43  two_point_field_goals_missed -0.025229  7.249108e-01 -0.038290
+41  one_point_field_goals_missed -0.009435  8.961197e-01 -0.011189
+40         one_point_field_goals -0.008658  9.031531e-01 -0.008043
+39                    on_reports  0.000397  9.966066e-01  0.000445
+
+
+
+
+
+
+
+
+This fits roughly with what you'd expect. Play them at their own game, don't miss tackles, linebreaks are particularly effective because their gameplan relies on not giving linebreaks away, being particularly effective in the tackle doesn't win you these games because they aren't making themselves particularly difficult to tackle, so good defenders shouldn't be a focus.

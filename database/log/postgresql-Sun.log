@@ -1,0 +1,340 @@
+2025-10-26 18:15:30.142 GMT [1434657] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-10-26 18:15:30.143 GMT [1434657] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-10-26 18:15:30.145 GMT [1434657] FATAL:  could not create lock file "/var/run/postgresql/.s.PGSQL.5432.lock": Permission denied
+2025-10-26 18:15:30.147 GMT [1434657] LOG:  database system is shut down
+2025-10-26 18:42:00.448 GMT [1530949] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-10-26 18:42:00.448 GMT [1530949] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-10-26 18:42:00.451 GMT [1530949] FATAL:  could not create lock file "/var/run/postgresql/.s.PGSQL.5432.lock": Permission denied
+2025-10-26 18:42:00.453 GMT [1530949] LOG:  database system is shut down
+2025-10-26 18:58:02.403 GMT [1589380] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-10-26 18:58:02.403 GMT [1589380] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-10-26 18:58:02.405 GMT [1589380] FATAL:  could not create lock file "/usr/bin/psql/.s.PGSQL.5432.lock": Not a directory
+2025-10-26 18:58:02.407 GMT [1589380] LOG:  database system is shut down
+2025-10-26 19:05:33.962 GMT [1616512] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-10-26 19:05:33.962 GMT [1616512] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-10-26 19:05:33.970 GMT [1616512] LOG:  listening on Unix socket "/dcs/23/u5503037/CS344/pgsock/.s.PGSQL.5432"
+2025-10-26 19:05:33.978 GMT [1616516] LOG:  database system was shut down at 2025-10-26 18:12:34 GMT
+2025-10-26 19:05:33.986 GMT [1616512] LOG:  database system is ready to accept connections
+2025-10-26 19:10:34.061 GMT [1616514] LOG:  checkpoint starting: time
+2025-10-26 19:10:38.439 GMT [1616514] LOG:  checkpoint complete: wrote 46 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.353 s, sync=0.014 s, total=4.378 s; sync files=11, longest=0.013 s, average=0.002 s; distance=277 kB, estimate=277 kB; lsn=0/1588F38, redo lsn=0/1588F00
+2025-10-26 19:20:34.610 GMT [1616514] LOG:  checkpoint starting: time
+2025-10-26 19:22:10.150 GMT [1616514] LOG:  checkpoint complete: wrote 956 buffers (5.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=95.511 s, sync=0.021 s, total=95.541 s; sync files=300, longest=0.011 s, average=0.001 s; distance=4463 kB, estimate=4463 kB; lsn=0/19E4D50, redo lsn=0/19E4D18
+2025-10-26 19:23:35.734 GMT [1616512] LOG:  received fast shutdown request
+2025-10-26 19:23:35.736 GMT [1616512] LOG:  aborting any active transactions
+2025-10-26 19:23:35.738 GMT [1616512] LOG:  background worker "logical replication launcher" (PID 1616519) exited with exit code 1
+2025-10-26 19:23:35.738 GMT [1616514] LOG:  shutting down
+2025-10-26 19:23:35.747 GMT [1616514] LOG:  checkpoint starting: shutdown immediate
+2025-10-26 19:23:35.758 GMT [1616514] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.020 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=4017 kB; lsn=0/19E4E00, redo lsn=0/19E4E00
+2025-10-26 19:23:35.766 GMT [1616512] LOG:  database system is shut down
+2025-11-02 18:53:45.070 GMT [2614863] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-11-02 18:53:45.070 GMT [2614863] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-11-02 18:53:45.078 GMT [2614863] LOG:  listening on Unix socket "/dcs/23/u5503037/CS344/pgsock/.s.PGSQL.5432"
+2025-11-02 18:53:45.102 GMT [2614868] LOG:  database system was shut down at 2025-11-01 14:19:14 GMT
+2025-11-02 18:53:45.113 GMT [2614863] LOG:  database system is ready to accept connections
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 34
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_home FROM matches WHERE home IS NULL OR home = '';
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 40
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_home_score FROM matches WHERE (home_score < 0 OR home_score > 120) AND home_score IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 50
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_time_in_possession_h FROM matches WHERE (time_in_possession_h < 600 OR time_in_possession_h > 4800) AND time_in_possession_h IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 40
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_all_runs_h FROM matches WHERE (all_runs_h < 0 OR all_runs_h > 400) AND all_runs_h IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 46
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_all_run_metres_h FROM matches WHERE (all_run_metres_h < 0 OR all_run_metres_h > 4000) AND all_run_metres_h IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 51
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_post_contact_metres_h FROM matches WHERE (post_contact_metres_h < 0 OR post_contact_metres_h > 2000) AND post_contact_metres_h IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 43
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_line_breaks_h FROM matches WHERE (line_breaks_h < 0 OR line_breaks_h > 40) AND line_breaks_h IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 45
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_tackle_breaks_h FROM matches WHERE (tackle_breaks_h < 0 OR tackle_breaks_h > 100) AND tackle_breaks_h IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 52
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_average_set_distance_h FROM matches WHERE (average_set_distance_h < 10 OR average_set_distance_h > 80) AND average_set_distance_h IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 50
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_kick_return_metres_h FROM matches WHERE (kick_return_metres_h < 0 OR kick_return_metres_h > 1000) AND kick_return_metres_h IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 40
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_offloads_h FROM matches WHERE (offloads_h < 0 OR offloads_h > 80) AND offloads_h IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 40
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_receipts_h FROM matches WHERE (receipts_h < 0 OR receipts_h > 800) AND receipts_h IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 44
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_total_passes_h FROM matches WHERE (total_passes_h < 0 OR total_passes_h > 1000) AND total_passes_h IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 44
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_dummy_passes_h FROM matches WHERE (dummy_passes_h < 0 OR dummy_passes_h > 400) AND dummy_passes_h IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 37
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_kicks_h FROM matches WHERE (kicks_h < 0 OR kicks_h > 80) AND kicks_h IS NOT NULL;
+2025-11-02 18:54:06.387 GMT [2615690] ERROR:  relation "matches" does not exist at character 46
+2025-11-02 18:54:06.387 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_kicking_metres_h FROM matches WHERE (kicking_metres_h < 0 OR kicking_metres_h > 4000) AND kicking_metres_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 48
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_forced_drop_outs_h FROM matches WHERE (forced_drop_outs_h < 0 OR forced_drop_outs_h > 20) AND forced_drop_outs_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 37
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_bombs_h FROM matches WHERE (bombs_h < 0 OR bombs_h > 40) AND bombs_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 40
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_grubbers_h FROM matches WHERE (grubbers_h < 0 OR grubbers_h > 60) AND grubbers_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 44
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_tackles_made_h FROM matches WHERE (tackles_made_h < 0 OR tackles_made_h > 800) AND tackles_made_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 46
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_missed_tackles_h FROM matches WHERE (missed_tackles_h < 0 OR missed_tackles_h > 120) AND missed_tackles_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 42
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT count(*) AS bad_intercepts_h FROM matches WHERE (intercepts_h < 0 OR intercepts_h > 10) AND intercepts_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 60
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT (home, away, season) AS bad_intercepts_h_match FROM matches WHERE (intercepts_h < 0 OR intercepts_h > 10) AND intercepts_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 51
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_ineffective_tackles_h FROM matches WHERE (ineffective_tackles_h < 0 OR ineffective_tackles_h > 150) AND ineffective_tackles_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 38
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_errors_h FROM matches WHERE (errors_h < 0 OR errors_h > 50) AND errors_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 50
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_penalties_conceded_h FROM matches WHERE (penalties_conceded_h < 0 OR penalties_conceded_h > 40) AND penalties_conceded_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 50
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_ruck_infringements_h FROM matches WHERE (ruck_infringements_h < 0 OR ruck_infringements_h > 30) AND ruck_infringements_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 49
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_inside_ten_metres_h FROM matches WHERE (inside_ten_metres_h < 0 OR inside_ten_metres_h > 40) AND inside_ten_metres_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 49
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_interchanges_used_h FROM matches WHERE (interchanges_used_h < 0 OR interchanges_used_h > 12) AND interchanges_used_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 47
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_completion_rate_h FROM matches WHERE (completion_rate_h < 0 OR completion_rate_h > 100) AND completion_rate_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 55
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_average_play_ball_speed_h FROM matches WHERE (average_play_ball_speed_h < 1 OR average_play_ball_speed_h > 6) AND average_play_ball_speed_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 44
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_kick_defusal_h FROM matches WHERE (kick_defusal_h < 0 OR kick_defusal_h > 100) AND kick_defusal_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 48
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_effective_tackle_h FROM matches WHERE (effective_tackle_h < 0 OR effective_tackle_h > 100) AND effective_tackle_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 37
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_tries_h FROM matches WHERE (tries_h < 0 OR tries_h > 30) AND tries_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 43
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_conversions_h FROM matches WHERE (conversions_h < 0 OR conversions_h > 15) AND conversions_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 50
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_conversions_missed_h FROM matches WHERE (conversions_missed_h < 0 OR conversions_missed_h > 15) AND conversions_missed_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 45
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_penalty_goals_h FROM matches WHERE (penalty_goals_h < 0 OR penalty_goals_h > 10) AND penalty_goals_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 52
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_penalty_goals_missed_h FROM matches WHERE (penalty_goals_missed_h < 0 OR penalty_goals_missed_h > 10) AND penalty_goals_missed_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 40
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_sin_bins_h FROM matches WHERE (sin_bins_h < 0 OR sin_bins_h > 10) AND sin_bins_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 53
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_one_point_field_goals_h FROM matches WHERE (one_point_field_goals_h < 0 OR one_point_field_goals_h > 5) AND one_point_field_goals_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 60
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_one_point_field_goals_missed_h FROM matches WHERE (one_point_field_goals_missed_h < 0 OR one_point_field_goals_missed_h > 10) AND one_point_field_goals_missed_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 53
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_two_point_field_goals_h FROM matches WHERE (two_point_field_goals_h < 0 OR two_point_field_goals_h > 5) AND two_point_field_goals_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 60
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_two_point_field_goals_missed_h FROM matches WHERE (two_point_field_goals_missed_h < 0 OR two_point_field_goals_missed_h > 6) AND two_point_field_goals_missed_h IS NOT NULL;
+2025-11-02 18:54:06.388 GMT [2615690] ERROR:  relation "matches" does not exist at character 41
+2025-11-02 18:54:06.388 GMT [2615690] STATEMENT:  SELECT COUNT(*) AS bad_half_time_h FROM matches WHERE (half_time_h < 0 OR half_time_h > 80) AND half_time_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 34
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_home FROM matches WHERE home IS NULL OR home = '';
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 40
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_home_score FROM matches WHERE (home_score < 0 OR home_score > 120) AND home_score IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 50
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_time_in_possession_h FROM matches WHERE (time_in_possession_h < 600 OR time_in_possession_h > 4800) AND time_in_possession_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 40
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_all_runs_h FROM matches WHERE (all_runs_h < 0 OR all_runs_h > 400) AND all_runs_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 46
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_all_run_metres_h FROM matches WHERE (all_run_metres_h < 0 OR all_run_metres_h > 4000) AND all_run_metres_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 51
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_post_contact_metres_h FROM matches WHERE (post_contact_metres_h < 0 OR post_contact_metres_h > 2000) AND post_contact_metres_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 43
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_line_breaks_h FROM matches WHERE (line_breaks_h < 0 OR line_breaks_h > 40) AND line_breaks_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 45
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_tackle_breaks_h FROM matches WHERE (tackle_breaks_h < 0 OR tackle_breaks_h > 100) AND tackle_breaks_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 52
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_average_set_distance_h FROM matches WHERE (average_set_distance_h < 10 OR average_set_distance_h > 80) AND average_set_distance_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 50
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_kick_return_metres_h FROM matches WHERE (kick_return_metres_h < 0 OR kick_return_metres_h > 1000) AND kick_return_metres_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 40
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_offloads_h FROM matches WHERE (offloads_h < 0 OR offloads_h > 80) AND offloads_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 40
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_receipts_h FROM matches WHERE (receipts_h < 0 OR receipts_h > 800) AND receipts_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 44
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_total_passes_h FROM matches WHERE (total_passes_h < 0 OR total_passes_h > 1000) AND total_passes_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 44
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_dummy_passes_h FROM matches WHERE (dummy_passes_h < 0 OR dummy_passes_h > 400) AND dummy_passes_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 37
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_kicks_h FROM matches WHERE (kicks_h < 0 OR kicks_h > 80) AND kicks_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 46
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_kicking_metres_h FROM matches WHERE (kicking_metres_h < 0 OR kicking_metres_h > 4000) AND kicking_metres_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 48
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_forced_drop_outs_h FROM matches WHERE (forced_drop_outs_h < 0 OR forced_drop_outs_h > 20) AND forced_drop_outs_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 37
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_bombs_h FROM matches WHERE (bombs_h < 0 OR bombs_h > 40) AND bombs_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 40
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_grubbers_h FROM matches WHERE (grubbers_h < 0 OR grubbers_h > 60) AND grubbers_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 44
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_tackles_made_h FROM matches WHERE (tackles_made_h < 0 OR tackles_made_h > 800) AND tackles_made_h IS NOT NULL;
+2025-11-02 18:56:56.744 GMT [2629280] ERROR:  relation "matches" does not exist at character 46
+2025-11-02 18:56:56.744 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_missed_tackles_h FROM matches WHERE (missed_tackles_h < 0 OR missed_tackles_h > 120) AND missed_tackles_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 42
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT count(*) AS bad_intercepts_h FROM matches WHERE (intercepts_h < 0 OR intercepts_h > 10) AND intercepts_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 60
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT (home, away, season) AS bad_intercepts_h_match FROM matches WHERE (intercepts_h < 0 OR intercepts_h > 10) AND intercepts_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 51
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_ineffective_tackles_h FROM matches WHERE (ineffective_tackles_h < 0 OR ineffective_tackles_h > 150) AND ineffective_tackles_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 38
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_errors_h FROM matches WHERE (errors_h < 0 OR errors_h > 50) AND errors_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 50
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_penalties_conceded_h FROM matches WHERE (penalties_conceded_h < 0 OR penalties_conceded_h > 40) AND penalties_conceded_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 50
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_ruck_infringements_h FROM matches WHERE (ruck_infringements_h < 0 OR ruck_infringements_h > 30) AND ruck_infringements_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 49
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_inside_ten_metres_h FROM matches WHERE (inside_ten_metres_h < 0 OR inside_ten_metres_h > 40) AND inside_ten_metres_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 49
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_interchanges_used_h FROM matches WHERE (interchanges_used_h < 0 OR interchanges_used_h > 12) AND interchanges_used_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 47
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_completion_rate_h FROM matches WHERE (completion_rate_h < 0 OR completion_rate_h > 100) AND completion_rate_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 55
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_average_play_ball_speed_h FROM matches WHERE (average_play_ball_speed_h < 1 OR average_play_ball_speed_h > 6) AND average_play_ball_speed_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 44
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_kick_defusal_h FROM matches WHERE (kick_defusal_h < 0 OR kick_defusal_h > 100) AND kick_defusal_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 48
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_effective_tackle_h FROM matches WHERE (effective_tackle_h < 0 OR effective_tackle_h > 100) AND effective_tackle_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 37
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_tries_h FROM matches WHERE (tries_h < 0 OR tries_h > 30) AND tries_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 43
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_conversions_h FROM matches WHERE (conversions_h < 0 OR conversions_h > 15) AND conversions_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 50
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_conversions_missed_h FROM matches WHERE (conversions_missed_h < 0 OR conversions_missed_h > 15) AND conversions_missed_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 45
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_penalty_goals_h FROM matches WHERE (penalty_goals_h < 0 OR penalty_goals_h > 10) AND penalty_goals_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 52
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_penalty_goals_missed_h FROM matches WHERE (penalty_goals_missed_h < 0 OR penalty_goals_missed_h > 10) AND penalty_goals_missed_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 40
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_sin_bins_h FROM matches WHERE (sin_bins_h < 0 OR sin_bins_h > 10) AND sin_bins_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 53
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_one_point_field_goals_h FROM matches WHERE (one_point_field_goals_h < 0 OR one_point_field_goals_h > 5) AND one_point_field_goals_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 60
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_one_point_field_goals_missed_h FROM matches WHERE (one_point_field_goals_missed_h < 0 OR one_point_field_goals_missed_h > 10) AND one_point_field_goals_missed_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 53
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_two_point_field_goals_h FROM matches WHERE (two_point_field_goals_h < 0 OR two_point_field_goals_h > 5) AND two_point_field_goals_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 60
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_two_point_field_goals_missed_h FROM matches WHERE (two_point_field_goals_missed_h < 0 OR two_point_field_goals_missed_h > 6) AND two_point_field_goals_missed_h IS NOT NULL;
+2025-11-02 18:56:56.745 GMT [2629280] ERROR:  relation "matches" does not exist at character 41
+2025-11-02 18:56:56.745 GMT [2629280] STATEMENT:  SELECT COUNT(*) AS bad_half_time_h FROM matches WHERE (half_time_h < 0 OR half_time_h > 80) AND half_time_h IS NOT NULL;
+2025-11-02 18:58:45.184 GMT [2614866] LOG:  checkpoint starting: time
+2025-11-02 18:59:18.617 GMT [2614866] LOG:  checkpoint complete: wrote 333 buffers (2.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=32.879 s, sync=0.521 s, total=33.434 s; sync files=46, longest=0.520 s, average=0.012 s; distance=2693 kB, estimate=2693 kB; lsn=0/3F15EE0, redo lsn=0/3F15EA8
+2025-11-02 19:36:04.913 GMT [2825147] ERROR:  column "forty/twenty_h" of relation "matches" does not exist at character 108
+2025-11-02 19:36:04.913 GMT [2825147] STATEMENT:  INSERT INTO matches ("all_run_metres_h", "line_breaks_h", "kick_return_metres_h", "offloads_h", "kicks_h", "forty/twenty_h", "tackles_made_h", "missed_tackles_h", "errors_h", "effective_tackle_h", "tries_h", "conversions_h", "conversions_missed_h", "penalty_goals_h", "penalty_goals_missed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goals_missed_h", "two_point_field_goals_h", "two_point_field_goals_missed_h", "half_time_h", "all_run_metres_a", "line_breaks_a", "kick_return_metres_a", "offloads_a", "kicks_a", "forty/twenty_a", "tackles_made_a", "missed_tackles_a", "errors_a", "effective_tackle_a", "tries_a", "conversions_a", "conversions_missed_a", "penalty_goals_a", "penalty_goals_missed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goals_missed_a", "two_point_field_goals_a", "two_point_field_goals_missed_a", "half_time_a", "round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_round", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (1529, 15, 11, 21, 16, 1, 227, 17, 10, 93.03, 9, 6, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 981, 4, 9, 7, 18, 0, 256, 45, 9, 85.05, 2, 2, NULL, 0, 0, 0, 0, 0, 0, 0, 0, '7', 'Dragons', 48, 'Cowboys', 12, 'WIN Stadium', '2001-04-01T00:00:00Z', 'https://www.nrl.com/draw/nrl-premiership/2001/round-7/dragons-v-cowboys/', 'Kyle Warren', 0, 'cowboys', '{}', '{}', NULL, NULL, NULL, '2001')
+2025-11-02 19:37:02.335 GMT [2828437] ERROR:  syntax error at or near "/" at character 509
+2025-11-02 19:37:02.335 GMT [2828437] STATEMENT:  CREATE TABLE matches (
+	    -- Home stats
+	    home text,
+	    home_score int,
+	    time_in_possession_h int,
+	    all_runs_h int,
+	    all_run_metres_h int,
+	    post_contact_metres_h int,
+	    line_breaks_h int,
+	    tackle_breaks_h int,
+	    average_set_distance_h numeric(7, 2),
+	    kick_return_metres_h int,
+	    offloads_h int,
+	    receipts_h int,
+	    total_passes_h int,
+	    dummy_passes_h int,
+	    kicks_h int,
+	    kicking_metres_h int,
+	    forced_drop_outs_h int,
+	    bombs_h int,
+	    grubbers_h int,
+	    forty/twenty_h int,
+	    tackles_made_h int,
+	    missed_tackles_h int,
+	    intercepts_h int,
+	    ineffective_tackles_h int,
+	    errors_h int,
+	    penalties_conceded_h int,
+	    ruck_infringements_h int,
+	    inside_ten_metres_h int,
+	    interchanges_used_h int,
+	    completion_rate_h numeric(5,2),
+	    average_play_ball_speed_h numeric(5, 2),
+	    kick_defusal_h numeric(5,2),
+	    effective_tackle_h numeric(5,2),
+	    tries_h int,
+	    conversions_h int,
+	    conversions_missed_h int,
+	    penalty_goals_h int,
+	    penalty_goals_missed_h int,
+	    sin_bins_h int,
+	    on_reports_h int,
+	    one_point_field_goals_h int,
+	    one_point_field_goals_missed_h int,
+	    two_point_field_goals_h int,
+	    two_point_field_goals_missed_h int,
+	    half_time_h int,
+	    -- Away stats
+	        away text,
+	    away_score int,
+	    time_in_possession_a int,
+	    all_runs_a int,
+	    all_run_metres_a int,
+	    post_contact_metres_a int,
+	    line_breaks_a int,
+	    tackle_breaks_a int,
+	    average_set_distance_a numeric(6, 2),
+	    kick_return_metres_a int,
+	    offloads_a int,
+	    receipts_a int,
+	    total_passes_a int,
+	    dummy_passes_a int,
+	    kicks_a int,
+	    kicking_metres_a int,
+	    forced_drop_outs_a int,
+	    bombs_a int,
+	    grubbers_a int,
+	    forty/twenty_a int,
+	    tackles_made_a int,
+	    missed_tackles_a int,
+	    intercepts_a int,
+	    ineffective_tackles_a int,
+	    errors_a int,
+	    penalties_conceded_a int,
+	    ruck_infringements_a int,
+	    inside_ten_metres_a int,
+	    interchanges_used_a int,
+	    completion_rate_a numeric(5,2),
+	    average_play_ball_speed_a numeric(5, 2),
+	    kick_defusal_a numeric(5,2),
+	    effective_tackle_a numeric(5, 2),
+	    tries_a int,
+	    conversions_a int,
+	    conversions_missed_a int,
+	    penalty_goals_a int,
+	    penalty_goals_missed_a int,
+	    sin_bins_a int,
+	    on_reports_a int,
+	    one_point_field_goals_a int,
+	    one_point_field_goals_missed_a int,
+	    two_point_field_goals_a int,
+	    two_point_field_goals_missed_a int,
+	    half_time_a int,
+	    -- Other match data
+	    season int,
+	    round int,
+	    venue text,
+	    match_date_utc timestamptz,
+	    match_centre_url text,
+	    overall_first_try_scorer text,
+	    overall_first_try_minute int,
+	    overall_first_try_round text,
+	    ref_names text[],
+	    ref_positions text[],
+	    main_ref text,
+	    ground_condition text,
+	    weather_condition text,
+	    match_id serial primary key
+	);
+2025-11-02 19:38:46.282 GMT [2614866] LOG:  checkpoint starting: time
+2025-11-02 19:38:53.441 GMT [2614866] LOG:  checkpoint complete: wrote 72 buffers (0.4%); 0 WAL file(s) added, 0 removed, 1 recycled; write=7.123 s, sync=0.013 s, total=7.160 s; sync files=43, longest=0.010 s, average=0.001 s; distance=2591 kB, estimate=2683 kB; lsn=0/419DB80, redo lsn=0/419DB10
+2025-11-02 19:43:46.541 GMT [2614866] LOG:  checkpoint starting: time
+2025-11-02 19:44:12.726 GMT [2614866] LOG:  checkpoint complete: wrote 264 buffers (1.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=26.156 s, sync=0.010 s, total=26.185 s; sync files=16, longest=0.010 s, average=0.001 s; distance=2317 kB, estimate=2646 kB; lsn=0/45A9AF8, redo lsn=0/43E10E8
+2025-11-02 19:48:46.765 GMT [2614866] LOG:  checkpoint starting: time
+2025-11-02 19:48:52.415 GMT [2614866] LOG:  checkpoint complete: wrote 57 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.622 s, sync=0.010 s, total=5.650 s; sync files=12, longest=0.010 s, average=0.001 s; distance=2186 kB, estimate=2600 kB; lsn=0/4603A58, redo lsn=0/4603A20
+2025-11-02 22:28:49.250 GMT [2614866] LOG:  checkpoint starting: time
+2025-11-02 22:29:39.965 GMT [2614866] LOG:  checkpoint complete: wrote 511 buffers (3.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=50.676 s, sync=0.013 s, total=50.716 s; sync files=15, longest=0.012 s, average=0.001 s; distance=5023 kB, estimate=5023 kB; lsn=0/4B0CDD0, redo lsn=0/4AEB778
+2025-11-02 22:38:50.160 GMT [2614866] LOG:  checkpoint starting: time
+2025-11-02 22:39:33.656 GMT [2614866] LOG:  checkpoint complete: wrote 437 buffers (2.7%); 0 WAL file(s) added, 0 removed, 1 recycled; write=43.469 s, sync=0.010 s, total=43.496 s; sync files=14, longest=0.009 s, average=0.001 s; distance=5808 kB, estimate=5808 kB; lsn=0/5097978, redo lsn=0/5097940
+2025-11-02 22:43:24.140 GMT [2614863] LOG:  received fast shutdown request
+2025-11-02 22:43:24.151 GMT [2614863] LOG:  aborting any active transactions
+2025-11-02 22:43:24.153 GMT [2614863] LOG:  background worker "logical replication launcher" (PID 2614871) exited with exit code 1
+2025-11-02 22:43:24.153 GMT [2614866] LOG:  shutting down
+2025-11-02 22:43:24.155 GMT [2614866] LOG:  checkpoint starting: shutdown immediate
+2025-11-02 22:43:24.165 GMT [2614866] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.013 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=5227 kB; lsn=0/5097A28, redo lsn=0/5097A28
+2025-11-02 22:43:24.174 GMT [2614863] LOG:  database system is shut down

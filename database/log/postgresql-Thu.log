@@ -1,0 +1,317 @@
+2025-10-30 11:55:29.349 GMT [1593411] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-10-30 11:55:29.349 GMT [1593411] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-10-30 11:55:29.358 GMT [1593411] LOG:  listening on Unix socket "/dcs/23/u5503037/CS344/pgsock/.s.PGSQL.5432"
+2025-10-30 11:55:29.378 GMT [1593425] LOG:  database system was shut down at 2025-10-26 19:23:35 GMT
+2025-10-30 11:55:29.392 GMT [1593411] LOG:  database system is ready to accept connections
+2025-10-30 11:58:42.281 GMT [1602048] ERROR:  table "testing" does not exist
+2025-10-30 11:58:42.281 GMT [1602048] STATEMENT:  drop table testing;
+2025-10-30 11:59:37.930 GMT [1602048] ERROR:  syntax error at or near "list" at character 1
+2025-10-30 11:59:37.930 GMT [1602048] STATEMENT:  list
+	dt
+	;
+2025-10-30 12:00:29.477 GMT [1593423] LOG:  checkpoint starting: time
+2025-10-30 12:00:29.500 GMT [1593423] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.008 s, sync=0.001 s, total=0.023 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/19E4EE8, redo lsn=0/19E4EB0
+2025-10-30 12:25:29.837 GMT [1593423] LOG:  checkpoint starting: time
+2025-10-30 12:25:32.085 GMT [1593423] LOG:  checkpoint complete: wrote 23 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.212 s, sync=0.024 s, total=2.248 s; sync files=20, longest=0.016 s, average=0.002 s; distance=97 kB, estimate=97 kB; lsn=0/19FD3E8, redo lsn=0/19FD3B0
+2025-10-30 12:36:08.623 GMT [1714498] ERROR:  syntax error at or near "1" at character 71
+2025-10-30 12:36:08.623 GMT [1714498] STATEMENT:   
+	INSERT INTO match(round, home, away, home_score, away_score) VALUES 1, Raiders, Warriors, 30, 8
+	
+2025-10-30 12:36:47.810 GMT [1716303] ERROR:  column "raiders" does not exist at character 75
+2025-10-30 12:36:47.810 GMT [1716303] STATEMENT:   
+	INSERT INTO match(round, home, away, home_score, away_score) VALUES (1, Raiders, Warriors, 30, 8)
+	
+2025-10-30 12:40:29.337 GMT [1593423] LOG:  checkpoint starting: time
+2025-10-30 12:40:31.810 GMT [1593423] LOG:  checkpoint complete: wrote 25 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.423 s, sync=0.025 s, total=2.474 s; sync files=19, longest=0.024 s, average=0.002 s; distance=119 kB, estimate=119 kB; lsn=0/1A1B268, redo lsn=0/1A1B230
+2025-10-30 12:40:34.013 GMT [1728436] ERROR:  column "raiders" does not exist at character 77
+2025-10-30 12:40:34.013 GMT [1728436] STATEMENT:   
+	INSERT INTO matches(round, home, away, home_score, away_score) VALUES (1, Raiders, Warriors, 30, 8)
+	
+2025-10-30 12:41:39.992 GMT [1731503] ERROR:  column "Raiders" does not exist at character 77
+2025-10-30 12:41:39.992 GMT [1731503] STATEMENT:   
+	INSERT INTO matches(round, home, away, home_score, away_score) VALUES (1, "Raiders", "Warriors", 30, 8)
+	
+2025-10-30 12:45:29.861 GMT [1593423] LOG:  checkpoint starting: time
+2025-10-30 12:45:30.096 GMT [1593423] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.213 s, sync=0.007 s, total=0.235 s; sync files=3, longest=0.005 s, average=0.003 s; distance=0 kB, estimate=107 kB; lsn=0/1A1B408, redo lsn=0/1A1B3D0
+2025-10-30 13:08:37.198 GMT [1818060] ERROR:  syntax error at or near "match_id" at character 2413
+2025-10-30 13:08:37.198 GMT [1818060] STATEMENT:  CREATE TABLE nrl_match_flat (
+	    -- Home stats
+	    home text,
+	    home_score int,
+	    time_in_possession_h text,
+	    all_runs_h text,
+	    all_run_metres_h text,
+	    post_contact_metres_h text,
+	    line_breaks_h text,
+	    tackle_breaks_h text,
+	    average_set_distance_h text,
+	    kick_return_metres_h text,
+	    offloads_h text,
+	    receipts_h text,
+	    total_passes_h text,
+	    dummy_passes_h text,
+	    kicks_h text,
+	    kicking_metres_h text,
+	    forced_drop_outs_h text,
+	    bombs_h text,
+	    grubbers_h text,
+	    tackles_made_h text,
+	    missed_tackles_h text,
+	    intercepts_h text,
+	    ineffective_tackles_h text,
+	    errors_h text,
+	    penalties_conceded_h text,
+	    ruck_infringements_h text,
+	    inside_10_metres_h text,
+	    interchanges_used_h text,
+	    completion_rate_h text,
+	    average_play_ball_speed_h text,
+	    kick_defusal_h text,
+	    effective_tackle_h text,
+	    tries_h text,
+	    conversions_h text,
+	    penalty_goals_h text,
+	    sin_bins_h text,
+	    one_point_field_goals_h text,
+	    two_point_field_goals_h text,
+	    half_time_h text,
+	    -- Away stats
+	    away text,
+	    away_score int,
+	    time_in_possession_a text,
+	    all_runs_a text,
+	    all_run_metres_a text,
+	    post_contact_metres_a text,
+	    line_breaks_a text,
+	    tackle_breaks_a text,
+	    average_set_distance_a text,
+	    kick_return_metres_a text,
+	    offloads_a text,
+	    receipts_a text,
+	    total_passes_a text,
+	    dummy_passes_a text,
+	    kicks_a text,
+	    kicking_metres_a text,
+	    forced_drop_outs_a text,
+	    bombs_a text,
+	    grubbers_a text,
+	    tackles_made_a text,
+	    missed_tackles_a text,
+	    intercepts_a text,
+	    ineffective_tackles_a text,
+	    errors_a text,
+	    penalties_conceded_a text,
+	    ruck_infringements_a text,
+	    inside_10_metres_a text,
+	    interchanges_used_a text,
+	    completion_rate_a text,
+	    average_play_ball_speed_a text,
+	    kick_defusal_a text,
+	    effective_tackle_a text,
+	    tries_a text,
+	    conversions_a text,
+	    penalty_goals_a text,
+	    sin_bins_a text,
+	    one_point_field_goals_a text,
+	    two_point_field_goals_a text,
+	    half_time_a text,
+	    -- Other match data
+	    venue text,
+	    match_date_utc timestamptz,
+	    match_centre_url text,
+	    overall_first_try_scorer text,
+	    overall_first_try_minute text,
+	    overall_first_try_round text,
+	    ref_names text[],
+	    ref_positions text[],
+	    main_ref text,
+	    ground_condition text,
+	    weather_condition text
+	    match_id int primary key AUTO_INCREMENT,
+	);
+2025-10-30 13:08:52.820 GMT [1818060] ERROR:  syntax error at or near "AUTO_INCREMENT" at character 2439
+2025-10-30 13:08:52.820 GMT [1818060] STATEMENT:  CREATE TABLE nrl_match_flat (
+	    -- Home stats
+	    home text,
+	    home_score int,
+	    time_in_possession_h text,
+	    all_runs_h text,
+	    all_run_metres_h text,
+	    post_contact_metres_h text,
+	    line_breaks_h text,
+	    tackle_breaks_h text,
+	    average_set_distance_h text,
+	    kick_return_metres_h text,
+	    offloads_h text,
+	    receipts_h text,
+	    total_passes_h text,
+	    dummy_passes_h text,
+	    kicks_h text,
+	    kicking_metres_h text,
+	    forced_drop_outs_h text,
+	    bombs_h text,
+	    grubbers_h text,
+	    tackles_made_h text,
+	    missed_tackles_h text,
+	    intercepts_h text,
+	    ineffective_tackles_h text,
+	    errors_h text,
+	    penalties_conceded_h text,
+	    ruck_infringements_h text,
+	    inside_10_metres_h text,
+	    interchanges_used_h text,
+	    completion_rate_h text,
+	    average_play_ball_speed_h text,
+	    kick_defusal_h text,
+	    effective_tackle_h text,
+	    tries_h text,
+	    conversions_h text,
+	    penalty_goals_h text,
+	    sin_bins_h text,
+	    one_point_field_goals_h text,
+	    two_point_field_goals_h text,
+	    half_time_h text,
+	    -- Away stats
+	    away text,
+	    away_score int,
+	    time_in_possession_a text,
+	    all_runs_a text,
+	    all_run_metres_a text,
+	    post_contact_metres_a text,
+	    line_breaks_a text,
+	    tackle_breaks_a text,
+	    average_set_distance_a text,
+	    kick_return_metres_a text,
+	    offloads_a text,
+	    receipts_a text,
+	    total_passes_a text,
+	    dummy_passes_a text,
+	    kicks_a text,
+	    kicking_metres_a text,
+	    forced_drop_outs_a text,
+	    bombs_a text,
+	    grubbers_a text,
+	    tackles_made_a text,
+	    missed_tackles_a text,
+	    intercepts_a text,
+	    ineffective_tackles_a text,
+	    errors_a text,
+	    penalties_conceded_a text,
+	    ruck_infringements_a text,
+	    inside_10_metres_a text,
+	    interchanges_used_a text,
+	    completion_rate_a text,
+	    average_play_ball_speed_a text,
+	    kick_defusal_a text,
+	    effective_tackle_a text,
+	    tries_a text,
+	    conversions_a text,
+	    penalty_goals_a text,
+	    sin_bins_a text,
+	    one_point_field_goals_a text,
+	    two_point_field_goals_a text,
+	    half_time_a text,
+	    -- Other match data
+	    venue text,
+	    match_date_utc timestamptz,
+	    match_centre_url text,
+	    overall_first_try_scorer text,
+	    overall_first_try_minute text,
+	    overall_first_try_round text,
+	    ref_names text[],
+	    ref_positions text[],
+	    main_ref text,
+	    ground_condition text,
+	    weather_condition text,
+	    match_id int primary key AUTO_INCREMENT,
+	);
+2025-10-30 13:10:29.537 GMT [1593423] LOG:  checkpoint starting: time
+2025-10-30 13:10:34.688 GMT [1593423] LOG:  checkpoint complete: wrote 52 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.124 s, sync=0.008 s, total=5.152 s; sync files=37, longest=0.005 s, average=0.001 s; distance=207 kB, estimate=207 kB; lsn=0/1A4F148, redo lsn=0/1A4F110
+2025-10-30 13:46:00.365 GMT [1818060] ERROR:  table "matches" does not exist
+2025-10-30 13:46:00.365 GMT [1818060] STATEMENT:  drop table matches
+	;
+2025-10-30 13:50:30.284 GMT [1593423] LOG:  checkpoint starting: time
+2025-10-30 13:50:36.246 GMT [1593423] LOG:  checkpoint complete: wrote 60 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.929 s, sync=0.013 s, total=5.962 s; sync files=42, longest=0.007 s, average=0.001 s; distance=284 kB, estimate=284 kB; lsn=0/1A964A8, redo lsn=0/1A96470
+2025-10-30 15:50:32.169 GMT [1593423] LOG:  checkpoint starting: time
+2025-10-30 15:50:37.024 GMT [1593423] LOG:  checkpoint complete: wrote 49 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.824 s, sync=0.018 s, total=4.855 s; sync files=37, longest=0.016 s, average=0.001 s; distance=233 kB, estimate=279 kB; lsn=0/1AD0C38, redo lsn=0/1AD0C00
+2025-10-30 15:57:17.021 GMT [1593411] LOG:  received fast shutdown request
+2025-10-30 15:57:17.023 GMT [1593411] LOG:  aborting any active transactions
+2025-10-30 15:57:17.024 GMT [1593411] LOG:  background worker "logical replication launcher" (PID 1593428) exited with exit code 1
+2025-10-30 15:57:17.024 GMT [1593423] LOG:  shutting down
+2025-10-30 15:57:17.037 GMT [1593423] LOG:  checkpoint starting: shutdown immediate
+2025-10-30 15:57:17.048 GMT [1593423] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.024 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=251 kB; lsn=0/1AD0CE8, redo lsn=0/1AD0CE8
+2025-10-30 15:57:17.056 GMT [1593411] LOG:  database system is shut down
+2025-10-30 18:54:36.509 GMT [2992827] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-10-30 18:54:36.509 GMT [2992827] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-10-30 18:54:36.516 GMT [2992827] LOG:  listening on Unix socket "/dcs/23/u5503037/CS344/pgsock/.s.PGSQL.5432"
+2025-10-30 18:54:36.528 GMT [2992834] LOG:  database system was shut down at 2025-10-30 15:57:17 GMT
+2025-10-30 18:54:36.538 GMT [2992827] LOG:  database system is ready to accept connections
+2025-10-30 18:59:36.627 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 18:59:36.859 GMT [2992832] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.215 s, sync=0.004 s, total=0.233 s; sync files=3, longest=0.003 s, average=0.002 s; distance=0 kB, estimate=0 kB; lsn=0/1AD0DD0, redo lsn=0/1AD0D98
+2025-10-30 20:40:11.105 GMT [3355234] ERROR:  column "inside_ten_metres_h" of relation "matches" does not exist at character 472
+2025-10-30 20:40:11.105 GMT [3355234] STATEMENT:  INSERT INTO matches ("time_in_possession_h", "all_runs_h", "all_run_metres_h", "post_contact_metres_h", "line_breaks_h", "tackle_breaks_h", "average_set_distance_h", "kick_return_metres_h", "offloads_h", "receipts_h", "total_passes_h", "dummy_passes_h", "kicks_h", "kicking_metres_h", "forced_drop_outs_h", "bombs_h", "grubbers_h", "tackles_made_h", "missed_tackles_h", "intercepts_h", "ineffective_tackles_h", "errors_h", "penalties_conceded_h", "ruck_infringements_h", "inside_ten_metres_h", "interchanges_used_h", "completion rate_h", "average_play_ball_speed_h", "kick_defusal_h", "effective_tackle_h", "tries_h", "conversions_h", "conversionsmissed_h", "penalty_goals_h", "penalty_goalsmissed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goalsmissed_h", "two_point_field_goals_h", "two_point_field_goalsmissed_h", "half_time_h", "time_in_possession_a", "all_runs_a", "all_run_metres_a", "post_contact_metres_a", "line_breaks_a", "tackle_breaks_a", "average_set_distance_a", "kick_return_metres_a", "offloads_a", "receipts_a", "total_passes_a", "dummy_passes_a", "kicks_a", "kicking_metres_a", "forced_drop_outs_a", "bombs_a", "grubbers_a", "tackles_made_a", "missed_tackles_a", "intercepts_a", "ineffective_tackles_a", "errors_a", "penalties_conceded_a", "ruck_infringements_a", "inside_ten_metres_a", "interchanges_used_a", "completion rate_a", "average_play_ball_speed_a", "kick_defusal_a", "effective_tackle_a", "tries_a", "conversions_a", "conversionsmissed_a", "penalty_goals_a", "penalty_goalsmissed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goalsmissed_a", "two_point_field_goals_a", "two_point_field_goalsmissed_a", "half_time_a", "Round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_round", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (128, 190, 1822, 681, 6, 44, 42.39, 213, 17, 401, 205, 16, 17, 584, 0, 4, 2, 378, 21, 1, 15, 13, 7, 2, 1, 2, 69, 3.72, 75, 91.3, 5, 4, 1, 1, 0, 1, 0, 0, 0, 0, 16, 127, 196, 1565, 627, 2, 21, 38.19, 125, 9, 449, 255, 12, 22, 670, 1, 4, 3, 356, 44, 1, 28, 13, 5, 1, 0, 1, 75, 3.57, 33, 83.18, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 4, '1', 'Raiders', 30, 'Warriors', 8, 'Allegiant Stadium', '2025-03-02T00:00:00Z', 'https://www.nrl.com/draw/nrl-premiership/2025/round-1/raiders-v-warriors/', 'Sebastian Kris', '5''', 'raiders', ARRAY['Grant Atkins','Phil Henderson','Dave Munro','Gerard Sutton'], ARRAY['Referee','Touch Judge','Touch Judge','Senior Review Official'], 'Grant Atkins', 'Good', 'Fine', '2025')
+2025-10-30 20:41:08.384 GMT [3358347] ERROR:  column "completion rate_h" of relation "matches" does not exist at character 518
+2025-10-30 20:41:08.384 GMT [3358347] STATEMENT:  INSERT INTO matches ("time_in_possession_h", "all_runs_h", "all_run_metres_h", "post_contact_metres_h", "line_breaks_h", "tackle_breaks_h", "average_set_distance_h", "kick_return_metres_h", "offloads_h", "receipts_h", "total_passes_h", "dummy_passes_h", "kicks_h", "kicking_metres_h", "forced_drop_outs_h", "bombs_h", "grubbers_h", "tackles_made_h", "missed_tackles_h", "intercepts_h", "ineffective_tackles_h", "errors_h", "penalties_conceded_h", "ruck_infringements_h", "inside_ten_metres_h", "interchanges_used_h", "completion rate_h", "average_play_ball_speed_h", "kick_defusal_h", "effective_tackle_h", "tries_h", "conversions_h", "conversionsmissed_h", "penalty_goals_h", "penalty_goalsmissed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goalsmissed_h", "two_point_field_goals_h", "two_point_field_goalsmissed_h", "half_time_h", "time_in_possession_a", "all_runs_a", "all_run_metres_a", "post_contact_metres_a", "line_breaks_a", "tackle_breaks_a", "average_set_distance_a", "kick_return_metres_a", "offloads_a", "receipts_a", "total_passes_a", "dummy_passes_a", "kicks_a", "kicking_metres_a", "forced_drop_outs_a", "bombs_a", "grubbers_a", "tackles_made_a", "missed_tackles_a", "intercepts_a", "ineffective_tackles_a", "errors_a", "penalties_conceded_a", "ruck_infringements_a", "inside_ten_metres_a", "interchanges_used_a", "completion rate_a", "average_play_ball_speed_a", "kick_defusal_a", "effective_tackle_a", "tries_a", "conversions_a", "conversionsmissed_a", "penalty_goals_a", "penalty_goalsmissed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goalsmissed_a", "two_point_field_goals_a", "two_point_field_goalsmissed_a", "half_time_a", "Round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_round", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (128, 190, 1822, 681, 6, 44, 42.39, 213, 17, 401, 205, 16, 17, 584, 0, 4, 2, 378, 21, 1, 15, 13, 7, 2, 1, 2, 69, 3.72, 75, 91.3, 5, 4, 1, 1, 0, 1, 0, 0, 0, 0, 16, 127, 196, 1565, 627, 2, 21, 38.19, 125, 9, 449, 255, 12, 22, 670, 1, 4, 3, 356, 44, 1, 28, 13, 5, 1, 0, 1, 75, 3.57, 33, 83.18, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 4, '1', 'Raiders', 30, 'Warriors', 8, 'Allegiant Stadium', '2025-03-02T00:00:00Z', 'https://www.nrl.com/draw/nrl-premiership/2025/round-1/raiders-v-warriors/', 'Sebastian Kris', '5''', 'raiders', ARRAY['Grant Atkins','Phil Henderson','Dave Munro','Gerard Sutton'], ARRAY['Referee','Touch Judge','Touch Judge','Senior Review Official'], 'Grant Atkins', 'Good', 'Fine', '2025')
+2025-10-30 20:43:02.548 GMT [3364680] ERROR:  column "conversionsmissed_h" of relation "matches" does not exist at character 636
+2025-10-30 20:43:02.548 GMT [3364680] STATEMENT:  INSERT INTO matches ("time_in_possession_h", "all_runs_h", "all_run_metres_h", "post_contact_metres_h", "line_breaks_h", "tackle_breaks_h", "average_set_distance_h", "kick_return_metres_h", "offloads_h", "receipts_h", "total_passes_h", "dummy_passes_h", "kicks_h", "kicking_metres_h", "forced_drop_outs_h", "bombs_h", "grubbers_h", "tackles_made_h", "missed_tackles_h", "intercepts_h", "ineffective_tackles_h", "errors_h", "penalties_conceded_h", "ruck_infringements_h", "inside_ten_metres_h", "interchanges_used_h", "completion_rate_h", "average_play_ball_speed_h", "kick_defusal_h", "effective_tackle_h", "tries_h", "conversions_h", "conversionsmissed_h", "penalty_goals_h", "penalty_goalsmissed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goalsmissed_h", "two_point_field_goals_h", "two_point_field_goalsmissed_h", "half_time_h", "time_in_possession_a", "all_runs_a", "all_run_metres_a", "post_contact_metres_a", "line_breaks_a", "tackle_breaks_a", "average_set_distance_a", "kick_return_metres_a", "offloads_a", "receipts_a", "total_passes_a", "dummy_passes_a", "kicks_a", "kicking_metres_a", "forced_drop_outs_a", "bombs_a", "grubbers_a", "tackles_made_a", "missed_tackles_a", "intercepts_a", "ineffective_tackles_a", "errors_a", "penalties_conceded_a", "ruck_infringements_a", "inside_ten_metres_a", "interchanges_used_a", "completion_rate_a", "average_play_ball_speed_a", "kick_defusal_a", "effective_tackle_a", "tries_a", "conversions_a", "conversionsmissed_a", "penalty_goals_a", "penalty_goalsmissed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goalsmissed_a", "two_point_field_goals_a", "two_point_field_goalsmissed_a", "half_time_a", "Round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_round", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (128, 190, 1822, 681, 6, 44, 42.39, 213, 17, 401, 205, 16, 17, 584, 0, 4, 2, 378, 21, 1, 15, 13, 7, 2, 1, 2, 69, 3.72, 75, 91.3, 5, 4, 1, 1, 0, 1, 0, 0, 0, 0, 16, 127, 196, 1565, 627, 2, 21, 38.19, 125, 9, 449, 255, 12, 22, 670, 1, 4, 3, 356, 44, 1, 28, 13, 5, 1, 0, 1, 75, 3.57, 33, 83.18, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 4, '1', 'Raiders', 30, 'Warriors', 8, 'Allegiant Stadium', '2025-03-02T00:00:00Z', 'https://www.nrl.com/draw/nrl-premiership/2025/round-1/raiders-v-warriors/', 'Sebastian Kris', '5''', 'raiders', ARRAY['Grant Atkins','Phil Henderson','Dave Munro','Gerard Sutton'], ARRAY['Referee','Touch Judge','Touch Judge','Senior Review Official'], 'Grant Atkins', 'Good', 'Fine', '2025')
+2025-10-30 20:43:41.272 GMT [3368626] ERROR:  column "Round" of relation "matches" does not exist at character 1690
+2025-10-30 20:43:41.272 GMT [3368626] STATEMENT:  INSERT INTO matches ("time_in_possession_h", "all_runs_h", "all_run_metres_h", "post_contact_metres_h", "line_breaks_h", "tackle_breaks_h", "average_set_distance_h", "kick_return_metres_h", "offloads_h", "receipts_h", "total_passes_h", "dummy_passes_h", "kicks_h", "kicking_metres_h", "forced_drop_outs_h", "bombs_h", "grubbers_h", "tackles_made_h", "missed_tackles_h", "intercepts_h", "ineffective_tackles_h", "errors_h", "penalties_conceded_h", "ruck_infringements_h", "inside_ten_metres_h", "interchanges_used_h", "completion_rate_h", "average_play_ball_speed_h", "kick_defusal_h", "effective_tackle_h", "tries_h", "conversions_h", "conversions_missed_h", "penalty_goals_h", "penalty_goals_missed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goals_missed_h", "two_point_field_goals_h", "two_point_field_goals_missed_h", "half_time_h", "time_in_possession_a", "all_runs_a", "all_run_metres_a", "post_contact_metres_a", "line_breaks_a", "tackle_breaks_a", "average_set_distance_a", "kick_return_metres_a", "offloads_a", "receipts_a", "total_passes_a", "dummy_passes_a", "kicks_a", "kicking_metres_a", "forced_drop_outs_a", "bombs_a", "grubbers_a", "tackles_made_a", "missed_tackles_a", "intercepts_a", "ineffective_tackles_a", "errors_a", "penalties_conceded_a", "ruck_infringements_a", "inside_ten_metres_a", "interchanges_used_a", "completion_rate_a", "average_play_ball_speed_a", "kick_defusal_a", "effective_tackle_a", "tries_a", "conversions_a", "conversions_missed_a", "penalty_goals_a", "penalty_goals_missed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goals_missed_a", "two_point_field_goals_a", "two_point_field_goals_missed_a", "half_time_a", "Round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_round", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (128, 190, 1822, 681, 6, 44, 42.39, 213, 17, 401, 205, 16, 17, 584, 0, 4, 2, 378, 21, 1, 15, 13, 7, 2, 1, 2, 69, 3.72, 75, 91.3, 5, 4, 1, 1, 0, 1, 0, 0, 0, 0, 16, 127, 196, 1565, 627, 2, 21, 38.19, 125, 9, 449, 255, 12, 22, 670, 1, 4, 3, 356, 44, 1, 28, 13, 5, 1, 0, 1, 75, 3.57, 33, 83.18, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 4, '1', 'Raiders', 30, 'Warriors', 8, 'Allegiant Stadium', '2025-03-02T00:00:00Z', 'https://www.nrl.com/draw/nrl-premiership/2025/round-1/raiders-v-warriors/', 'Sebastian Kris', '5''', 'raiders', ARRAY['Grant Atkins','Phil Henderson','Dave Munro','Gerard Sutton'], ARRAY['Referee','Touch Judge','Touch Judge','Senior Review Official'], 'Grant Atkins', 'Good', 'Fine', '2025')
+2025-10-30 20:44:11.112 GMT [3370377] ERROR:  invalid input syntax for type integer: "5'" at character 2472
+2025-10-30 20:44:11.112 GMT [3370377] STATEMENT:  INSERT INTO matches ("time_in_possession_h", "all_runs_h", "all_run_metres_h", "post_contact_metres_h", "line_breaks_h", "tackle_breaks_h", "average_set_distance_h", "kick_return_metres_h", "offloads_h", "receipts_h", "total_passes_h", "dummy_passes_h", "kicks_h", "kicking_metres_h", "forced_drop_outs_h", "bombs_h", "grubbers_h", "tackles_made_h", "missed_tackles_h", "intercepts_h", "ineffective_tackles_h", "errors_h", "penalties_conceded_h", "ruck_infringements_h", "inside_ten_metres_h", "interchanges_used_h", "completion_rate_h", "average_play_ball_speed_h", "kick_defusal_h", "effective_tackle_h", "tries_h", "conversions_h", "conversions_missed_h", "penalty_goals_h", "penalty_goals_missed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goals_missed_h", "two_point_field_goals_h", "two_point_field_goals_missed_h", "half_time_h", "time_in_possession_a", "all_runs_a", "all_run_metres_a", "post_contact_metres_a", "line_breaks_a", "tackle_breaks_a", "average_set_distance_a", "kick_return_metres_a", "offloads_a", "receipts_a", "total_passes_a", "dummy_passes_a", "kicks_a", "kicking_metres_a", "forced_drop_outs_a", "bombs_a", "grubbers_a", "tackles_made_a", "missed_tackles_a", "intercepts_a", "ineffective_tackles_a", "errors_a", "penalties_conceded_a", "ruck_infringements_a", "inside_ten_metres_a", "interchanges_used_a", "completion_rate_a", "average_play_ball_speed_a", "kick_defusal_a", "effective_tackle_a", "tries_a", "conversions_a", "conversions_missed_a", "penalty_goals_a", "penalty_goals_missed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goals_missed_a", "two_point_field_goals_a", "two_point_field_goals_missed_a", "half_time_a", "round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_round", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (128, 190, 1822, 681, 6, 44, 42.39, 213, 17, 401, 205, 16, 17, 584, 0, 4, 2, 378, 21, 1, 15, 13, 7, 2, 1, 2, 69, 3.72, 75, 91.3, 5, 4, 1, 1, 0, 1, 0, 0, 0, 0, 16, 127, 196, 1565, 627, 2, 21, 38.19, 125, 9, 449, 255, 12, 22, 670, 1, 4, 3, 356, 44, 1, 28, 13, 5, 1, 0, 1, 75, 3.57, 33, 83.18, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 4, '1', 'Raiders', 30, 'Warriors', 8, 'Allegiant Stadium', '2025-03-02T00:00:00Z', 'https://www.nrl.com/draw/nrl-premiership/2025/round-1/raiders-v-warriors/', 'Sebastian Kris', '5''', 'raiders', ARRAY['Grant Atkins','Phil Henderson','Dave Munro','Gerard Sutton'], ARRAY['Referee','Touch Judge','Touch Judge','Senior Review Official'], 'Grant Atkins', 'Good', 'Fine', '2025')
+2025-10-30 20:44:38.639 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 20:44:44.399 GMT [2992832] LOG:  checkpoint complete: wrote 58 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.717 s, sync=0.023 s, total=5.761 s; sync files=40, longest=0.016 s, average=0.001 s; distance=275 kB, estimate=275 kB; lsn=0/1B15C68, redo lsn=0/1B15C30
+2025-10-30 20:45:58.916 GMT [3376977] ERROR:  numeric field overflow
+2025-10-30 20:45:58.916 GMT [3376977] DETAIL:  A field with precision 3, scale 2 must round to an absolute value less than 10^1.
+2025-10-30 20:45:58.916 GMT [3376977] STATEMENT:  INSERT INTO matches ("time_in_possession_h", "all_runs_h", "all_run_metres_h", "post_contact_metres_h", "line_breaks_h", "tackle_breaks_h", "average_set_distance_h", "kick_return_metres_h", "offloads_h", "receipts_h", "total_passes_h", "dummy_passes_h", "kicks_h", "kicking_metres_h", "forced_drop_outs_h", "bombs_h", "grubbers_h", "tackles_made_h", "missed_tackles_h", "intercepts_h", "ineffective_tackles_h", "errors_h", "penalties_conceded_h", "ruck_infringements_h", "inside_ten_metres_h", "interchanges_used_h", "completion_rate_h", "average_play_ball_speed_h", "kick_defusal_h", "effective_tackle_h", "tries_h", "conversions_h", "conversions_missed_h", "penalty_goals_h", "penalty_goals_missed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goals_missed_h", "two_point_field_goals_h", "two_point_field_goals_missed_h", "half_time_h", "time_in_possession_a", "all_runs_a", "all_run_metres_a", "post_contact_metres_a", "line_breaks_a", "tackle_breaks_a", "average_set_distance_a", "kick_return_metres_a", "offloads_a", "receipts_a", "total_passes_a", "dummy_passes_a", "kicks_a", "kicking_metres_a", "forced_drop_outs_a", "bombs_a", "grubbers_a", "tackles_made_a", "missed_tackles_a", "intercepts_a", "ineffective_tackles_a", "errors_a", "penalties_conceded_a", "ruck_infringements_a", "inside_ten_metres_a", "interchanges_used_a", "completion_rate_a", "average_play_ball_speed_a", "kick_defusal_a", "effective_tackle_a", "tries_a", "conversions_a", "conversions_missed_a", "penalty_goals_a", "penalty_goals_missed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goals_missed_a", "two_point_field_goals_a", "two_point_field_goals_missed_a", "half_time_a", "round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_round", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (128, 190, 1822, 681, 6, 44, 42.39, 213, 17, 401, 205, 16, 17, 584, 0, 4, 2, 378, 21, 1, 15, 13, 7, 2, 1, 2, 69, 3.72, 75, 91.3, 5, 4, 1, 1, 0, 1, 0, 0, 0, 0, 16, 127, 196, 1565, 627, 2, 21, 38.19, 125, 9, 449, 255, 12, 22, 670, 1, 4, 3, 356, 44, 1, 28, 13, 5, 1, 0, 1, 75, 3.57, 33, 83.18, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 4, '1', 'Raiders', 30, 'Warriors', 8, 'Allegiant Stadium', '2025-03-02T00:00:00Z', 'https://www.nrl.com/draw/nrl-premiership/2025/round-1/raiders-v-warriors/', 'Sebastian Kris', 5, 'raiders', ARRAY['Grant Atkins','Phil Henderson','Dave Munro','Gerard Sutton'], ARRAY['Referee','Touch Judge','Touch Judge','Senior Review Official'], 'Grant Atkins', 'Good', 'Fine', '2025')
+2025-10-30 20:49:38.491 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 20:49:43.155 GMT [2992832] LOG:  checkpoint complete: wrote 47 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.615 s, sync=0.020 s, total=4.665 s; sync files=34, longest=0.014 s, average=0.001 s; distance=222 kB, estimate=270 kB; lsn=0/1B4D5E8, redo lsn=0/1B4D5B0
+2025-10-30 21:19:38.721 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 21:19:39.043 GMT [2992832] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.306 s, sync=0.004 s, total=0.323 s; sync files=4, longest=0.004 s, average=0.001 s; distance=3 kB, estimate=243 kB; lsn=0/1B4E550, redo lsn=0/1B4E518
+2025-10-30 21:24:38.143 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 21:24:38.477 GMT [2992832] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.320 s, sync=0.003 s, total=0.335 s; sync files=4, longest=0.003 s, average=0.001 s; distance=6 kB, estimate=219 kB; lsn=0/1B4FFB8, redo lsn=0/1B4FF80
+2025-10-30 21:39:38.748 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 21:39:39.278 GMT [2992832] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.505 s, sync=0.005 s, total=0.530 s; sync files=5, longest=0.005 s, average=0.001 s; distance=15 kB, estimate=199 kB; lsn=0/1B53FB0, redo lsn=0/1B53F78
+2025-10-30 21:44:38.354 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 21:44:39.001 GMT [2992832] LOG:  checkpoint complete: wrote 7 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.605 s, sync=0.010 s, total=0.648 s; sync files=5, longest=0.010 s, average=0.002 s; distance=26 kB, estimate=182 kB; lsn=0/1B5AB68, redo lsn=0/1B5AB30
+2025-10-30 21:49:38.081 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 21:49:40.428 GMT [2992832] LOG:  checkpoint complete: wrote 24 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.317 s, sync=0.019 s, total=2.348 s; sync files=10, longest=0.011 s, average=0.002 s; distance=120 kB, estimate=176 kB; lsn=0/1B78F40, redo lsn=0/1B78F08
+2025-10-30 22:40:22.993 GMT [3771088] ERROR:  column "overall_first_try_team" of relation "matches" does not exist at character 1846
+2025-10-30 22:40:22.993 GMT [3771088] STATEMENT:  INSERT INTO matches ("time_in_possession_h", "all_runs_h", "all_run_metres_h", "post_contact_metres_h", "line_breaks_h", "tackle_breaks_h", "average_set_distance_h", "kick_return_metres_h", "offloads_h", "receipts_h", "total_passes_h", "dummy_passes_h", "kicks_h", "kicking_metres_h", "forced_drop_outs_h", "bombs_h", "grubbers_h", "tackles_made_h", "missed_tackles_h", "intercepts_h", "ineffective_tackles_h", "errors_h", "penalties_conceded_h", "ruck_infringements_h", "inside_ten_metres_h", "interchanges_used_h", "completion_rate_h", "average_play_ball_speed_h", "kick_defusal_h", "effective_tackle_h", "tries_h", "conversions_h", "conversions_missed_h", "penalty_goals_h", "penalty_goals_missed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goals_missed_h", "two_point_field_goals_h", "two_point_field_goals_missed_h", "half_time_h", "time_in_possession_a", "all_runs_a", "all_run_metres_a", "post_contact_metres_a", "line_breaks_a", "tackle_breaks_a", "average_set_distance_a", "kick_return_metres_a", "offloads_a", "receipts_a", "total_passes_a", "dummy_passes_a", "kicks_a", "kicking_metres_a", "forced_drop_outs_a", "bombs_a", "grubbers_a", "tackles_made_a", "missed_tackles_a", "intercepts_a", "ineffective_tackles_a", "errors_a", "penalties_conceded_a", "ruck_infringements_a", "inside_ten_metres_a", "interchanges_used_a", "completion_rate_a", "average_play_ball_speed_a", "kick_defusal_a", "effective_tackle_a", "tries_a", "conversions_a", "conversions_missed_a", "penalty_goals_a", "penalty_goals_missed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goals_missed_a", "two_point_field_goals_a", "two_point_field_goals_missed_a", "half_time_a", "round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_team", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (128, 190, 1822, 681, 6, 44, 42.39, 213, 17, 401, 205, 16, 17, 584, 0, 4, 2, 378, 21, 1, 15, 13, 7, 2, 1, 2, 69, 3.72, 75, 91.3, 5, 4, 1, 1, 0, 1, 0, 0, 0, 0, 16, 127, 196, 1565, 627, 2, 21, 38.19, 125, 9, 449, 255, 12, 22, 670, 1, 4, 3, 356, 44, 1, 28, 13, 5, 1, 0, 1, 75, 3.57, 33, 83.18, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 4, '1', 'Raiders', 30, 'Warriors', 8, 'Allegiant Stadium', '2025-03-02T00:00:00Z', 'https://www.nrl.com/draw/nrl-premiership/2025/round-1/raiders-v-warriors/', 'Sebastian Kris', 5, 'raiders', ARRAY['Grant Atkins','Phil Henderson','Dave Munro','Gerard Sutton'], ARRAY['Referee','Touch Judge','Touch Judge','Senior Review Official'], 'Grant Atkins', 'Good', 'Fine', '2025')
+2025-10-30 22:41:20.273 GMT [3773284] ERROR:  syntax error at or near "dt" at character 1
+2025-10-30 22:41:20.273 GMT [3773284] STATEMENT:  dt
+	select * from matches
+	;
+2025-10-30 22:43:44.374 GMT [3773284] ERROR:  relation "nrl_data" does not exist at character 13
+2025-10-30 22:43:44.374 GMT [3773284] STATEMENT:  delete from nrl_data
+	;
+2025-10-30 22:44:39.178 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 22:44:40.532 GMT [2992832] LOG:  checkpoint complete: wrote 14 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.315 s, sync=0.010 s, total=1.355 s; sync files=7, longest=0.009 s, average=0.002 s; distance=67 kB, estimate=165 kB; lsn=0/1B89DE0, redo lsn=0/1B89DA8
+2025-10-30 22:54:24.718 GMT [3828223] ERROR:  invalid input syntax for type integer: "Final" at character 2400
+2025-10-30 22:54:24.718 GMT [3828223] STATEMENT:  INSERT INTO matches ("time_in_possession_h", "all_runs_h", "all_run_metres_h", "post_contact_metres_h", "line_breaks_h", "tackle_breaks_h", "average_set_distance_h", "kick_return_metres_h", "offloads_h", "receipts_h", "total_passes_h", "dummy_passes_h", "kicks_h", "kicking_metres_h", "forced_drop_outs_h", "bombs_h", "grubbers_h", "tackles_made_h", "missed_tackles_h", "intercepts_h", "ineffective_tackles_h", "errors_h", "penalties_conceded_h", "ruck_infringements_h", "inside_ten_metres_h", "interchanges_used_h", "completion_rate_h", "average_play_ball_speed_h", "kick_defusal_h", "effective_tackle_h", "tries_h", "conversions_h", "conversions_missed_h", "penalty_goals_h", "penalty_goals_missed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goals_missed_h", "two_point_field_goals_h", "two_point_field_goals_missed_h", "half_time_h", "time_in_possession_a", "all_runs_a", "all_run_metres_a", "post_contact_metres_a", "line_breaks_a", "tackle_breaks_a", "average_set_distance_a", "kick_return_metres_a", "offloads_a", "receipts_a", "total_passes_a", "dummy_passes_a", "kicks_a", "kicking_metres_a", "forced_drop_outs_a", "bombs_a", "grubbers_a", "tackles_made_a", "missed_tackles_a", "intercepts_a", "ineffective_tackles_a", "errors_a", "penalties_conceded_a", "ruck_infringements_a", "inside_ten_metres_a", "interchanges_used_a", "completion_rate_a", "average_play_ball_speed_a", "kick_defusal_a", "effective_tackle_a", "tries_a", "conversions_a", "conversions_missed_a", "penalty_goals_a", "penalty_goals_missed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goals_missed_a", "two_point_field_goals_a", "two_point_field_goals_missed_a", "half_time_a", "round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_round", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Final', 'Storm', 22, 'Broncos', 26, 'Accor Stadium', '2025-10-05T08:30:00Z', 'https://www.nrl.com/draw/nrl-premiership/2025/grand-final/storm-v-broncos/', NULL, NULL, NULL, '{}', '{}', NULL, NULL, NULL, '2025')
+2025-10-30 22:54:39.703 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 22:54:41.943 GMT [2992832] LOG:  checkpoint complete: wrote 23 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.207 s, sync=0.007 s, total=2.241 s; sync files=5, longest=0.007 s, average=0.002 s; distance=177 kB, estimate=177 kB; lsn=0/1BB6458, redo lsn=0/1BB6420
+2025-10-30 22:59:40.043 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 22:59:45.498 GMT [2992832] LOG:  checkpoint complete: wrote 55 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.421 s, sync=0.015 s, total=5.455 s; sync files=11, longest=0.015 s, average=0.002 s; distance=213 kB, estimate=213 kB; lsn=0/1BEB9E8, redo lsn=0/1BEB9B0
+2025-10-30 23:01:08.165 GMT [3852115] ERROR:  invalid input syntax for type integer: "Final" at character 2400
+2025-10-30 23:01:08.165 GMT [3852115] STATEMENT:  INSERT INTO matches ("time_in_possession_h", "all_runs_h", "all_run_metres_h", "post_contact_metres_h", "line_breaks_h", "tackle_breaks_h", "average_set_distance_h", "kick_return_metres_h", "offloads_h", "receipts_h", "total_passes_h", "dummy_passes_h", "kicks_h", "kicking_metres_h", "forced_drop_outs_h", "bombs_h", "grubbers_h", "tackles_made_h", "missed_tackles_h", "intercepts_h", "ineffective_tackles_h", "errors_h", "penalties_conceded_h", "ruck_infringements_h", "inside_ten_metres_h", "interchanges_used_h", "completion_rate_h", "average_play_ball_speed_h", "kick_defusal_h", "effective_tackle_h", "tries_h", "conversions_h", "conversions_missed_h", "penalty_goals_h", "penalty_goals_missed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goals_missed_h", "two_point_field_goals_h", "two_point_field_goals_missed_h", "half_time_h", "time_in_possession_a", "all_runs_a", "all_run_metres_a", "post_contact_metres_a", "line_breaks_a", "tackle_breaks_a", "average_set_distance_a", "kick_return_metres_a", "offloads_a", "receipts_a", "total_passes_a", "dummy_passes_a", "kicks_a", "kicking_metres_a", "forced_drop_outs_a", "bombs_a", "grubbers_a", "tackles_made_a", "missed_tackles_a", "intercepts_a", "ineffective_tackles_a", "errors_a", "penalties_conceded_a", "ruck_infringements_a", "inside_ten_metres_a", "interchanges_used_a", "completion_rate_a", "average_play_ball_speed_a", "kick_defusal_a", "effective_tackle_a", "tries_a", "conversions_a", "conversions_missed_a", "penalty_goals_a", "penalty_goals_missed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goals_missed_a", "two_point_field_goals_a", "two_point_field_goals_missed_a", "half_time_a", "round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_round", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Final', 'Storm', 22, 'Broncos', 26, 'Accor Stadium', '2025-10-05T08:30:00Z', 'https://www.nrl.com/draw/nrl-premiership/2025/grand-final/storm-v-broncos/', NULL, NULL, NULL, '{}', '{}', NULL, NULL, NULL, '2025')
+2025-10-30 23:03:45.762 GMT [3861283] ERROR:  invalid input syntax for type integer: "Final" at character 2400
+2025-10-30 23:03:45.762 GMT [3861283] STATEMENT:  INSERT INTO matches ("time_in_possession_h", "all_runs_h", "all_run_metres_h", "post_contact_metres_h", "line_breaks_h", "tackle_breaks_h", "average_set_distance_h", "kick_return_metres_h", "offloads_h", "receipts_h", "total_passes_h", "dummy_passes_h", "kicks_h", "kicking_metres_h", "forced_drop_outs_h", "bombs_h", "grubbers_h", "tackles_made_h", "missed_tackles_h", "intercepts_h", "ineffective_tackles_h", "errors_h", "penalties_conceded_h", "ruck_infringements_h", "inside_ten_metres_h", "interchanges_used_h", "completion_rate_h", "average_play_ball_speed_h", "kick_defusal_h", "effective_tackle_h", "tries_h", "conversions_h", "conversions_missed_h", "penalty_goals_h", "penalty_goals_missed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goals_missed_h", "two_point_field_goals_h", "two_point_field_goals_missed_h", "half_time_h", "time_in_possession_a", "all_runs_a", "all_run_metres_a", "post_contact_metres_a", "line_breaks_a", "tackle_breaks_a", "average_set_distance_a", "kick_return_metres_a", "offloads_a", "receipts_a", "total_passes_a", "dummy_passes_a", "kicks_a", "kicking_metres_a", "forced_drop_outs_a", "bombs_a", "grubbers_a", "tackles_made_a", "missed_tackles_a", "intercepts_a", "ineffective_tackles_a", "errors_a", "penalties_conceded_a", "ruck_infringements_a", "inside_ten_metres_a", "interchanges_used_a", "completion_rate_a", "average_play_ball_speed_a", "kick_defusal_a", "effective_tackle_a", "tries_a", "conversions_a", "conversions_missed_a", "penalty_goals_a", "penalty_goals_missed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goals_missed_a", "two_point_field_goals_a", "two_point_field_goals_missed_a", "half_time_a", "round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_round", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Final', 'Storm', 22, 'Broncos', 26, 'Accor Stadium', '2025-10-05T08:30:00Z', 'https://www.nrl.com/draw/nrl-premiership/2025/grand-final/storm-v-broncos/', NULL, NULL, NULL, '{}', '{}', NULL, NULL, NULL, '2025')
+2025-10-30 23:04:35.616 GMT [3864081] ERROR:  invalid input syntax for type integer: "Final" at character 2400
+2025-10-30 23:04:35.616 GMT [3864081] STATEMENT:  INSERT INTO matches ("time_in_possession_h", "all_runs_h", "all_run_metres_h", "post_contact_metres_h", "line_breaks_h", "tackle_breaks_h", "average_set_distance_h", "kick_return_metres_h", "offloads_h", "receipts_h", "total_passes_h", "dummy_passes_h", "kicks_h", "kicking_metres_h", "forced_drop_outs_h", "bombs_h", "grubbers_h", "tackles_made_h", "missed_tackles_h", "intercepts_h", "ineffective_tackles_h", "errors_h", "penalties_conceded_h", "ruck_infringements_h", "inside_ten_metres_h", "interchanges_used_h", "completion_rate_h", "average_play_ball_speed_h", "kick_defusal_h", "effective_tackle_h", "tries_h", "conversions_h", "conversions_missed_h", "penalty_goals_h", "penalty_goals_missed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goals_missed_h", "two_point_field_goals_h", "two_point_field_goals_missed_h", "half_time_h", "time_in_possession_a", "all_runs_a", "all_run_metres_a", "post_contact_metres_a", "line_breaks_a", "tackle_breaks_a", "average_set_distance_a", "kick_return_metres_a", "offloads_a", "receipts_a", "total_passes_a", "dummy_passes_a", "kicks_a", "kicking_metres_a", "forced_drop_outs_a", "bombs_a", "grubbers_a", "tackles_made_a", "missed_tackles_a", "intercepts_a", "ineffective_tackles_a", "errors_a", "penalties_conceded_a", "ruck_infringements_a", "inside_ten_metres_a", "interchanges_used_a", "completion_rate_a", "average_play_ball_speed_a", "kick_defusal_a", "effective_tackle_a", "tries_a", "conversions_a", "conversions_missed_a", "penalty_goals_a", "penalty_goals_missed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goals_missed_a", "two_point_field_goals_a", "two_point_field_goals_missed_a", "half_time_a", "round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_round", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Final', 'Storm', 22, 'Broncos', 26, 'Accor Stadium', '2025-10-05T08:30:00Z', 'https://www.nrl.com/draw/nrl-premiership/2025/grand-final/storm-v-broncos/', NULL, NULL, NULL, '{}', '{}', NULL, NULL, NULL, '2025')
+2025-10-30 23:04:40.529 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 23:04:51.097 GMT [2992832] LOG:  checkpoint complete: wrote 105 buffers (0.6%); 1 WAL file(s) added, 0 removed, 0 recycled; write=10.436 s, sync=0.007 s, total=10.569 s; sync files=13, longest=0.006 s, average=0.001 s; distance=835 kB, estimate=835 kB; lsn=0/1CBC8F0, redo lsn=0/1CBC8B8
+2025-10-30 23:05:48.335 GMT [3868432] ERROR:  invalid input syntax for type integer: "Final" at character 2400
+2025-10-30 23:05:48.335 GMT [3868432] STATEMENT:  INSERT INTO matches ("time_in_possession_h", "all_runs_h", "all_run_metres_h", "post_contact_metres_h", "line_breaks_h", "tackle_breaks_h", "average_set_distance_h", "kick_return_metres_h", "offloads_h", "receipts_h", "total_passes_h", "dummy_passes_h", "kicks_h", "kicking_metres_h", "forced_drop_outs_h", "bombs_h", "grubbers_h", "tackles_made_h", "missed_tackles_h", "intercepts_h", "ineffective_tackles_h", "errors_h", "penalties_conceded_h", "ruck_infringements_h", "inside_ten_metres_h", "interchanges_used_h", "completion_rate_h", "average_play_ball_speed_h", "kick_defusal_h", "effective_tackle_h", "tries_h", "conversions_h", "conversions_missed_h", "penalty_goals_h", "penalty_goals_missed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goals_missed_h", "two_point_field_goals_h", "two_point_field_goals_missed_h", "half_time_h", "time_in_possession_a", "all_runs_a", "all_run_metres_a", "post_contact_metres_a", "line_breaks_a", "tackle_breaks_a", "average_set_distance_a", "kick_return_metres_a", "offloads_a", "receipts_a", "total_passes_a", "dummy_passes_a", "kicks_a", "kicking_metres_a", "forced_drop_outs_a", "bombs_a", "grubbers_a", "tackles_made_a", "missed_tackles_a", "intercepts_a", "ineffective_tackles_a", "errors_a", "penalties_conceded_a", "ruck_infringements_a", "inside_ten_metres_a", "interchanges_used_a", "completion_rate_a", "average_play_ball_speed_a", "kick_defusal_a", "effective_tackle_a", "tries_a", "conversions_a", "conversions_missed_a", "penalty_goals_a", "penalty_goals_missed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goals_missed_a", "two_point_field_goals_a", "two_point_field_goals_missed_a", "half_time_a", "round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_round", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Final', 'Storm', 22, 'Broncos', 26, 'Accor Stadium', '2025-10-05T08:30:00Z', 'https://www.nrl.com/draw/nrl-premiership/2025/grand-final/storm-v-broncos/', NULL, NULL, NULL, '{}', '{}', NULL, NULL, NULL, '2025')
+2025-10-30 23:08:02.531 GMT [3876335] ERROR:  invalid input syntax for type integer: "Grand Final" at character 2400
+2025-10-30 23:08:02.531 GMT [3876335] STATEMENT:  INSERT INTO matches ("time_in_possession_h", "all_runs_h", "all_run_metres_h", "post_contact_metres_h", "line_breaks_h", "tackle_breaks_h", "average_set_distance_h", "kick_return_metres_h", "offloads_h", "receipts_h", "total_passes_h", "dummy_passes_h", "kicks_h", "kicking_metres_h", "forced_drop_outs_h", "bombs_h", "grubbers_h", "tackles_made_h", "missed_tackles_h", "intercepts_h", "ineffective_tackles_h", "errors_h", "penalties_conceded_h", "ruck_infringements_h", "inside_ten_metres_h", "interchanges_used_h", "completion_rate_h", "average_play_ball_speed_h", "kick_defusal_h", "effective_tackle_h", "tries_h", "conversions_h", "conversions_missed_h", "penalty_goals_h", "penalty_goals_missed_h", "sin_bins_h", "one_point_field_goals_h", "one_point_field_goals_missed_h", "two_point_field_goals_h", "two_point_field_goals_missed_h", "half_time_h", "time_in_possession_a", "all_runs_a", "all_run_metres_a", "post_contact_metres_a", "line_breaks_a", "tackle_breaks_a", "average_set_distance_a", "kick_return_metres_a", "offloads_a", "receipts_a", "total_passes_a", "dummy_passes_a", "kicks_a", "kicking_metres_a", "forced_drop_outs_a", "bombs_a", "grubbers_a", "tackles_made_a", "missed_tackles_a", "intercepts_a", "ineffective_tackles_a", "errors_a", "penalties_conceded_a", "ruck_infringements_a", "inside_ten_metres_a", "interchanges_used_a", "completion_rate_a", "average_play_ball_speed_a", "kick_defusal_a", "effective_tackle_a", "tries_a", "conversions_a", "conversions_missed_a", "penalty_goals_a", "penalty_goals_missed_a", "sin_bins_a", "one_point_field_goals_a", "one_point_field_goals_missed_a", "two_point_field_goals_a", "two_point_field_goals_missed_a", "half_time_a", "round", "home", "home_score", "away", "away_score", "venue", "match_date_utc", "match_centre_url", "overall_first_try_scorer", "overall_first_try_minute", "overall_first_try_round", "ref_names", "ref_positions", "main_ref", "ground_condition", "weather_condition", "season") VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Grand Final', 'Storm', 22, 'Broncos', 26, 'Accor Stadium', '2025-10-05T08:30:00Z', 'https://www.nrl.com/draw/nrl-premiership/2025/grand-final/storm-v-broncos/', NULL, NULL, NULL, '{}', '{}', NULL, NULL, NULL, '2025')
+2025-10-30 23:09:40.147 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 23:09:58.726 GMT [2992832] LOG:  checkpoint complete: wrote 187 buffers (1.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=18.546 s, sync=0.005 s, total=18.579 s; sync files=14, longest=0.004 s, average=0.001 s; distance=975 kB, estimate=975 kB; lsn=0/1DB06E0, redo lsn=0/1DB06A8
+2025-10-30 23:14:40.798 GMT [2992832] LOG:  checkpoint starting: time
+2025-10-30 23:14:56.374 GMT [2992827] LOG:  received fast shutdown request
+2025-10-30 23:14:56.376 GMT [2992827] LOG:  aborting any active transactions
+2025-10-30 23:14:56.377 GMT [2992827] LOG:  background worker "logical replication launcher" (PID 2992837) exited with exit code 1
+2025-10-30 23:14:56.415 GMT [2992832] LOG:  checkpoint complete: wrote 241 buffers (1.5%); 0 WAL file(s) added, 0 removed, 0 recycled; write=15.574 s, sync=0.026 s, total=15.617 s; sync files=14, longest=0.025 s, average=0.002 s; distance=2038 kB, estimate=2038 kB; lsn=0/1FAE0F0, redo lsn=0/1FAE0B8
+2025-10-30 23:14:56.415 GMT [2992832] LOG:  shutting down
+2025-10-30 23:14:56.416 GMT [2992832] LOG:  checkpoint starting: shutdown immediate
+2025-10-30 23:14:56.427 GMT [2992832] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.013 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=1834 kB; lsn=0/1FAE168, redo lsn=0/1FAE168
+2025-10-30 23:14:56.435 GMT [2992827] LOG:  database system is shut down

@@ -1,0 +1,274 @@
+2025-11-03 14:04:02.763 GMT [65065] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-11-03 14:04:02.763 GMT [65065] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-11-03 14:04:02.770 GMT [65065] LOG:  listening on Unix socket "/dcs/23/u5503037/CS344/pgsock/.s.PGSQL.5432"
+2025-11-03 14:04:02.785 GMT [65073] LOG:  database system was shut down at 2025-11-02 22:43:24 GMT
+2025-11-03 14:04:02.797 GMT [65065] LOG:  database system is ready to accept connections
+2025-11-03 14:09:02.885 GMT [65071] LOG:  checkpoint starting: time
+2025-11-03 14:09:02.921 GMT [65071] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.024 s, sync=0.001 s, total=0.037 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/5097B10, redo lsn=0/5097AD8
+2025-11-03 14:25:11.802 GMT [173199] ERROR:  relation "matches_new" does not exist
+2025-11-03 14:25:11.802 GMT [173199] STATEMENT:  CREATE TABLE team_stats (
+	  match_id  integer NOT NULL REFERENCES matches_new(match_id) ON DELETE CASCADE,
+	  team      text    NOT NULL,
+	  is_home   boolean NOT NULL, -- true = home, false = away
+	  score     int,
+	  half_time int,
+	  time_in_possession int,
+	  all_runs int,
+	  all_run_metres int,
+	  post_contact_metres int,
+	  line_breaks int,
+	  tackle_breaks int,
+	  average_set_distance numeric(7,2),
+	  kick_return_metres int,
+	  offloads int,
+	  receipts int,
+	  total_passes int,
+	  dummy_passes int,
+	  kicks int,
+	  kicking_metres int,
+	  forced_drop_outs int,
+	  bombs int,
+	  grubbers int,
+	  forty_twenty int,
+	  tackles_made int,
+	  missed_tackles int,
+	  intercepts int,
+	  ineffective_tackles int,
+	  errors int,
+	  penalties_conceded int,
+	  ruck_infringements int,
+	  inside_ten_metres int,
+	  interchanges_used int,
+	  completion_rate numeric(5,2),
+	  average_play_ball_speed numeric(5,2),
+	  kick_defusal numeric(5,2),
+	  effective_tackle numeric(5,2),
+	  tries int,
+	  conversions int,
+	  conversions_missed int,
+	  penalty_goals int,
+	  penalty_goals_missed int,
+	  sin_bins int,
+	  on_reports int,
+	  one_point_field_goals int,
+	  one_point_field_goals_missed int,
+	  two_point_field_goals int,
+	  two_point_field_goals_missed int,
+	  PRIMARY KEY (match_id, is_home)
+	);
+2025-11-03 14:27:54.278 GMT [173199] ERROR:  null value in column "round" of relation "match_data" violates not-null constraint
+2025-11-03 14:27:54.278 GMT [173199] DETAIL:  Failing row contains (10625, 2001, null, PointsBet Stadium, 2001-09-07 01:00:00+01, https://www.nrl.com/draw/nrl-premiership/2001/mckintyre-1/sharks..., null, null, null, {}, {}, null, null, null).
+2025-11-03 14:27:54.278 GMT [173199] STATEMENT:  INSERT INTO match_data(
+	  match_id, season, round, venue, match_date_utc, match_centre_url,
+	  overall_first_try_scorer, overall_first_try_minute, overall_first_try_round,
+	  ref_names, ref_positions, main_ref, ground_condition, weather_condition
+	)
+	SELECT
+	  match_id, season, round, venue, match_date_utc, match_centre_url,
+	  overall_first_try_scorer, overall_first_try_minute, overall_first_try_round,
+	  ref_names, ref_positions, main_ref, ground_condition, weather_condition
+	FROM matches;
+2025-11-03 14:27:54.300 GMT [173199] ERROR:  insert or update on table "team_stats" violates foreign key constraint "team_stats_match_id_fkey"
+2025-11-03 14:27:54.300 GMT [173199] DETAIL:  Key (match_id)=(10443) is not present in table "match_data".
+2025-11-03 14:27:54.300 GMT [173199] STATEMENT:  INSERT INTO team_stats (
+	  match_id, team, is_home, score, half_time,
+	  time_in_possession, all_runs, all_run_metres, post_contact_metres,
+	  line_breaks, tackle_breaks, average_set_distance, kick_return_metres,
+	  offloads, receipts, total_passes, dummy_passes, kicks, kicking_metres,
+	  forced_drop_outs, bombs, grubbers, forty_twenty, tackles_made,
+	  missed_tackles, intercepts, ineffective_tackles, errors,
+	  penalties_conceded, ruck_infringements, inside_ten_metres,
+	  interchanges_used, completion_rate, average_play_ball_speed,
+	  kick_defusal, effective_tackle, tries, conversions, conversions_missed,
+	  penalty_goals, penalty_goals_missed, sin_bins, on_reports,
+	  one_point_field_goals, one_point_field_goals_missed,
+	  two_point_field_goals, two_point_field_goals_missed
+	)
+	SELECT
+	  match_id, home, TRUE, home_score, half_time_h,
+	  time_in_possession_h, all_runs_h, all_run_metres_h, post_contact_metres_h,
+	  line_breaks_h, tackle_breaks_h, average_set_distance_h, kick_return_metres_h,
+	  offloads_h, receipts_h, total_passes_h, dummy_passes_h, kicks_h, kicking_metres_h,
+	  forced_drop_outs_h, bombs_h, grubbers_h, forty_twenty_h, tackles_made_h,
+	  missed_tackles_h, intercepts_h, ineffective_tackles_h, errors_h,
+	  penalties_conceded_h, ruck_infringements_h, inside_ten_metres_h,
+	  interchanges_used_h, completion_rate_h, average_play_ball_speed_h,
+	  kick_defusal_h, effective_tackle_h, tries_h, conversions_h, conversions_missed_h,
+	  penalty_goals_h, penalty_goals_missed_h, sin_bins_h, on_reports_h,
+	  one_point_field_goals_h, one_point_field_goals_missed_h,
+	  two_point_field_goals_h, two_point_field_goals_missed_h
+	FROM matches;
+2025-11-03 14:27:54.311 GMT [173199] ERROR:  insert or update on table "team_stats" violates foreign key constraint "team_stats_match_id_fkey"
+2025-11-03 14:27:54.311 GMT [173199] DETAIL:  Key (match_id)=(10443) is not present in table "match_data".
+2025-11-03 14:27:54.311 GMT [173199] STATEMENT:  INSERT INTO team_stats (
+	  match_id, team, is_home, score, half_time,
+	  time_in_possession, all_runs, all_run_metres, post_contact_metres,
+	  line_breaks, tackle_breaks, average_set_distance, kick_return_metres,
+	  offloads, receipts, total_passes, dummy_passes, kicks, kicking_metres,
+	  forced_drop_outs, bombs, grubbers, forty_twenty, tackles_made,
+	  missed_tackles, intercepts, ineffective_tackles, errors,
+	  penalties_conceded, ruck_infringements, inside_ten_metres,
+	  interchanges_used, completion_rate, average_play_ball_speed,
+	  kick_defusal, effective_tackle, tries, conversions, conversions_missed,
+	  penalty_goals, penalty_goals_missed, sin_bins, on_reports,
+	  one_point_field_goals, one_point_field_goals_missed,
+	  two_point_field_goals, two_point_field_goals_missed
+	)
+	SELECT
+	  match_id, away, FALSE, away_score, half_time_a,
+	  time_in_possession_a, all_runs_a, all_run_metres_a, post_contact_metres_a,
+	  line_breaks_a, tackle_breaks_a, average_set_distance_a, kick_return_metres_a,
+	  offloads_a, receipts_a, total_passes_a, dummy_passes_a, kicks_a, kicking_metres_a,
+	  forced_drop_outs_a, bombs_a, grubbers_a, forty_twenty_a, tackles_made_a,
+	  missed_tackles_a, intercepts_a, ineffective_tackles_a, errors_a,
+	  penalties_conceded_a, ruck_infringements_a, inside_ten_metres_a,
+	  interchanges_used_a, completion_rate_a, average_play_ball_speed_a,
+	  kick_defusal_a, effective_tackle_a, tries_a, conversions_a, conversions_missed_a,
+	  penalty_goals_a, penalty_goals_missed_a, sin_bins_a, on_reports_a,
+	  one_point_field_goals_a, one_point_field_goals_missed_a,
+	  two_point_field_goals_a, two_point_field_goals_missed_a
+	FROM matches;
+2025-11-03 14:29:03.219 GMT [65071] LOG:  checkpoint starting: time
+2025-11-03 14:29:14.778 GMT [65071] LOG:  checkpoint complete: wrote 116 buffers (0.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=11.528 s, sync=0.006 s, total=11.560 s; sync files=54, longest=0.002 s, average=0.001 s; distance=3285 kB, estimate=3285 kB; lsn=0/53CD118, redo lsn=0/53CD0E0
+2025-11-03 14:34:01.405 GMT [173199] ERROR:  column "season" does not exist at character 52
+2025-11-03 14:34:01.405 GMT [173199] STATEMENT:  select * from team_stats where team ='Broncos' and season = 2016;
+2025-11-03 14:34:03.876 GMT [65071] LOG:  checkpoint starting: time
+2025-11-03 14:34:58.270 GMT [65071] LOG:  checkpoint complete: wrote 545 buffers (3.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=54.382 s, sync=0.001 s, total=54.394 s; sync files=19, longest=0.001 s, average=0.001 s; distance=5668 kB, estimate=5668 kB; lsn=0/59563E8, redo lsn=0/59563B0
+2025-11-03 14:35:47.943 GMT [173199] ERROR:  syntax error at or near "where" at character 48
+2025-11-03 14:35:47.943 GMT [173199] STATEMENT:  select * from team_stats inner join match_data where team = 'Broncos' and season = 2015;
+2025-11-03 14:39:03.363 GMT [65071] LOG:  checkpoint starting: time
+2025-11-03 14:39:04.186 GMT [65071] LOG:  checkpoint complete: wrote 8 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.803 s, sync=0.008 s, total=0.824 s; sync files=2, longest=0.008 s, average=0.004 s; distance=12 kB, estimate=5103 kB; lsn=0/5959568, redo lsn=0/5959530
+2025-11-03 14:49:03.342 GMT [65071] LOG:  checkpoint starting: time
+2025-11-03 14:49:06.676 GMT [65071] LOG:  checkpoint complete: wrote 34 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.314 s, sync=0.003 s, total=3.334 s; sync files=33, longest=0.001 s, average=0.001 s; distance=165 kB, estimate=4609 kB; lsn=0/5982AD0, redo lsn=0/5982A98
+2025-11-03 15:01:44.978 GMT [293582] ERROR:  syntax error at or near "precisiont" at character 350
+2025-11-03 15:01:44.978 GMT [293582] STATEMENT:  CREATE TABLE team_stats_z (
+	  match_id  integer NOT NULL REFERENCES match_data(match_id) ON DELETE CASCADE,
+	  team      text    NOT NULL,
+	  is_home   boolean NOT NULL, -- true = home, false = away
+	  score     double precision,
+	  half_time double precision,
+	  time_in_possession double precision,
+	  all_runs double precision,
+	  all_run_metres double precisiont,
+	  post_contact_metres double precision,
+	  line_breaks double precision,
+	  tackle_breaks double precision,
+	  average_set_distance double precision,
+	  kick_return_metres double precision,
+	  offloads double precision,
+	  receipts double precision,
+	  total_passes double precision,
+	  dummy_passes double precision,
+	  kicks double precision,
+	  kicking_metres double precision,
+	  forced_drop_outs double precision,
+	  bombs double precision,
+	  grubbers double precision,
+	  forty_twenty double precision,
+	  tackles_made double precision,
+	  missed_tackles double precision,
+	  intercepts double precision,
+	  ineffective_tackles double precision,
+	  errors double precision,
+	  penalties_conceded double precision,
+	  ruck_infringements double precision,
+	  inside_ten_metres double precision,
+	  interchanges_used double precision,
+	  completion_rate double precision,
+	  average_play_ball_speed double precision,
+	  kick_defusal double precision,
+	  effective_tackle double precision,
+	  tries double precision,
+	  conversions double precision,
+	  conversions_missed double precision,
+	  penalty_goals double precision,
+	  penalty_goals_missed double precision,
+	  sin_bins double precision,
+	  on_reports double precision,
+	  one_point_field_goals double precision,
+	  one_point_field_goals_missed double precision,
+	  two_point_field_goals double precision,
+	  two_point_field_goals_missed double precision,
+	  PRIMARY KEY (match_id, is_home)
+	);
+2025-11-03 15:04:03.939 GMT [65071] LOG:  checkpoint starting: time
+2025-11-03 15:04:07.885 GMT [65071] LOG:  checkpoint complete: wrote 40 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.915 s, sync=0.011 s, total=3.946 s; sync files=33, longest=0.009 s, average=0.001 s; distance=194 kB, estimate=4167 kB; lsn=0/59B33F8, redo lsn=0/59B33C0
+2025-11-03 15:31:01.052 GMT [523274] ERROR:  syntax error at or near "team_stats" at character 2
+2025-11-03 15:31:01.052 GMT [523274] STATEMENT:  
+	team_stats.*, match_data.season
+	from team_stats join match_data on team_stats.match_id = match_data.match_id 
+	where match_data.season = 2001
+	
+2025-11-03 15:52:07.815 GMT [65065] LOG:  received fast shutdown request
+2025-11-03 15:52:07.817 GMT [65065] LOG:  aborting any active transactions
+2025-11-03 15:52:07.819 GMT [65065] LOG:  background worker "logical replication launcher" (PID 65076) exited with exit code 1
+2025-11-03 15:52:07.819 GMT [65071] LOG:  shutting down
+2025-11-03 15:52:07.821 GMT [65071] LOG:  checkpoint starting: shutdown immediate
+2025-11-03 15:52:07.847 GMT [65071] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.014 s, total=0.028 s; sync files=1, longest=0.014 s, average=0.014 s; distance=0 kB, estimate=3751 kB; lsn=0/59B34A8, redo lsn=0/59B34A8
+2025-11-03 15:52:07.856 GMT [65065] LOG:  database system is shut down
+2025-11-03 19:29:07.484 GMT [1816417] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-11-03 19:29:07.484 GMT [1816417] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-11-03 19:29:07.495 GMT [1816417] LOG:  listening on Unix socket "/dcs/23/u5503037/CS344/pgsock/.s.PGSQL.5432"
+2025-11-03 19:29:07.510 GMT [1816427] LOG:  database system was shut down at 2025-11-03 15:52:07 GMT
+2025-11-03 19:29:07.530 GMT [1816417] LOG:  database system is ready to accept connections
+2025-11-03 19:34:07.609 GMT [1816425] LOG:  checkpoint starting: time
+2025-11-03 19:34:07.749 GMT [1816425] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.122 s, sync=0.004 s, total=0.140 s; sync files=3, longest=0.004 s, average=0.002 s; distance=0 kB, estimate=0 kB; lsn=0/59B3590, redo lsn=0/59B3558
+2025-11-03 19:39:07.830 GMT [1816425] LOG:  checkpoint starting: time
+2025-11-03 19:39:46.194 GMT [1870352] ERROR:  column "averag_play_ball_speed" does not exist at character 111
+2025-11-03 19:39:46.194 GMT [1870352] HINT:  Perhaps you meant to reference the column "team_stats_z.average_play_ball_speed".
+2025-11-03 19:39:46.194 GMT [1870352] STATEMENT:  select match_id, team, score, is_home, one_point_field_goals, average_play_ball_speed from team_stats_z where averag_play_ball_speed is not null limit 10
+	;
+2025-11-03 19:40:08.141 GMT [1816425] LOG:  checkpoint complete: wrote 604 buffers (3.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=60.294 s, sync=0.004 s, total=60.311 s; sync files=16, longest=0.004 s, average=0.001 s; distance=5631 kB, estimate=5631 kB; lsn=0/5F33390, redo lsn=0/5F33358
+2025-11-03 19:41:27.857 GMT [1870352] ERROR:  column "home" does not exist at character 8
+2025-11-03 19:41:27.857 GMT [1870352] STATEMENT:  select home, away, season, round from match_data where match_id = 13261
+	;
+2025-11-03 20:19:46.563 GMT [2095078] ERROR:  syntax error at or near "[" at character 22
+2025-11-03 20:19:46.563 GMT [2095078] STATEMENT:  
+	    select Composed([Identifier('time_in_possession'), SQL(', '), Identifier('average_play_ball_speed'), SQL(', '), Identifier('completion_rate')])
+	    from team_stats_z
+	    
+2025-11-03 20:20:34.361 GMT [2099245] ERROR:  syntax error at or near "[" at character 23
+2025-11-03 20:20:34.361 GMT [2099245] STATEMENT:  
+	    select dict_keys(['time_in_possession', 'average_play_ball_speed', 'completion_rate'])
+	    from team_stats_z
+	    
+2025-11-03 20:22:06.901 GMT [2108268] ERROR:  column "time_in_possessionaverage_play_ball_speedcompletion_rate" does not exist at character 13
+2025-11-03 20:22:06.901 GMT [2108268] STATEMENT:  
+	    select time_in_possessionaverage_play_ball_speedcompletion_rate
+	    from team_stats_z
+	    
+2025-11-03 20:31:33.212 GMT [2158084] ERROR:  syntax error at or near "not" at character 127
+2025-11-03 20:31:33.212 GMT [2158084] STATEMENT:  
+	    select time_in_possession, average_play_ball_speed, completion_rate
+	    from team_stats_z
+	    where time_in_possessionis not null and average_play_ball_speedis not null and completion_rate
+	    limit 20
+	    
+2025-11-03 20:31:46.496 GMT [2159240] ERROR:  argument of AND must be type boolean, not type double precision at character 181
+2025-11-03 20:31:46.496 GMT [2159240] STATEMENT:  
+	    select time_in_possession, average_play_ball_speed, completion_rate
+	    from team_stats_z
+	    where time_in_possession is not null and average_play_ball_speed is not null and completion_rate
+	    limit 20
+	    
+2025-11-03 20:34:14.537 GMT [1816417] LOG:  received fast shutdown request
+2025-11-03 20:34:14.539 GMT [1816417] LOG:  aborting any active transactions
+2025-11-03 20:34:14.541 GMT [1816417] LOG:  background worker "logical replication launcher" (PID 1816430) exited with exit code 1
+2025-11-03 20:34:14.541 GMT [1816425] LOG:  shutting down
+2025-11-03 20:34:14.553 GMT [1816425] LOG:  checkpoint starting: shutdown immediate
+2025-11-03 20:34:14.568 GMT [1816425] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.003 s, total=0.027 s; sync files=1, longest=0.003 s, average=0.003 s; distance=0 kB, estimate=5068 kB; lsn=0/5F33440, redo lsn=0/5F33440
+2025-11-03 20:34:14.577 GMT [1816417] LOG:  database system is shut down
+2025-11-03 22:40:58.035 GMT [2928136] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-11-03 22:40:58.035 GMT [2928136] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-11-03 22:40:58.047 GMT [2928136] LOG:  listening on Unix socket "/dcs/23/u5503037/CS344/pgsock/.s.PGSQL.5432"
+2025-11-03 22:40:58.064 GMT [2928140] LOG:  database system was shut down at 2025-11-03 20:34:14 GMT
+2025-11-03 22:40:58.078 GMT [2928136] LOG:  database system is ready to accept connections
+2025-11-03 22:45:58.138 GMT [2928138] LOG:  checkpoint starting: time
+2025-11-03 22:45:58.176 GMT [2928138] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.022 s, sync=0.001 s, total=0.038 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/5F33528, redo lsn=0/5F334F0
+2025-11-03 23:26:58.233 GMT [2928136] LOG:  received fast shutdown request
+2025-11-03 23:26:58.236 GMT [2928136] LOG:  aborting any active transactions
+2025-11-03 23:26:58.238 GMT [2928136] LOG:  background worker "logical replication launcher" (PID 2928146) exited with exit code 1
+2025-11-03 23:26:58.238 GMT [2928138] LOG:  shutting down
+2025-11-03 23:26:58.253 GMT [2928138] LOG:  checkpoint starting: shutdown immediate
+2025-11-03 23:26:58.267 GMT [2928138] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.029 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB; lsn=0/5F335D8, redo lsn=0/5F335D8
+2025-11-03 23:26:58.276 GMT [2928136] LOG:  database system is shut down
