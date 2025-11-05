@@ -1,0 +1,246 @@
+              now              
+-------------------------------
+ 2025-11-02 22:41:03.077775+00
+(1 row)
+
+ bad_home 
+----------
+        0
+(1 row)
+
+ bad_home_score 
+----------------
+              0
+(1 row)
+
+ bad_time_in_possession_h 
+--------------------------
+                       18
+(1 row)
+
+     bad_time_in_possession_h      
+-----------------------------------
+ (Bulldogs,Cowboys,549,2013)
+ (Panthers,Rabbitohs,532,2013)
+ ("Sea Eagles",Rabbitohs,587,2013)
+ (Sharks,Bulldogs,567,2013)
+ (Sharks,Panthers,575,2013)
+ (Panthers,Roosters,518,2013)
+ (Dragons,Bulldogs,473,2013)
+ (Rabbitohs,Roosters,550,2013)
+ (Raiders,Sharks,492,2013)
+ (Warriors,Roosters,439,2014)
+ (Broncos,Rabbitohs,562,2015)
+ (Eels,Titans,306,2015)
+ (Warriors,Storm,597,2015)
+ (Bulldogs,Sharks,543,2015)
+ (Titans,Eels,589,2015)
+ (Eels,Panthers,591,2015)
+ ("Sea Eagles",Roosters,590,2015)
+ (Bulldogs,Warriors,565,2015)
+(18 rows)
+
+ bad_all_runs_h 
+----------------
+              0
+(1 row)
+
+ bad_all_run_metres_h 
+----------------------
+                    0
+(1 row)
+
+ bad_post_contact_metres_h 
+---------------------------
+                         0
+(1 row)
+
+ bad_line_breaks_h 
+-------------------
+                 0
+(1 row)
+
+ bad_tackle_breaks_h 
+---------------------
+                   0
+(1 row)
+
+ bad_average_set_distance_h 
+----------------------------
+                          1
+(1 row)
+
+ bad_kick_return_metres_h 
+--------------------------
+                        0
+(1 row)
+
+ bad_offloads_h 
+----------------
+              0
+(1 row)
+
+ bad_receipts_h 
+----------------
+              0
+(1 row)
+
+ bad_total_passes_h 
+--------------------
+                  0
+(1 row)
+
+ bad_dummy_passes_h 
+--------------------
+                  0
+(1 row)
+
+ bad_kicks_h 
+-------------
+           0
+(1 row)
+
+ bad_kicking_metres_h 
+----------------------
+                    0
+(1 row)
+
+ bad_forced_drop_outs_h 
+------------------------
+                      0
+(1 row)
+
+ bad_bombs_h 
+-------------
+           0
+(1 row)
+
+ bad_grubbers_h 
+----------------
+              0
+(1 row)
+
+ bad_tackles_made_h 
+--------------------
+                  0
+(1 row)
+
+ bad_missed_tackles_h 
+----------------------
+                    0
+(1 row)
+
+ bad_intercepts_h 
+------------------
+                0
+(1 row)
+
+ bad_intercepts_h_match 
+------------------------
+(0 rows)
+
+ bad_ineffective_tackles_h 
+---------------------------
+                         0
+(1 row)
+
+ bad_errors_h 
+--------------
+            0
+(1 row)
+
+ bad_penalties_conceded_h 
+--------------------------
+                        0
+(1 row)
+
+ bad_ruck_infringements_h 
+--------------------------
+                        0
+(1 row)
+
+ bad_inside_ten_metres_h 
+-------------------------
+                       0
+(1 row)
+
+ bad_interchanges_used_h 
+-------------------------
+                       0
+(1 row)
+
+ bad_completion_rate_h 
+-----------------------
+                     0
+(1 row)
+
+ bad_average_play_ball_speed_h 
+-------------------------------
+                             0
+(1 row)
+
+ bad_kick_defusal_h 
+--------------------
+                  0
+(1 row)
+
+ bad_effective_tackle_h 
+------------------------
+                      0
+(1 row)
+
+ bad_tries_h 
+-------------
+           0
+(1 row)
+
+ bad_conversions_h 
+-------------------
+                 0
+(1 row)
+
+ bad_conversions_missed_h 
+--------------------------
+                        0
+(1 row)
+
+ bad_penalty_goals_h 
+---------------------
+                   0
+(1 row)
+
+ bad_penalty_goals_missed_h 
+----------------------------
+                          0
+(1 row)
+
+ bad_sin_bins_h 
+----------------
+              0
+(1 row)
+
+ bad_one_point_field_goals_h 
+-----------------------------
+                           0
+(1 row)
+
+ bad_one_point_field_goals_missed_h 
+------------------------------------
+                                  0
+(1 row)
+
+ bad_two_point_field_goals_h 
+-----------------------------
+                           0
+(1 row)
+
+ bad_two_point_field_goals_missed_h 
+------------------------------------
+                                  0
+(1 row)
+
+ bad_half_time_h 
+-----------------
+               0
+(1 row)
+

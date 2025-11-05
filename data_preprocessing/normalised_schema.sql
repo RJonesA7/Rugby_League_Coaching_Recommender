@@ -1,0 +1,71 @@
+-- Metadata about the match, not the main stats for analysis
+CREATE TABLE match_data (
+  match_id        integer PRIMARY KEY,     -- keep the existing IDs
+  season          int        NOT NULL,
+  round           int        NOT NULL,
+  venue           text,
+  match_date_utc  timestamptz,
+  match_centre_url text,
+  overall_first_try_scorer text,
+  overall_first_try_minute int,
+  overall_first_try_round  text,
+  ref_names       text[],
+  ref_positions   text[],
+  main_ref        text,
+  ground_condition  text,
+  weather_condition text
+);
+
+-- Per-team, per-match stats (one row per side per match)
+CREATE TABLE team_stats (
+  match_id  integer NOT NULL REFERENCES match_data(match_id) ON DELETE CASCADE,
+  team      text    NOT NULL,
+  is_home   boolean NOT NULL, -- true = home, false = away
+  score     int,
+  half_time int,
+
+  time_in_possession int,
+  all_runs int,
+  all_run_metres int,
+  post_contact_metres int,
+  line_breaks int,
+  tackle_breaks int,
+  average_set_distance numeric(7,2),
+  kick_return_metres int,
+  offloads int,
+  receipts int,
+  total_passes int,
+  dummy_passes int,
+  kicks int,
+  kicking_metres int,
+  forced_drop_outs int,
+  bombs int,
+  grubbers int,
+  forty_twenty int,
+  tackles_made int,
+  missed_tackles int,
+  intercepts int,
+  ineffective_tackles int,
+  errors int,
+  penalties_conceded int,
+  ruck_infringements int,
+  inside_ten_metres int,
+  interchanges_used int,
+  completion_rate numeric(5,2),
+  average_play_ball_speed numeric(5,2),
+  kick_defusal numeric(5,2),
+  effective_tackle numeric(5,2),
+  tries int,
+  conversions int,
+  conversions_missed int,
+  penalty_goals int,
+  penalty_goals_missed int,
+  sin_bins int,
+  on_reports int,
+  one_point_field_goals int,
+  one_point_field_goals_missed int,
+  two_point_field_goals int,
+  two_point_field_goals_missed int,
+
+  PRIMARY KEY (match_id, is_home)
+);
