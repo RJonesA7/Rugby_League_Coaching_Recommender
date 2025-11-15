@@ -315,3 +315,28 @@
 2025-10-30 23:14:56.416 GMT [2992832] LOG:  checkpoint starting: shutdown immediate
 2025-10-30 23:14:56.427 GMT [2992832] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.013 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=1834 kB; lsn=0/1FAE168, redo lsn=0/1FAE168
 2025-10-30 23:14:56.435 GMT [2992827] LOG:  database system is shut down
+2025-11-13 15:28:01.323 GMT [1697318] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-11-13 15:28:01.324 GMT [1697318] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-11-13 15:28:01.334 GMT [1697318] LOG:  listening on Unix socket "/dcs/23/u5503037/CS344/pgsock/.s.PGSQL.5432"
+2025-11-13 15:28:01.354 GMT [1697335] LOG:  database system was interrupted; last known up at 2025-11-11 11:46:05 GMT
+2025-11-13 15:28:02.032 GMT [1697335] LOG:  database system was not properly shut down; automatic recovery in progress
+2025-11-13 15:28:02.052 GMT [1697335] LOG:  redo starts at 0/5F34030
+2025-11-13 15:28:02.052 GMT [1697335] LOG:  invalid record length at 0/5F34118: expected at least 24, got 0
+2025-11-13 15:28:02.052 GMT [1697335] LOG:  redo done at 0/5F340E0 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2025-11-13 15:28:02.069 GMT [1697333] LOG:  checkpoint starting: end-of-recovery immediate wait
+2025-11-13 15:28:02.096 GMT [1697333] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.010 s, sync=0.001 s, total=0.039 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/5F34118, redo lsn=0/5F34118
+2025-11-13 15:28:02.101 GMT [1697318] LOG:  database system is ready to accept connections
+2025-11-13 15:28:10.767 GMT [1697318] LOG:  received fast shutdown request
+2025-11-13 15:28:10.768 GMT [1697318] LOG:  aborting any active transactions
+2025-11-13 15:28:10.770 GMT [1697318] LOG:  background worker "logical replication launcher" (PID 1697378) exited with exit code 1
+2025-11-13 15:28:10.770 GMT [1697333] LOG:  shutting down
+2025-11-13 15:28:10.783 GMT [1697333] LOG:  checkpoint starting: shutdown immediate
+2025-11-13 15:28:10.792 GMT [1697333] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.022 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB; lsn=0/5F34190, redo lsn=0/5F34190
+2025-11-13 15:28:10.798 GMT [1697318] LOG:  database system is shut down
+2025-11-13 15:28:12.553 GMT [1698025] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-11-13 15:28:12.553 GMT [1698025] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-11-13 15:28:12.574 GMT [1698025] LOG:  listening on Unix socket "/dcs/23/u5503037/CS344/pgsock/.s.PGSQL.5432"
+2025-11-13 15:28:12.594 GMT [1698030] LOG:  database system was shut down at 2025-11-13 15:28:10 GMT
+2025-11-13 15:28:12.601 GMT [1698025] LOG:  database system is ready to accept connections
+2025-11-13 15:33:12.675 GMT [1698028] LOG:  checkpoint starting: time
+2025-11-13 15:33:12.707 GMT [1698028] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.013 s, sync=0.001 s, total=0.032 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/5F34278, redo lsn=0/5F34240

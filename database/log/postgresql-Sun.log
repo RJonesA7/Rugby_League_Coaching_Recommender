@@ -338,3 +338,44 @@
 2025-11-02 22:43:24.155 GMT [2614866] LOG:  checkpoint starting: shutdown immediate
 2025-11-02 22:43:24.165 GMT [2614866] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.013 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=5227 kB; lsn=0/5097A28, redo lsn=0/5097A28
 2025-11-02 22:43:24.174 GMT [2614863] LOG:  database system is shut down
+2025-11-09 15:18:25.488 GMT [3135117] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-11-09 15:18:25.488 GMT [3135117] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-11-09 15:18:25.497 GMT [3135117] LOG:  listening on Unix socket "/dcs/23/u5503037/CS344/pgsock/.s.PGSQL.5432"
+2025-11-09 15:18:25.516 GMT [3135126] LOG:  database system was shut down at 2025-11-05 15:23:04 GMT
+2025-11-09 15:18:25.531 GMT [3135117] LOG:  database system is ready to accept connections
+2025-11-09 15:19:34.346 GMT [3139117] ERROR:  missing FROM-clause entry for table "team_stats" at character 923
+2025-11-09 15:19:34.346 GMT [3139117] STATEMENT:  
+	    select team_stats_z.*, (team_stats_z.score - opp_stats_z.score) as final_margin
+	    from team_stats_z join team_stats_z opp_stats_z on team_stats_z.match_id = opp_stats_z.match_id and team_stats_z.is_home != opp_stats_z.is_home
+	    where (team_stats_z.match_id = 14909 and team_stats_z.is_home = True) or (team_stats_z.match_id = 14293 and team_stats_z.is_home = True) or (team_stats_z.match_id = 13819 and team_stats_z.is_home = True) or (team_stats_z.match_id = 14841 and team_stats_z.is_home = True) or (team_stats_z.match_id = 13522 and team_stats_z.is_home = False) or (team_stats_z.match_id = 14334 and team_stats_z.is_home = False) or (team_stats_z.match_id = 14987 and team_stats_z.is_home = False) or (team_stats_z.match_id = 13639 and team_stats_z.is_home = True) or (team_stats_z.match_id = 15091 and team_stats_z.is_home = True) or (team_stats_z.match_id = 13515 and team_stats_z.is_home = True) order by team_stats.match_id desc
+	    
+2025-11-09 15:23:25.615 GMT [3135124] LOG:  checkpoint starting: time
+2025-11-09 15:23:25.636 GMT [3135124] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.008 s, sync=0.001 s, total=0.021 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/5F33B88, redo lsn=0/5F33B50
+2025-11-09 17:18:06.289 GMT [3135117] LOG:  received fast shutdown request
+2025-11-09 17:18:06.291 GMT [3135117] LOG:  aborting any active transactions
+2025-11-09 17:18:06.293 GMT [3135117] LOG:  background worker "logical replication launcher" (PID 3135129) exited with exit code 1
+2025-11-09 17:18:06.293 GMT [3135124] LOG:  shutting down
+2025-11-09 17:18:06.303 GMT [3135124] LOG:  checkpoint starting: shutdown immediate
+2025-11-09 17:18:06.314 GMT [3135124] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.021 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB; lsn=0/5F33C38, redo lsn=0/5F33C38
+2025-11-09 17:18:06.322 GMT [3135117] LOG:  database system is shut down
+2025-11-09 18:25:08.646 GMT [3804024] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-11-09 18:25:08.646 GMT [3804024] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-11-09 18:25:08.661 GMT [3804024] LOG:  listening on Unix socket "/dcs/23/u5503037/CS344/pgsock/.s.PGSQL.5432"
+2025-11-09 18:25:08.696 GMT [3804031] LOG:  database system was shut down at 2025-11-09 17:18:06 GMT
+2025-11-09 18:25:08.734 GMT [3804024] LOG:  database system is ready to accept connections
+2025-11-09 18:30:08.784 GMT [3804029] LOG:  checkpoint starting: time
+2025-11-09 18:30:08.944 GMT [3804029] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.066 s, sync=0.003 s, total=0.160 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=0 kB; lsn=0/5F33D20, redo lsn=0/5F33CE8
+2025-11-09 18:52:01.748 GMT [3804024] LOG:  received fast shutdown request
+2025-11-09 18:52:01.750 GMT [3804024] LOG:  aborting any active transactions
+2025-11-09 18:52:01.752 GMT [3804024] LOG:  background worker "logical replication launcher" (PID 3804034) exited with exit code 1
+2025-11-09 18:52:01.752 GMT [3804029] LOG:  shutting down
+2025-11-09 18:52:01.754 GMT [3804029] LOG:  checkpoint starting: shutdown immediate
+2025-11-09 18:52:01.763 GMT [3804029] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.012 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB; lsn=0/5F33DD0, redo lsn=0/5F33DD0
+2025-11-09 18:52:01.771 GMT [3804024] LOG:  database system is shut down
+2025-11-09 20:35:08.038 GMT [71984] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-5), 64-bit
+2025-11-09 20:35:08.039 GMT [71984] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-11-09 20:35:08.056 GMT [71984] LOG:  listening on Unix socket "/dcs/23/u5503037/CS344/pgsock/.s.PGSQL.5432"
+2025-11-09 20:35:08.071 GMT [71995] LOG:  database system was shut down at 2025-11-09 18:52:01 GMT
+2025-11-09 20:35:08.088 GMT [71984] LOG:  database system is ready to accept connections
+2025-11-09 20:40:08.110 GMT [71991] LOG:  checkpoint starting: time
+2025-11-09 20:40:08.354 GMT [71991] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.014 s, sync=0.001 s, total=0.244 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/5F33EB8, redo lsn=0/5F33E80

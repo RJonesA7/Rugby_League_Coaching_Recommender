@@ -1,0 +1,50 @@
+2025-10-26 18:15:30.141 GMT [1434657] LOG:  redirecting log output to logging collector process
+2025-10-26 18:15:30.141 GMT [1434657] HINT:  Future log output will appear in directory "log".
+2025-10-26 18:42:00.434 GMT [1530949] LOG:  redirecting log output to logging collector process
+2025-10-26 18:42:00.434 GMT [1530949] HINT:  Future log output will appear in directory "log".
+2025-10-26 18:58:02.396 GMT [1589380] LOG:  redirecting log output to logging collector process
+2025-10-26 18:58:02.396 GMT [1589380] HINT:  Future log output will appear in directory "log".
+2025-10-26 19:05:33.953 GMT [1616512] LOG:  redirecting log output to logging collector process
+2025-10-26 19:05:33.953 GMT [1616512] HINT:  Future log output will appear in directory "log".
+2025-10-30 11:55:29.337 GMT [1593411] LOG:  redirecting log output to logging collector process
+2025-10-30 11:55:29.337 GMT [1593411] HINT:  Future log output will appear in directory "log".
+2025-10-30 18:54:36.498 GMT [2992827] LOG:  redirecting log output to logging collector process
+2025-10-30 18:54:36.498 GMT [2992827] HINT:  Future log output will appear in directory "log".
+2025-10-31 13:12:49.628 GMT [2973015] LOG:  redirecting log output to logging collector process
+2025-10-31 13:12:49.628 GMT [2973015] HINT:  Future log output will appear in directory "log".
+2025-11-01 13:48:34.210 GMT [3886126] LOG:  redirecting log output to logging collector process
+2025-11-01 13:48:34.210 GMT [3886126] HINT:  Future log output will appear in directory "log".
+2025-11-02 18:53:45.068 GMT [2614863] LOG:  redirecting log output to logging collector process
+2025-11-02 18:53:45.068 GMT [2614863] HINT:  Future log output will appear in directory "log".
+2025-11-03 14:04:02.754 GMT [65065] LOG:  redirecting log output to logging collector process
+2025-11-03 14:04:02.754 GMT [65065] HINT:  Future log output will appear in directory "log".
+2025-11-03 19:29:07.481 GMT [1816417] LOG:  redirecting log output to logging collector process
+2025-11-03 19:29:07.481 GMT [1816417] HINT:  Future log output will appear in directory "log".
+2025-11-03 22:40:58.032 GMT [2928136] LOG:  redirecting log output to logging collector process
+2025-11-03 22:40:58.032 GMT [2928136] HINT:  Future log output will appear in directory "log".
+2025-11-04 11:19:19.010 GMT [241337] LOG:  redirecting log output to logging collector process
+2025-11-04 11:19:19.010 GMT [241337] HINT:  Future log output will appear in directory "log".
+2025-11-04 17:05:50.466 GMT [108891] LOG:  redirecting log output to logging collector process
+2025-11-04 17:05:50.466 GMT [108891] HINT:  Future log output will appear in directory "log".
+2025-11-05 10:43:49.455 GMT [576230] LOG:  redirecting log output to logging collector process
+2025-11-05 10:43:49.455 GMT [576230] HINT:  Future log output will appear in directory "log".
+2025-11-09 15:18:25.486 GMT [3135117] LOG:  redirecting log output to logging collector process
+2025-11-09 15:18:25.486 GMT [3135117] HINT:  Future log output will appear in directory "log".
+2025-11-09 15:20:43.646 GMT [3142884] FATAL:  lock file "postmaster.pid" already exists
+2025-11-09 15:20:43.646 GMT [3142884] HINT:  Is another postmaster (PID 3135117) running in data directory "/dcs/23/u5503037/CS344/database"?
+2025-11-09 18:25:08.644 GMT [3804024] LOG:  redirecting log output to logging collector process
+2025-11-09 18:25:08.644 GMT [3804024] HINT:  Future log output will appear in directory "log".
+2025-11-09 20:35:08.036 GMT [71984] LOG:  redirecting log output to logging collector process
+2025-11-09 20:35:08.036 GMT [71984] HINT:  Future log output will appear in directory "log".
+2025-11-09 20:46:23.989 GMT [112283] FATAL:  lock file "postmaster.pid" already exists
+2025-11-09 20:46:23.989 GMT [112283] HINT:  Is another postmaster (PID 71984) running in data directory "/dcs/23/u5503037/CS344/database"?
+2025-11-11 11:41:02.372 GMT [172975] LOG:  redirecting log output to logging collector process
+2025-11-11 11:41:02.372 GMT [172975] HINT:  Future log output will appear in directory "log".
+2025-11-13 15:28:01.321 GMT [1697318] LOG:  redirecting log output to logging collector process
+2025-11-13 15:28:01.321 GMT [1697318] HINT:  Future log output will appear in directory "log".
+2025-11-13 15:28:12.550 GMT [1698025] LOG:  redirecting log output to logging collector process
+2025-11-13 15:28:12.550 GMT [1698025] HINT:  Future log output will appear in directory "log".
+2025-11-15 11:47:44.202 GMT [235584] LOG:  redirecting log output to logging collector process
+2025-11-15 11:47:44.202 GMT [235584] HINT:  Future log output will appear in directory "log".
+2025-11-15 11:48:46.133 GMT [239907] FATAL:  lock file "postmaster.pid" already exists
+2025-11-15 11:48:46.133 GMT [239907] HINT:  Is another postmaster (PID 235584) running in data directory "/dcs/23/u5503037/CS344/database"?

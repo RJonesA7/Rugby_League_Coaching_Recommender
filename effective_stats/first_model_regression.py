@@ -21,7 +21,6 @@ def first_model_regression(opposition_sides):
     keys = list(keys)
     for i in range(len(keys)):
         keys[i] = list(keys[i])
-        keys[i][1] = not keys[i][1]
 
     #Get the database teams for analysis, which are those represented by the match_id and is_home now in keys
     conditions = ["(team_stats_z.match_id = " + str(key[0]) + " and team_stats_z.is_home = " + str(key[1]) + ") or " for key in keys]
