@@ -18,7 +18,7 @@ def similar_teams_z_sum(stats_dict, num_of_matches):
             "errors",  "penalties_conceded",  "ruck_infringements",  "inside_ten_metres",
             "interchanges_used",  "completion_rate",  "average_play_ball_speed",
             "kick_defusal",  "effective_tackle",  "tries",  "conversions",
-            "conversions_missed",  "penalty_goals",  "penalty_goals_missed",  "sin_bins",  "on_reports",
+            "conversions_missed",  "penalty_goals",  "penalty_goals_missed",  "sin_bins",  "on_reports"
             ]:
             raise ValueError("invalid statistic " + key)
     
@@ -30,6 +30,7 @@ def similar_teams_z_sum(stats_dict, num_of_matches):
     """.format(columns=", ".join(stats_dict.keys()), not_nulls = " is not null and ".join(stats_dict.keys()) + " is not null")
     stat_df = pandas.read_sql_query(stats_select_query, conn)
 
+    #Flip is_home (for the functions we will pass this to), since we are interested in teams playing against similar teams found
     #Join the match_id and home_away columns to have a unique identifier, and set this as the index
     stat_df = stat_df.set_index(["match_id", "is_home"])
 
