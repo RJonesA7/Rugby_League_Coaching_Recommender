@@ -137,7 +137,7 @@ def first_model_no_scipy(weights):
             x_wm = x_wm / weights.sum()
             y_wm = y_wm / weights.sum()
 
-            #Caclulate grad and y-int to minimise least squares - see report for calculation
+            #Caclulate grad and y-int to minimise least squares
             num = 0
             den = 0
             for i in range(len(xcol)):
