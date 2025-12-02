@@ -1,6 +1,8 @@
 from similar_teams.similar_teams_z_sum import similar_teams_z_sum
+from similar_teams.similar_teams_z_sum_filtered import similar_teams_z_sum_filtered
 from effective_stats.first_model_regression import first_model_regression
 from effective_stats.first_model_no_scipy import first_model_no_scipy
+from effective_stats.multilinear_regression import multilinear_regression
 from evaluation_metrics.spearman_cor import spearman_cor
 
 import pandas, numpy
@@ -55,40 +57,25 @@ opposition_representation = {
   #"two_point_field_goals_missed": 0,
 }
 
-"""
-opposition_sides = similar_teams_z_sum(opposition_representation, 200)
-print(first_model_no_scipy(opposition_sides))
-"""
+opposition_sides = similar_teams_z_sum_filtered(opposition_representation, 1000)
+#Split opposition_sides for K-Fold validation to get SHAP values
+opposition_sides_chunks = numpy.array_split(opposition_sides.to_frame(), 5)
 
-#Find empirical metric performance by training on 2001-2023, testing on 2024-25
+tot_res = None
+for i in range(0,5):
+  curr_chunk = opposition_sides_chunks[i]
+  other_chunks = pandas.concat([opposition_sides_chunks[j] for j in range(0,5) if j != i])
+  curr_chunk["validation"] = True
+  other_chunks["validation"] = False
+  curr_input = pandas.concat([curr_chunk, other_chunks])
+  if tot_res is None:
+    tot_res =  multilinear_regression(curr_input)
+  else:
+    tot_res = tot_res + multilinear_regression(curr_input)
 
-#Find data representing relevant sides
-losing_teams_query = """
-select team_stats_z.*
-from team_stats_z join team_stats_z opp_stats_z on team_stats_z.match_id = opp_stats_z.match_id and team_stats_z.is_home != opp_stats_z.is_home
-where (team_stats_z.score - opp_stats_z.score) < 0 and (select season from match_data where match_data.match_id = team_stats_z.match_id) > 2023
-"""
-losing_teams = pandas.read_sql_query(losing_teams_query, conn)
+tot_res = tot_res / 5
+print(tot_res)
 
-n = 0
-spearman_tot = 0
-for team in losing_teams.iterrows():
-	team = team[1]
-	team = team.to_dict()
-	keys = list(team.keys())
-	represantion = {}
-	for key in keys:
-		if team[key] is None:
-			del team[key]
-		elif key not in ["match_id", "is_home", "team", "one_point_field_goals", "two_point_field_goals", "one_point_field_goals_missed", "two_point_field_goals_missed"]:
-			represantion[key] = team[key]
-		
-	recommendations = first_model_no_scipy(similar_teams_z_sum(represantion, 100))
-	res = spearman_cor({"match_id": team["match_id"], "is_home": team["is_home"]}, recommendations)
-	spearman_tot = spearman_tot + res
-	print(res)
-	n = n + 1
-
-print("Overall average Spearman correlation coefficient for stats recommended by the model and stats of winning teams: " + str(spearman_tot/n))
+#print(multilinear_regression(opposition_sides))
 
 
