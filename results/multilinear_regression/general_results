@@ -1,0 +1,75 @@
+Having removed all other statistics in an effort to avoid the SHAP values being dominated by a few statistics which are measures of team performance not styles of play, these were results against 1000 neutral opposition teams:
+
+time_in_possession              0.168375
+all_runs                        0.106269
+post_contact_metres             0.027501
+tackle_breaks                   0.140861
+average_set_distance            0.014005
+kick_return_metres              0.082992
+offloads                        0.026213
+total_passes                   -0.011841
+dummy_passes                   -0.001107
+kicks                          -0.045431
+kicking_metres                  0.040793
+forced_drop_outs                0.004906
+bombs                          -0.000583
+grubbers                        0.004424
+forty_twenty                    0.003408
+intercepts                      0.009628
+ineffective_tackles            -0.014853
+errors                         -0.009999
+ruck_infringements              0.026392
+inside_ten_metres               0.020379
+interchanges_used               0.004851
+completion_rate                 0.097525
+average_play_ball_speed         0.026921
+kick_defusal                    0.001871
+effective_tackle                0.038881
+penalty_goals_missed            0.006729
+sin_bins                       -0.000856
+on_reports                      0.010602
+one_point_field_goals           0.000125
+one_point_field_goals_missed    0.000621
+two_point_field_goals           0.000972
+two_point_field_goals_missed    0.003937
+const                          -0.023730
+
+
+When increased to 8000, we do not see extravagant difference, showing that the model converges on its results quickly and that creating models on sections of the dataset can be effective, validating the k-NN method for selecting relevant opposition.
+time_in_possession              0.137477
+all_runs                        0.143014
+post_contact_metres             0.039901
+tackle_breaks                   0.115591
+average_set_distance            0.044387
+kick_return_metres              0.146110
+offloads                        0.004595
+total_passes                   -0.045707
+dummy_passes                   -0.000087
+kicks                          -0.084227
+kicking_metres                  0.028170
+forced_drop_outs                0.002257
+bombs                          -0.000045
+grubbers                        0.009079
+forty_twenty                    0.003548
+intercepts                      0.010585
+ineffective_tackles            -0.008367
+errors                         -0.039805
+ruck_infringements              0.005066
+inside_ten_metres               0.004635
+interchanges_used               0.000255
+completion_rate                 0.178678
+average_play_ball_speed         0.026526
+kick_defusal                    0.012852
+effective_tackle                0.012087
+penalty_goals_missed           -0.000488
+sin_bins                       -0.000301
+on_reports                      0.007006
+one_point_field_goals           0.000169
+one_point_field_goals_missed   -0.002488
+two_point_field_goals          -0.000272
+two_point_field_goals_missed   -0.000014
+const                           0.000070
+
+When all stats are considered, we see that the SHAP values are dominated by tries, as this is not at all independent of other statistics and this is an assumption made for SHAP values. This shows the importance of selecting features which are independent, further work on which could be done in future to identify which stats are most independent.
+
+
