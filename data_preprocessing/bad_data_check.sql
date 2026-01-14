@@ -2,7 +2,7 @@
 
 SELECT now();
 
--- home (text) – optional presence check
+-- Check there is a home team
 SELECT COUNT(*) AS bad_home FROM matches WHERE home IS NULL OR home = '';
 
 -- Scores / time
@@ -20,7 +20,7 @@ SELECT COUNT(*) AS bad_post_contact_metres_h FROM matches WHERE (post_contact_me
 -- Attack events
 SELECT COUNT(*) AS bad_line_breaks_h FROM matches WHERE (line_breaks_h < 0 OR line_breaks_h > 40) AND line_breaks_h IS NOT NULL;
 SELECT COUNT(*) AS bad_tackle_breaks_h FROM matches WHERE (tackle_breaks_h < 0 OR tackle_breaks_h > 100) AND tackle_breaks_h IS NOT NULL;
--- metres gained per set (very conservative band)
+-- metres gained per set
 SELECT COUNT(*) AS bad_average_set_distance_h FROM matches WHERE (average_set_distance_h < 10 OR average_set_distance_h > 80) AND average_set_distance_h IS NOT NULL;
 SELECT COUNT(*) AS bad_kick_return_metres_h FROM matches WHERE (kick_return_metres_h < 0 OR kick_return_metres_h > 1000) AND kick_return_metres_h IS NOT NULL;
 SELECT COUNT(*) AS bad_offloads_h FROM matches WHERE (offloads_h < 0 OR offloads_h > 80) AND offloads_h IS NOT NULL;
@@ -69,11 +69,5 @@ SELECT COUNT(*) AS bad_two_point_field_goals_missed_h FROM matches WHERE (two_po
 
 -- Half-time score (team points by HT)
 SELECT COUNT(*) AS bad_half_time_h FROM matches WHERE (half_time_h < 0 OR half_time_h > 80) AND half_time_h IS NOT NULL;
-
-
--- Identify bad years by checking the above for season > y, with y = 2016, then 17, …
-
-
--- Duplicate all queries to check both home and away stats
 
 \o             

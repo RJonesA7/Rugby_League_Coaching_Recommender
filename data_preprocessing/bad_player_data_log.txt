@@ -1,0 +1,319 @@
+              now              
+-------------------------------
+ 2026-01-14 12:11:17.870989+00
+(1 row)
+
+ bad_name 
+----------
+        0
+(1 row)
+
+ bad_number 
+------------
+          0
+(1 row)
+
+ bad_season 
+------------
+          0
+(1 row)
+
+ bad_round 
+-----------
+         0
+(1 row)
+
+ bad_home_away 
+---------------
+             0
+(1 row)
+
+ bad_mins_played 
+-----------------
+               0
+(1 row)
+
+ bad_mins_played_rows 
+----------------------
+(0 rows)
+
+ bad_stint_one 
+---------------
+             0
+(1 row)
+
+ bad_stint_two 
+---------------
+             0
+(1 row)
+
+ bad_stints_sum 
+----------------
+            421
+(1 row)
+
+ bad_points 
+------------
+          0
+(1 row)
+
+ bad_tries 
+-----------
+         0
+(1 row)
+
+ bad_conversions 
+-----------------
+               0
+(1 row)
+
+ bad_conversion_attempts 
+-------------------------
+                       0
+(1 row)
+
+ bad_conv_attempts_lt_conversions 
+----------------------------------
+                                0
+(1 row)
+
+ bad_penalty_goals 
+-------------------
+                 0
+(1 row)
+
+ bad_goal_conversion_rate 
+--------------------------
+                        0
+(1 row)
+
+ bad_one_point_field_goals 
+---------------------------
+                         0
+(1 row)
+
+ bad_two_point_field_goals 
+---------------------------
+                         0
+(1 row)
+
+ bad_all_runs 
+--------------
+            0
+(1 row)
+
+ bad_all_run_metres 
+--------------------
+                  0
+(1 row)
+
+ bad_hit_ups 
+-------------
+           0
+(1 row)
+
+ bad_post_contact_metres 
+-------------------------
+                       0
+(1 row)
+
+ bad_kick_return_metres 
+------------------------
+                      0
+(1 row)
+
+ bad_line_engaged_runs 
+-----------------------
+                     0
+(1 row)
+
+ bad_line_breaks 
+-----------------
+               0
+(1 row)
+
+ bad_line_break_assists 
+------------------------
+                      0
+(1 row)
+
+ bad_try_assists 
+-----------------
+               0
+(1 row)
+
+ bad_tackle_breaks 
+-------------------
+                 0
+(1 row)
+
+ bad_play_the_ball 
+-------------------
+                 0
+(1 row)
+
+ bad_avg_ptb_speed 
+-------------------
+                 1
+(1 row)
+
+ bad_receipts 
+--------------
+            0
+(1 row)
+
+ bad_passes 
+------------
+          0
+(1 row)
+
+ bad_dummy_passes 
+------------------
+                0
+(1 row)
+
+ bad_offloads 
+--------------
+            0
+(1 row)
+
+ bad_passes_to_run_ratio 
+-------------------------
+                       0
+(1 row)
+
+ bad_dummy_half_runs 
+---------------------
+                   0
+(1 row)
+
+ bad_dummy_half_run_metres 
+---------------------------
+                         0
+(1 row)
+
+ bad_tackles_made 
+------------------
+                0
+(1 row)
+
+ bad_missed_tackles 
+--------------------
+                  0
+(1 row)
+
+ bad_ineffective_tackles 
+-------------------------
+                       0
+(1 row)
+
+ bad_tackle_efficiency 
+-----------------------
+                     0
+(1 row)
+
+ bad_intercepts 
+----------------
+              0
+(1 row)
+
+ bad_one_on_one_steal 
+----------------------
+                    0
+(1 row)
+
+ bad_one_on_one_lost 
+---------------------
+                   0
+(1 row)
+
+ bad_errors 
+------------
+          0
+(1 row)
+
+ bad_handling_errors 
+---------------------
+                   0
+(1 row)
+
+ bad_penalties 
+---------------
+             0
+(1 row)
+
+ bad_ruck_infringements 
+------------------------
+                      0
+(1 row)
+
+ bad_inside_10_metres 
+----------------------
+                    0
+(1 row)
+
+ bad_on_report 
+---------------
+             2
+(1 row)
+
+ bad_sin_bins 
+--------------
+            0
+(1 row)
+
+ bad_send_offs 
+---------------
+             0
+(1 row)
+
+ bad_kicks 
+-----------
+         0
+(1 row)
+
+ bad_kicking_metres 
+--------------------
+                  0
+(1 row)
+
+ bad_forced_drop_outs 
+----------------------
+                    0
+(1 row)
+
+ bad_bomb_kicks 
+----------------
+              0
+(1 row)
+
+ bad_grubbers 
+--------------
+            0
+(1 row)
+
+ bad_forty_twenty 
+------------------
+                0
+(1 row)
+
+ bad_twenty_forty 
+------------------
+                0
+(1 row)
+
+ bad_cross_field_kicks 
+-----------------------
+                     0
+(1 row)
+
+ bad_kicked_dead 
+-----------------
+               0
+(1 row)
+
+ bad_kicks_defused 
+-------------------
+                 0
+(1 row)
+

@@ -3,6 +3,7 @@ from similar_teams.similar_teams_z_sum_filtered import similar_teams_z_sum_filte
 from effective_stats.first_model_regression import first_model_regression
 from effective_stats.first_model_no_scipy import first_model_no_scipy
 from effective_stats.multilinear_regression import multilinear_regression
+from effective_stats.svc_scikit import svc_scikit
 from evaluation_metrics.spearman_cor import spearman_cor
 
 import pandas, numpy
@@ -57,7 +58,9 @@ opposition_representation = {
   #"two_point_field_goals_missed": 0,
 }
 
-opposition_sides = similar_teams_z_sum_filtered(opposition_representation, 1000)
+
+opposition_sides = similar_teams_z_sum_filtered(opposition_representation, 8000)
+
 #Split opposition_sides for K-Fold validation to get SHAP values
 opposition_sides_chunks = numpy.array_split(opposition_sides.to_frame(), 5)
 
@@ -75,7 +78,5 @@ for i in range(0,5):
 
 tot_res = tot_res / 5
 print(tot_res)
-
-#print(multilinear_regression(opposition_sides))
 
 
