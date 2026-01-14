@@ -1,0 +1,7 @@
+2026-01-12 13:10:24.378 GMT [1293700] LOG:  starting PostgreSQL 16.10 on x86_64-redhat-linux-gnu, compiled by gcc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-11), 64-bit
+2026-01-12 13:10:24.378 GMT [1293700] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-01-12 13:10:24.387 GMT [1293700] LOG:  listening on Unix socket "/dcs/23/u5503037/CS344/pgsock/.s.PGSQL.5432"
+2026-01-12 13:10:24.408 GMT [1293704] LOG:  database system was shut down at 2026-01-06 05:10:32 GMT
+2026-01-12 13:10:24.437 GMT [1293700] LOG:  database system is ready to accept connections
+2026-01-12 13:15:24.413 GMT [1293702] LOG:  checkpoint starting: time
+2026-01-12 13:15:24.441 GMT [1293702] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.015 s, sync=0.001 s, total=0.028 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/5F34B20, redo lsn=0/5F34AE8

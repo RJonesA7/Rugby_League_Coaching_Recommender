@@ -71,5 +71,52 @@ two_point_field_goals_missed   -0.000014
 const                           0.000070
 
 When all stats are considered, we see that the SHAP values are dominated by tries, as this is not at all independent of other statistics and this is an assumption made for SHAP values. This shows the importance of selecting features which are independent, further work on which could be done in future to identify which stats are most independent.
+score                           1.249549
+half_time                       0.012281
+time_in_possession             -0.006917
+all_runs                        0.002160
+all_run_metres                  0.043153
+post_contact_metres             0.000833
+line_breaks                     0.016338
+tackle_breaks                   0.003929
+average_set_distance           -0.014237
+kick_return_metres             -0.007176
+offloads                       -0.004233
+receipts                       -0.073366
+total_passes                    0.030559
+dummy_passes                   -0.000436
+kicks                          -0.004166
+kicking_metres                 -0.019043
+forced_drop_outs                0.002558
+bombs                           0.000792
+grubbers                       -0.000387
+forty_twenty                   -0.000091
+tackles_made                   -0.017730
+missed_tackles                  0.013036
+intercepts                      0.000656
+ineffective_tackles             0.002261
+errors                         -0.002865
+penalties_conceded             -0.011094
+ruck_infringements              0.003200
+inside_ten_metres               0.003562
+interchanges_used               0.000350
+completion_rate                -0.000516
+average_play_ball_speed         0.006814
+kick_defusal                    0.000644
+effective_tackle               -0.002682
+tries                          -0.381571
+conversions                    -0.119019
+conversions_missed              0.008955
+penalty_goals                  -0.004117
+penalty_goals_missed           -0.005741
+sin_bins                       -0.000084
+on_reports                      0.002532
+one_point_field_goals           0.000442
+one_point_field_goals_missed    0.005585
+two_point_field_goals           0.000812
+two_point_field_goals_missed   -0.000534
+const                          -0.004548
+
+
 
 

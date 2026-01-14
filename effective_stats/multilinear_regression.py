@@ -59,7 +59,9 @@ def multilinear_regression(weights):
     #Drop columns from the data with zero variance, field goals, penalties etc. will often have this and cause errors
     X = X.loc[:, X.nunique() > 1]
     #Additionally, drop the stats that can't be targeted and are completely dependent on other stats, like score.
-    X = X.drop(columns=['score', 'half_time', 'tries', 'conversions', 'conversions_missed', 'line_breaks', 'all_run_metres'])
+    X = X.drop(columns=['score', 'half_time', 'tries', 'conversions', 'conversions_missed'])
+    #This line is to be freely updated to try and obtain meaningful results
+    #X = X.drop(columns=['missed_tackles', 'tackles_made', 'penalties_conceded', 'receipts', 'penalty_goals', 'line_breaks', 'all_run_metres'])
 
     #Add a constant column to X to allow for bias
     X['const'] = 1
@@ -74,6 +76,13 @@ def multilinear_regression(weights):
 
     sol = pandas.Series(sol, index=X.columns)
 
+    #Code to test the effectiveness via classification accuracy of the multilinear regression is commented out in the below section
+    correct = 0
+    incorrect = 0
+
+    #Code to test effectiveness via root mean squared error also commented out
+    mse = 0
+
     predictions = []
     #For testing: Run some predictions of the final margin, and print them alongside some actual final margins
     test_data = stat_df.drop(columns = ['team', 'is_home', 'weight'])
@@ -81,10 +90,26 @@ def multilinear_regression(weights):
     for match in test_data.iterrows():
         match = match[1]
         prediction_id = match['match_id']
+        res = match['final_margin']
         match = match.drop(columns=['final_margin', 'match_id'])
         prediction = sol * match
         prediction_final_margin = prediction.sum()
+
+        mse = mse + (prediction_final_margin - res) ** 2
+
+        if (prediction_final_margin > 0 and res > 0) or (prediction_final_margin < 0 and res < 0):
+            correct = correct + 1
+        else:
+            incorrect = incorrect + 1
+
         predictions.append((prediction_final_margin, prediction_id))
+
+    mse = mse / (correct + incorrect)
+
+    print("accuracy: " + str(correct/(incorrect+correct)))
+    print("MSE: " + str(mse))
+    
+    return correct/(incorrect+correct)
 
     #Take just the top 25% most positive predictions, as we are interested in what makes the model predicts wins
     predictions = sorted(predictions, key=lambda x: x[0])
@@ -120,9 +145,4 @@ def multilinear_regression(weights):
     total_shap_vals = total_shap_vals/num_preds
     
     return total_shap_vals
-
-
-"""
-Function which uses the above to calculate SHAP values for each statistic, and therefore give the effectiveness for each statistic
-"""
 
