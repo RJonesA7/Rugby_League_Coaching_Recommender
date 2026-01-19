@@ -76,16 +76,17 @@ def multilinear_regression(weights):
 
     sol = pandas.Series(sol, index=X.columns)
 
-    #Code to test the effectiveness via classification accuracy of the multilinear regression is commented out in the below section
+    #Code to test the effectiveness via classification accuracy of the multilinear regression is in the below section
     correct = 0
     incorrect = 0
 
-    #Code to test effectiveness via root mean squared error also commented out
+    #Code to test effectiveness via root mean squared error also below
     mse = 0
 
     predictions = []
     #For testing: Run some predictions of the final margin, and print them alongside some actual final margins
-    test_data = stat_df.drop(columns = ['team', 'is_home', 'weight'])
+    eval_stats = eval_stats.reset_index()
+    test_data = eval_stats.drop(columns = ['team', 'is_home', 'weight'])
     test_data = test_data.fillna(0)
     for match in test_data.iterrows():
         match = match[1]
@@ -106,10 +107,10 @@ def multilinear_regression(weights):
 
     mse = mse / (correct + incorrect)
 
-    print("accuracy: " + str(correct/(incorrect+correct)))
-    print("MSE: " + str(mse))
+    #print("accuracy: " + str(correct/(incorrect+correct)))
+    #print("MSE: " + str(mse))
     
-    return correct/(incorrect+correct)
+    #return correct/(incorrect+correct)
 
     #Take just the top 25% most positive predictions, as we are interested in what makes the model predicts wins
     predictions = sorted(predictions, key=lambda x: x[0])
