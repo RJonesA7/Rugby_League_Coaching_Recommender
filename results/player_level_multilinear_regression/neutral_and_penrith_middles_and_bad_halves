@@ -1,0 +1,396 @@
+Presentation has here been changed, they are now all multiplied so high = good for every stat, meaning that they are now in pure order of recommendations for how much to target them, and they're a smidge more granular, particular for kicking and discipline. Dummy half stuff also separated, so only really relevant for fulllbacks and hookers.
+
+{'middles': workload_volume                   1.988119
+post_contact_effectiveness        0.202490
+defence_volume                    0.075888
+scoring_proxies                   0.063850
+running_metres                    0.052164
+aerial_kick_defence               0.027266
+chance_creation                   0.018763
+defensive_events                  0.014204
+dummy_half_running                0.000000
+positive_attacking_kick_volume    0.000000
+territory_kicking                 0.000000
+technical_discipline             -0.006219
+discipline                       -0.013314
+ruck_speed                       -0.017400
+ball_security                    -0.018170
+distribution_involvement         -0.187542
+defence_quality                  -0.245437
+dtype: float64, 'hooker': distribution_involvement          1.388735
+defence_volume                    0.163981
+post_contact_effectiveness        0.078478
+dummy_half_running                0.038620
+scoring_proxies                   0.024587
+territory_kicking                 0.016762
+running_metres                    0.009934
+defensive_events                  0.004308
+chance_creation                   0.004209
+aerial_kick_defence               0.001845
+positive_attacking_kick_volume    0.001629
+ruck_speed                        0.001446
+discipline                       -0.001044
+technical_discipline             -0.001609
+ball_security                    -0.003102
+workload_volume                  -0.007179
+defence_quality                  -0.408917
+dtype: float64, 'second_rows': workload_volume                   0.757611
+post_contact_effectiveness        0.376064
+defence_volume                    0.129030
+scoring_proxies                   0.122659
+distribution_involvement          0.016150
+defensive_events                  0.015369
+chance_creation                   0.014601
+running_metres                    0.013300
+aerial_kick_defence               0.000909
+dummy_half_running                0.000000
+positive_attacking_kick_volume    0.000000
+territory_kicking                 0.000000
+ruck_speed                       -0.002737
+technical_discipline             -0.007470
+ball_security                    -0.020805
+discipline                       -0.038841
+defence_quality                  -0.373465
+dtype: float64, 'halves': territory_kicking                 1.323131
+chance_creation                   0.306056
+workload_volume                   0.245330
+scoring_proxies                   0.185667
+distribution_involvement          0.148585
+post_contact_effectiveness        0.139095
+defence_volume                    0.023213
+defensive_events                  0.017356
+running_metres                    0.003596
+aerial_kick_defence               0.002324
+dummy_half_running                0.000000
+ruck_speed                       -0.000356
+technical_discipline             -0.003991
+defence_quality                  -0.007226
+ball_security                    -0.007364
+positive_attacking_kick_volume   -0.023868
+discipline                       -0.033712
+dtype: float64, 'centres': workload_volume                   0.994714
+scoring_proxies                   0.537881
+post_contact_effectiveness        0.306170
+defence_volume                    0.121792
+defensive_events                  0.051529
+chance_creation                   0.045650
+territory_kicking                 0.024515
+distribution_involvement          0.008415
+running_metres                    0.008144
+defence_quality                   0.004608
+positive_attacking_kick_volume    0.002561
+dummy_half_running                0.000000
+ruck_speed                       -0.004538
+aerial_kick_defence              -0.006032
+technical_discipline             -0.010610
+discipline                       -0.023972
+ball_security                    -0.036897
+dtype: float64, 'wingers': scoring_proxies                   1.640784
+workload_volume                   0.828369
+post_contact_effectiveness        0.459389
+running_metres                    0.123109
+defensive_events                  0.012726
+territory_kicking                 0.009363
+defence_volume                    0.008378
+chance_creation                   0.007316
+positive_attacking_kick_volume    0.004176
+ruck_speed                        0.000589
+dummy_half_running                0.000000
+aerial_kick_defence               0.000000
+ball_security                    -0.001113
+defence_quality                  -0.007523
+technical_discipline             -0.009492
+discipline                       -0.010607
+distribution_involvement         -0.022553
+dtype: float64, 'fullback': post_contact_effectiveness        1.099632
+workload_volume                   0.363603
+scoring_proxies                   0.334306
+running_metres                    0.333010
+chance_creation                   0.067803
+territory_kicking                 0.025386
+defence_volume                    0.020316
+dummy_half_running                0.013101
+positive_attacking_kick_volume    0.012167
+defensive_events                  0.009245
+ruck_speed                       -0.002833
+aerial_kick_defence              -0.006805
+ball_security                    -0.007325
+discipline                       -0.014042
+defence_quality                  -0.016469
+technical_discipline             -0.054579
+distribution_involvement         -0.079680
+dtype: float64}
+
+These are the recs when playing against a neutral opposition for the most part, but weak halves with low kicking territory etc.
+
+Specifically, with opp_halves found with curr_stats.update({
+        "mins_played": 0,
+        "passes": 0,
+        "passes_to_run_ratio": 1,
+        "try_assists": -0.5,
+        "line_break_assists": -0.5,
+        "kicks": 0,
+        "kicking_metres": -1,
+        "forced_drop_outs": -1,
+        "errors": 1,
+})
+
+{'middles': workload_volume                   2.117006
+post_contact_effectiveness        0.201730
+defence_volume                    0.075051
+scoring_proxies                   0.067208
+running_metres                    0.053908
+aerial_kick_defence               0.029185
+chance_creation                   0.020646
+defensive_events                  0.014902
+dummy_half_running                0.000000
+positive_attacking_kick_volume    0.000000
+territory_kicking                 0.000000
+technical_discipline             -0.007783
+ruck_speed                       -0.016500
+ball_security                    -0.018375
+discipline                       -0.020796
+distribution_involvement         -0.206965
+defence_quality                  -0.238260
+dtype: float64, 'hooker': distribution_involvement          1.529608
+defence_volume                    0.176585
+post_contact_effectiveness        0.074330
+dummy_half_running                0.052423
+scoring_proxies                   0.023432
+territory_kicking                 0.019783
+running_metres                    0.009980
+positive_attacking_kick_volume    0.004963
+chance_creation                   0.004652
+defensive_events                  0.004065
+ruck_speed                        0.001161
+technical_discipline             -0.000230
+aerial_kick_defence              -0.000528
+discipline                       -0.001599
+ball_security                    -0.002859
+workload_volume                  -0.011886
+defence_quality                  -0.391428
+dtype: float64, 'second_rows': workload_volume                   0.751151
+post_contact_effectiveness        0.438643
+scoring_proxies                   0.128867
+defence_volume                    0.127627
+defensive_events                  0.017907
+chance_creation                   0.017338
+running_metres                    0.012693
+distribution_involvement          0.012210
+aerial_kick_defence               0.000443
+dummy_half_running                0.000000
+positive_attacking_kick_volume    0.000000
+territory_kicking                 0.000000
+ruck_speed                       -0.002289
+technical_discipline             -0.008968
+ball_security                    -0.021333
+discipline                       -0.066282
+defence_quality                  -0.371490
+dtype: float64, 'halves': territory_kicking                 1.485393
+chance_creation                   0.306893
+distribution_involvement          0.173582
+workload_volume                   0.171815
+scoring_proxies                   0.147443
+post_contact_effectiveness        0.117397
+defence_volume                    0.026722
+defensive_events                  0.011256
+running_metres                    0.006668
+aerial_kick_defence               0.003169
+dummy_half_running                0.000000
+ruck_speed                       -0.000042
+defence_quality                  -0.005016
+technical_discipline             -0.007298
+ball_security                    -0.009217
+positive_attacking_kick_volume   -0.021284
+discipline                       -0.034044
+dtype: float64, 'centres': workload_volume                   1.097477
+scoring_proxies                   0.466735
+post_contact_effectiveness        0.349460
+defence_volume                    0.106519
+chance_creation                   0.050066
+defensive_events                  0.034498
+territory_kicking                 0.021074
+running_metres                    0.012713
+distribution_involvement          0.012356
+aerial_kick_defence               0.005432
+defence_quality                   0.005276
+dummy_half_running                0.000000
+discipline                       -0.001345
+ruck_speed                       -0.008084
+positive_attacking_kick_volume   -0.008301
+technical_discipline             -0.017352
+ball_security                    -0.034236
+dtype: float64, 'wingers': scoring_proxies                   1.649842
+workload_volume                   0.833619
+post_contact_effectiveness        0.472262
+running_metres                    0.149609
+defensive_events                  0.013201
+positive_attacking_kick_volume    0.011145
+chance_creation                   0.007319
+defence_volume                    0.007184
+territory_kicking                 0.006293
+dummy_half_running                0.000000
+aerial_kick_defence               0.000000
+ball_security                    -0.000804
+ruck_speed                       -0.000946
+defence_quality                  -0.006319
+technical_discipline             -0.007409
+discipline                       -0.008665
+distribution_involvement         -0.021869
+dtype: float64, 'fullback': post_contact_effectiveness        1.047246
+workload_volume                   0.402707
+running_metres                    0.354539
+scoring_proxies                   0.331816
+chance_creation                   0.071422
+defence_volume                    0.030187
+territory_kicking                 0.025229
+dummy_half_running                0.013639
+positive_attacking_kick_volume    0.012157
+defensive_events                  0.007630
+aerial_kick_defence              -0.002750
+ruck_speed                       -0.003866
+ball_security                    -0.006270
+discipline                       -0.011220
+defence_quality                  -0.015401
+technical_discipline             -0.054072
+distribution_involvement         -0.070352
+dtype: float64}
+
+
+And changing middles, to Penrith style dominant middles
+
+curr_stats.update({
+            "mins_played": 0,
+            "hit_ups": 1.2,
+            "all_runs": 1.1,
+            "all_run_metres": 0.9,
+            "post_contact_metres": 0.8,
+            "line_engaged_runs": 1.0,
+            "average_play_the_ball_speed": -1.2,
+            "tackles_made": 1.0,
+            "tackle_efficiency": 0.6,
+            "passes": -0.2,
+        })
+
+
+{'middles': workload_volume                   2.213176
+post_contact_effectiveness        0.180326
+running_metres                    0.087148
+scoring_proxies                   0.057937
+defence_volume                    0.054380
+aerial_kick_defence               0.023480
+chance_creation                   0.016353
+defensive_events                  0.010738
+dummy_half_running                0.000000
+positive_attacking_kick_volume    0.000000
+territory_kicking                 0.000000
+ball_security                    -0.005519
+technical_discipline             -0.018382
+discipline                       -0.027147
+ruck_speed                       -0.076627
+defence_quality                  -0.175645
+distribution_involvement         -0.249126
+dtype: float64, 'hooker': distribution_involvement          2.815619
+defence_volume                    0.131308
+dummy_half_running                0.082993
+post_contact_effectiveness        0.069500
+positive_attacking_kick_volume    0.010220
+territory_kicking                 0.009450
+ruck_speed                        0.008045
+running_metres                    0.006312
+scoring_proxies                   0.004642
+chance_creation                   0.003861
+defensive_events                  0.003179
+aerial_kick_defence              -0.002146
+discipline                       -0.003233
+ball_security                    -0.004164
+technical_discipline             -0.018615
+workload_volume                  -0.104393
+defence_quality                  -0.121840
+dtype: float64, 'second_rows': workload_volume                   0.830217
+post_contact_effectiveness        0.441417
+scoring_proxies                   0.128712
+defence_volume                    0.116097
+chance_creation                   0.025594
+defensive_events                  0.014490
+distribution_involvement          0.010716
+running_metres                    0.003288
+aerial_kick_defence               0.000848
+dummy_half_running                0.000000
+positive_attacking_kick_volume    0.000000
+territory_kicking                 0.000000
+ruck_speed                       -0.003216
+technical_discipline             -0.007700
+ball_security                    -0.019825
+discipline                       -0.049841
+defence_quality                  -0.366477
+dtype: float64, 'halves': territory_kicking                 1.317635
+chance_creation                   0.291549
+workload_volume                   0.256363
+scoring_proxies                   0.174273
+distribution_involvement          0.164375
+post_contact_effectiveness        0.122701
+defence_volume                    0.022603
+defensive_events                  0.016118
+running_metres                    0.002857
+aerial_kick_defence               0.000520
+dummy_half_running                0.000000
+ruck_speed                       -0.001176
+defence_quality                  -0.003146
+discipline                       -0.006679
+ball_security                    -0.010604
+technical_discipline             -0.012214
+positive_attacking_kick_volume   -0.022461
+dtype: float64, 'centres': workload_volume                   1.068627
+scoring_proxies                   0.485809
+post_contact_effectiveness        0.351510
+defence_volume                    0.112579
+chance_creation                   0.045498
+defensive_events                  0.042857
+territory_kicking                 0.023611
+distribution_involvement          0.022371
+defence_quality                   0.005201
+running_metres                    0.003509
+positive_attacking_kick_volume    0.000643
+dummy_half_running                0.000000
+ruck_speed                       -0.004624
+aerial_kick_defence              -0.006117
+technical_discipline             -0.024436
+discipline                       -0.025441
+ball_security                    -0.036362
+dtype: float64, 'wingers': scoring_proxies                   1.624133
+workload_volume                   0.859311
+post_contact_effectiveness        0.471508
+running_metres                    0.122901
+defensive_events                  0.033337
+chance_creation                   0.014090
+positive_attacking_kick_volume    0.008595
+defence_volume                    0.007574
+territory_kicking                 0.005752
+ruck_speed                        0.000339
+dummy_half_running                0.000000
+aerial_kick_defence               0.000000
+ball_security                    -0.004389
+technical_discipline             -0.009644
+defence_quality                  -0.010196
+discipline                       -0.018223
+distribution_involvement         -0.026434
+dtype: float64, 'fullback': post_contact_effectiveness        1.056416
+workload_volume                   0.411733
+scoring_proxies                   0.349140
+running_metres                    0.311728
+chance_creation                   0.067539
+territory_kicking                 0.026463
+defence_volume                    0.019109
+dummy_half_running                0.015895
+positive_attacking_kick_volume    0.012797
+defensive_events                  0.007781
+defence_quality                   0.003780
+ruck_speed                       -0.002820
+ball_security                    -0.006867
+aerial_kick_defence              -0.009226
+discipline                       -0.015601
+technical_discipline             -0.054764
+distribution_involvement         -0.093348
+dtype: float64}
+
