@@ -111,6 +111,7 @@ def multilinear_regression(weights):
     #print("MSE: " + str(mse))
     
     #return correct/(incorrect+correct)
+    #return mse
 
     #Take just the top 25% most positive predictions, as we are interested in what makes the model predicts wins
     predictions = sorted(predictions, key=lambda x: x[0])

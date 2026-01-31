@@ -162,16 +162,16 @@ def first_model_no_scipy(weights):
             den = (den_x * den_y) ** (1/2)
             r = num/den
 
-            """
             #Code to plot, used in testing and exploratory analysis
             plt.figure(figsize=(12,8))
+            plt.axhline(y=0, color='black', linestyle='-')
             plt.scatter(xcol, ycol, s=12)
             xx = numpy.linspace(xcol.min(), xcol.max(), 100)
             plt.plot(xx, grad*xx + y_int)
             plt.xlabel(stat); plt.ylabel("final_score"); plt.title("final_score vs "  + stat + ", weighted L2 diff: " + str(round(diff, 3)) + ", pearson correlation: " + str(round(r, 3)) +", gradient: " + str(round(grad, 2)))
             plt.tight_layout()
             plt.show()
-            """
+
 
             #Store the relevant values in the results_df
             results_df.loc[len(results_df)] = {'stat': stat, 'r': r, 'weighted_l2_diff': diff, 'grad': grad}

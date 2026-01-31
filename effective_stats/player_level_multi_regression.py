@@ -6,6 +6,7 @@ conn = psycopg2.connect(dbname="nrl_data", host="/dcs/23/u5503037/CS344/pgsock",
 
 # Stats to exclude from the feature space for each position group
 # These are stats that are structurally irrelevant for recommendations for that role
+# Fantasy points are excluded everywhere because they are damaging to SHAP values, since they correlate with pretty much every positive stat
 position_drop_stats = {
     "middles": [
         "kicks",
@@ -20,6 +21,7 @@ position_drop_stats = {
         "dummy_half_runs",
         "dummy_half_run_metres",
         "dummy_passes",
+        "fantasy_points",
     ],
 
     "second_rows": [
@@ -35,28 +37,36 @@ position_drop_stats = {
         "dummy_half_runs",
         "dummy_half_run_metres",
         "dummy_passes",
+        "fantasy_points",
     ],
 
-    "hooker": [],
+    "hooker": [
+        "fantasy_points",
+    ],
 
-    "fullback": [],
+    "fullback": [
+        "fantasy_points",
+    ],
 
     "halves": [
         "dummy_half_runs",
         "dummy_half_run_metres",
         "dummy_passes",
+        "fantasy_points",
     ],
 
     "centres": [
         "dummy_half_runs",
         "dummy_half_run_metres",
         "dummy_passes",
+        "fantasy_points",
     ],
 
     "wingers": [
         "dummy_half_runs",
         "dummy_half_run_metres",
         "dummy_passes",
+        "fantasy_points",
     ],
 }
 

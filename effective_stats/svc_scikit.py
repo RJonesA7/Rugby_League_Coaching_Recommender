@@ -63,12 +63,12 @@ def svc_scikit(weights):
     #This line is to be freely updated to try and obtain meaningful results
     #X = X.drop(columns=['missed_tackles', 'tackles_made', 'penalties_conceded', 'receipts', 'penalty_goals', 'line_breaks', 'all_run_metres'])
 
-    svr = SVR(kernel="rbf")
+    svr = SVR(kernel="linear")
 
     param_grid = {
         "C": [0.1, 1, 10, 100],
         "epsilon": [0.01, 0.1, 0.5, 1.0],
-        "gamma": ["scale", "auto", 0.01, 0.1, 1, 10],
+        #"gamma": ["scale", "auto", 0.01, 0.1, 1, 10],
     }
 
     search = GridSearchCV(
