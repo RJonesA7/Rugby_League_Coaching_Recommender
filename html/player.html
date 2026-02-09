@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Rugby League Recommender System - Player Level</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='webapp_styling.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="brand">
+        <div class="badge"></div>
+        <div>
+          <h1>Rugby League Recommender System</h1>
+          <p class="subtitle">Player level opposition profile (z-scores: -3 to +3)</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="card">
+      <form method="post" action="{{ url_for('player_post') }}">
+
+        <div class="position-grid">
+          {% for pos in position_order %}
+          <section class="pos-block">
+            <div class="pos-head">
+              <h2 class="pos-title">{{ pos }}</h2>
+              <p class="pos-subtitle">Opposition {{ pos }} group</p>
+            </div>
+
+            <div class="grid">
+              {% for stat in position_stats[pos] %}
+              {% set field = pos ~ "__" ~ stat %}
+              <div class="field">
+                <label for="{{ field }}">
+                  <span class="stat-name">{{ stat }}</span>
+                  <span class="stat-value" id="{{ field }}_val">{{ values[pos][stat] }}</span>
+                </label>
+
+                <input
+                  type="range"
+                  id="{{ field }}"
+                  name="{{ field }}"
+                  min="-3"
+                  max="3"
+                  step="0.1"
+                  value="{{ values[pos][stat] }}"
+                  oninput="document.getElementById('{{ field }}_val').textContent = this.value"
+                />
+                <div class="ticks">
+                  <span>-3</span><span>0</span><span>+3</span>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </section>
+          {% endfor %}
+        </div>
+
+        <div class="actions">
+          <button class="btn" type="submit">Run</button>
+          <a class="btn ghost" href="{{ url_for('player') }}">Reset</a>
+          <a class="btn ghost" href="{{ url_for('index') }}">Back to home</a>
+        </div>
+      </form>
+
+      {% if output is not none %}
+      <section class="output">
+        <h2>Opposition profile (z-scores)</h2>
+
+        {% for pos in position_order %}
+          <div class="pos-output">
+            <h3 class="pos-out-title">{{ pos }}</h3>
+            <div class="stat-list">
+              {% for stat, value in output[pos].items() %}
+                <div class="stat-row">
+                  <span class="stat-key">{{ stat }}</span>
+                  <span class="stat-val {{ 'pos' if value > 0 else 'neg' if value < 0 else 'zero' }}">
+                    {{ "%.6f"|format(value) }}
+                  </span>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </section>
+      {% endif %}
+    </main>
+
+  </div>
+</body>
+</html>

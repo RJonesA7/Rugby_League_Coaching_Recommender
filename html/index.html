@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Rugby League Recommender System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='webapp_styling.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="brand">
+        <div class="badge"></div>
+        <div>
+          <h1>Rugby League Recommender System</h1>
+          <p class="subtitle">
+            Context based recommendations for rugby league coaches
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <main class="card">
+      <div class="home-actions">
+        <a class="home-link" href="{{ url_for('team') }}">
+          <h2>Team Level Recommendations</h2>
+          <p>
+            Input opposition team statistics and receive team wide
+            recommendations.
+          </p>
+        </a>
+
+        <a class="home-link" href="{{ url_for('player') }}">
+          <h2>Player Level Recommendations</h2>
+          <p>
+            Input opposition position-group profiles and receive
+            position specific recommendations.
+          </p>
+        </a>
+
+        <a class="home-link" href="{{ url_for('about') }}">
+          <h2>About the system</h2>
+          <p>What it does, how it works, and key limitations.</p>
+        </a>
+
+      </div>  
+
+    </main>
+
+    <footer class="footer">
+      <p>CS344 · Rugby League Coaching Recommender</p>
+    </footer>
+  </div>
+</body>
+</html>

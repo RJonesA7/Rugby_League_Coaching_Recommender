@@ -59,7 +59,9 @@ opposition_representation = {
 }
 
 
-opposition_sides = similar_teams_z_sum_filtered(opposition_representation, 8000)
+
+
+opposition_sides = similar_teams_z_sum_filtered({**opposition_representation, "missed_tackles": -1, "completion_rate": 1, "kicking_metres": 1, "post_contact_metres": 1, "total_passes": -1}, 8000)
 
 #Split opposition_sides for K-Fold validation to get SHAP values
 opposition_sides_chunks = numpy.array_split(opposition_sides.to_frame(), 5)

@@ -60,8 +60,30 @@ def multilinear_regression(weights):
     X = X.loc[:, X.nunique() > 1]
     #Additionally, drop the stats that can't be targeted and are completely dependent on other stats, like score.
     X = X.drop(columns=['score', 'half_time', 'tries', 'conversions', 'conversions_missed'])
-    #This line is to be freely updated to try and obtain meaningful results
+    
+    #These lines areto be freely updated to try and obtain meaningful results
     #X = X.drop(columns=['missed_tackles', 'tackles_made', 'penalties_conceded', 'receipts', 'penalty_goals', 'line_breaks', 'all_run_metres'])
+    X = X.drop(columns=[
+        "all_runs",
+        "all_run_metres",
+        "line_breaks",
+        "tackle_breaks",
+        "kick_return_metres",
+        "kicking_metres",
+        "forced_drop_outs",
+        "forty_twenty",
+        "missed_tackles",
+        "effective_tackle",
+        "penalty_goals",
+        "penalty_goals_missed",
+        "sin_bins",
+        "on_reports",
+        "one_point_field_goals",
+        "one_point_field_goals_missed",
+        "two_point_field_goals",
+        "two_point_field_goals_missed",
+        "receipts"
+    ])
 
     #Add a constant column to X to allow for bias
     X['const'] = 1

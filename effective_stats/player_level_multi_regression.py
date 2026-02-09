@@ -157,7 +157,7 @@ def player_level_multi_regression(weights, position_group):
     w = w.replace([numpy.inf, -numpy.inf], numpy.nan).fillna(0.0)
     w = w.clip(lower=0.0, upper=numpy.nanquantile(w, 0.99))
 
-    # Apply weighted least squares via square-root scaling
+    # Apply weighted least squares via square root scaling
     w = w ** (1 / 2)
     y_w = y * w
     X_w = X.mul(w, axis=0)
@@ -167,7 +167,7 @@ def player_level_multi_regression(weights, position_group):
         index=X.columns
     )
 
-    # Evaluate prediction error on the held-out fold
+    # Evaluate prediction error on the remaining fold
     mse = 0.0
     predictions = []
 

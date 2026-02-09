@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Rugby League Recommender System - About</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='webapp_styling.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="brand">
+        <div class="badge"></div>
+        <div>
+          <h1>Rugby League Recommender System</h1>
+          <p class="subtitle">About</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="card">
+      <div class="about">
+        <section class="about-section">
+          <h2>What this tool does</h2>
+          <p>
+            This web app produces coaching recommendations for an upcoming match based on an
+            input profile of the opposition. The input is expressed as z-scores
+            (standardised values), so a slider value of 0 represents “league average”, +1 means “one standard
+            deviation above average”, and −1 means “one standard deviation below average”.
+          </p>
+          <p>
+            The output is a ranked set of statistics or stat-themes that the system estimates are most worth targeting
+            against that specific opposition profile.
+          </p>
+        </section>
+
+        <section class="about-section">
+          <h2>How it works</h2>
+
+          <div class="about-steps">
+
+            <div class="about-step">
+              <h3>1) Retrieve similar opposition cases</h3>
+              <p>
+                Given your opposition input, the system finds historical matches with a similar opposition profile using a
+                nearest neighbour search through a database of over 8000 NRL matches.
+              </p>
+            </div>
+
+            <div class="about-step">
+              <h3>2) Fit a weighted model on the fly</h3>
+              <p>
+                Using the retrieved historical cases, the app fits a weighted regression model. More similar cases receive
+                more weight, so the fitted model is tailored to the specific opposition context.
+              </p>
+            </div>
+
+            <div class="about-step">
+              <h3>3) Turn explanations into recommendations</h3>
+              <p>
+                The model’s predictions are explained using SHAP contribution values. The explanations for the most
+                positive predictions made by the model are averaged, and returned as recommendations.
+              </p>
+            </div>
+
+            <div class="about-step">
+              <h3>Player level</h3>
+              <p>
+                In player level mode, the same logic is applied per position group (middles, halves, etc.). The system retrieves
+                similar opposition position-group cases and fits matchup conditioned models, producing recommendations per position group.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="about-section">
+          <h2>How to interpret the numbers</h2>
+          <ul class="about-list">
+            <li><strong>Z-scores (inputs):</strong> relative to season averages; + means the opposition tends to do more of that thing than average.</li>
+            <li><strong>Recommendation scores (outputs):</strong> relative importance weights from the explanation layer; larger magnitude means more influence.</li>
+            <li><strong>Sign:</strong> positive vs negative indicates direction of influence under the fitted model, not a guaranteed causal effect.</li>
+          </ul>
+        </section>
+
+        <section class="about-section">
+          <h2>Limitations</h2>
+          <ul class="about-list">
+            <li>
+              <strong>Not causal:</strong> recommendations are based on patterns in historical data, not controlled experiments.
+            </li>
+            <li>
+              <strong>Feature dependence:</strong> many rugby statistics are correlated, which can make attribution methods less stable.
+            </li>
+            <li>
+              <strong>Context loss:</strong> match events, injuries, weather, and tactics aren’t fully captured in box-score stats.
+            </li>
+            <li>
+              <strong>“Similarity” is a choice:</strong> the nearest-neighbour feature set defines what “similar opposition” means.
+            </li>
+          </ul>
+        </section>
+
+        <div class="actions">
+          <a class="btn ghost" href="{{ url_for('index') }}">Back to home</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>CS344 · Rugby League Coaching Recommender</p>
+    </footer>
+  </div>
+</body>
+</html>

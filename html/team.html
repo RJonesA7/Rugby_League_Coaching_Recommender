@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Rugby League Recommender System - Team Level</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='webapp_styling.css') }}">
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <div class="brand">
+                <div class="badge"></div>
+                <div>
+                    <h1>Rugby League Recommender System</h1>
+                    <p class="subtitle">Team level opposition profile (z-scores: -3 to +3)</p>
+                </div>
+            </div>
+        </header>
+
+    <main class="card">
+        <form method="post">
+            <div class="grid">
+                {% for stat in stats %}
+                <div class="field">
+                    <label for="{{ stat }}">
+                        <span class="stat-name">{{ stat }}</span>
+                        <span class="stat-value" id="{{ stat }}_val">{{ values[stat] }}</span>
+                    </label>
+
+                    <input
+                        type="range"
+                        id="{{ stat }}"
+                        name="{{ stat }}"
+                        min="-3"
+                        max="3"
+                        step="0.1"
+                        value="{{ values[stat] }}"
+                        oninput="document.getElementById('{{ stat }}_val').textContent = this.value"
+                    />
+                    <div class="ticks">
+                        <span>-3</span><span>0</span><span>+3</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="actions">
+                <button class="btn" type="submit">Run</button>
+                <a class="btn ghost" href="{{ url_for('team') }}">Reset</a>
+                <a class="btn ghost" href="{{ url_for('index') }}">Back to home</a>
+            </div>
+        </form>
+
+        {% if output is not none %}
+        <section class="output">
+            <h2>Opposition profile (z-scores)</h2>
+
+            <div class="stat-list">
+                {% for stat, value in output.items() %}
+                <div class="stat-row">
+                    <span class="stat-key">{{ stat }}</span>
+                    <span class="stat-val {{ 'pos' if value > 0 else 'neg' if value < 0 else 'zero' }}">
+                    {{ value | round(5) }}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+    </main>
+
+  </div>
+</body>
+</html>
