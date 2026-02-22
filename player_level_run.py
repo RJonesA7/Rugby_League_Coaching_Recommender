@@ -74,7 +74,16 @@ base_stats = {
 
 conn = psycopg2.connect(dbname="nrl_data", host="/dcs/23/u5503037/CS344/pgsock", port=5432)
 
+#After updating player_level_multi_regression, this function allows extraction of the average SHAP val series from the output of player_level_multi
+def extract_avg_series(res_dict):
+    """
+    res_dict: feature -> [avg, [min, q1, avg, q3, max]]
+    returns: pandas.Series(feature -> avg)
+    """
+    if res_dict is None:
+        return None
 
+    return pandas.Series({feat: float(v[0]) for feat, v in res_dict.items()})
 
 opposition_middles = similar_pos_groups_filtered(base_stats, "middles", 4000)
 
@@ -142,6 +151,7 @@ for opp_pos in positions:
             curr_input = pandas.concat([curr_chunk, other_chunks])
 
             res = player_level_multi_regression(curr_input, our_pos)
+            res = extract_avg_series(res)
             tot_res = res if tot_res is None else tot_res + res
 
         results_by_position[our_pos][opp_pos] = tot_res

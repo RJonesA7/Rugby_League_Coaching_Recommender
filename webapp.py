@@ -161,14 +161,35 @@ def player_post():
             field = f"{pos}__{stat}"
             values[pos][stat] = parse_float(request.form.get(field, "0"))
 
-    output = player_level_multi_regression_run(values)
+    grouped_final_recs, box_plot_grouped_final_recs = player_level_multi_regression_run(values)
+
+    # Convert grouped_final_recs[pos] (Series) -> plain dict (ordered)
+    output = {}
+    for pos in POSITION_ORDER:
+        s = grouped_final_recs.get(pos, None)
+        if s is None:
+            output[pos] = {}
+        else:
+            # keep ordering from Series (already sorted in your runner)
+            output[pos] = {k: float(v) for k, v in s.items()}
+
+    # box_plot_grouped_final_recs is already pos -> ordered dict of group -> [avg, stats]
+    # Ensure float-serialisable
+    box_data = {}
+    for pos in POSITION_ORDER:
+        d = box_plot_grouped_final_recs.get(pos, {})
+        box_data[pos] = {
+            g: [float(v[0]), [float(x) for x in v[1]]]
+            for g, v in d.items()
+        }
 
     return render_template(
         "player.html",
         position_order=POSITION_ORDER_FMT,
         position_stats=POSITION_STATS_FMT,
         values=format_obj(values),
-        output=format_obj(output),
+        output=format_obj(output), # numeric list display
+        box_data=format_obj(box_data), # keep raw numeric for JS
     )
 
 
@@ -182,16 +203,39 @@ def team():
 def team_post():
     values = {s: parse_float(request.form.get(s, "0")) for s in TEAM_STATS}
 
-    output = multilinear_regression_run(values).to_dict()
-    output.pop("const", None)
+    output = multilinear_regression_run(values)
+
+    base_output = output[0]
+    base_output.pop("const", None)
+
+    box_output = output[1]
+    box_output.pop("const", None)
+
+    # Order box plot stats by absolute mean SHAP (index 2 in [min,q1,mean,q3,max])
+    box_output = dict(
+        sorted(
+            box_output.items(),
+            key=lambda item: item[1][2],
+            reverse=True
+        )
+    )
+
+    # Also order the numerical output to match
+    base_output = dict(
+        sorted(
+            base_output.items(),
+            key=lambda item: item[1],
+            reverse=True
+        )
+    )
 
     return render_template(
         "team.html",
         stats=TEAM_STATS_FMT,
         values=format_obj(values),
-        output=format_obj(output),
+        output=format_obj(base_output),
+        box_data=box_output
     )
-
 
 @app.get("/")
 def index():

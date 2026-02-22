@@ -3,7 +3,7 @@ from similar_teams.similar_teams_z_sum_filtered import similar_teams_z_sum_filte
 from effective_stats.first_model_regression import first_model_regression
 from effective_stats.first_model_no_scipy import first_model_no_scipy
 from effective_stats.multilinear_regression import multilinear_regression
-from effective_stats.svc_scikit import svc_scikit
+from effective_stats.random_forest import rf_scikit
 from evaluation_metrics.spearman_cor import spearman_cor
 
 import pandas, numpy
@@ -59,48 +59,24 @@ opposition_representation = {
 }
 
 
+opposition_sides = similar_teams_z_sum_filtered(opposition_representation, 8000)
 
-
-opposition_sides = similar_teams_z_sum_filtered({**opposition_representation, "missed_tackles": -1, "completion_rate": 1, "kicking_metres": 1, "post_contact_metres": 1, "total_passes": -1}, 8000)
-
-# Split opposition_sides for K-Fold validation
+#Split opposition_sides for K-Fold validation to get SHAP values
 opposition_sides_chunks = numpy.array_split(opposition_sides.to_frame(), 5)
 
-tot_avg = None          # dict: feature -> float
-tot_box = None          # dict: feature -> list[6]
-for i in range(0, 5):
-    curr_chunk = opposition_sides_chunks[i].copy()
-    other_chunks = pandas.concat([opposition_sides_chunks[j] for j in range(0, 5) if j != i])
+tot_res = None
+for i in range(0,5):
+  curr_chunk = opposition_sides_chunks[i]
+  other_chunks = pandas.concat([opposition_sides_chunks[j] for j in range(0,5) if j != i])
+  curr_chunk["validation"] = True
+  other_chunks["validation"] = False
+  curr_input = pandas.concat([curr_chunk, other_chunks])
+  if tot_res is None:
+    tot_res =  rf_scikit(curr_input)
+  else:
+    tot_res = tot_res + rf_scikit(curr_input)
 
-    curr_chunk["validation"] = True
-    other_chunks["validation"] = False
-    curr_input = pandas.concat([curr_chunk, other_chunks])
-
-    fold_res = multilinear_regression(curr_input)
-    # fold_res: feature -> [mean_shap, [min, q1, mean, q3, max]]
-
-    # Initialise accumulators on first fold
-    if tot_avg is None:
-        tot_avg = {feat: fold_res[feat][0] for feat in fold_res}
-        tot_box = {feat: fold_res[feat][1][:] for feat in fold_res}  # copy list
-    else:
-        for feat in fold_res:
-            tot_avg[feat] += fold_res[feat][0]
-            # elementwise add stats list
-            for k in range(5):
-                tot_box[feat][k] += fold_res[feat][1][k]
-
-# Average across folds
-for feat in tot_avg:
-    tot_avg[feat] /= 5.0
-    for k in range(5):
-        tot_box[feat][k] /= 5.0
-
-# Keep separate for now
-# tot_avg: feature -> avg mean SHAP across folds
-# tot_box: feature -> [avg min, avg q1, avg mean, avg q3, avg max] across folds
-
-
-print(tot_avg)
+tot_res = tot_res / 5
+print(tot_res)
 
 

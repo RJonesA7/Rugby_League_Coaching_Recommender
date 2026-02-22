@@ -63,6 +63,7 @@ def multilinear_regression(weights):
     
     #These lines areto be freely updated to try and obtain meaningful results
     #X = X.drop(columns=['missed_tackles', 'tackles_made', 'penalties_conceded', 'receipts', 'penalty_goals', 'line_breaks', 'all_run_metres'])
+    """
     X = X.drop(columns=[
         "all_runs",
         "all_run_metres",
@@ -84,6 +85,7 @@ def multilinear_regression(weights):
         "two_point_field_goals_missed",
         "receipts"
     ])
+    """
 
     #Add a constant column to X to allow for bias
     X['const'] = 1
@@ -114,9 +116,13 @@ def multilinear_regression(weights):
         match = match[1]
         prediction_id = match['match_id']
         res = match['final_margin']
-        match = match.drop(columns=['final_margin', 'match_id'])
-        prediction = sol * match
-        prediction_final_margin = prediction.sum()
+
+        match = match.drop(labels=['final_margin', 'match_id'])
+        match['const'] = 1
+
+        match = match.reindex(sol.index, fill_value=0)
+
+        prediction_final_margin = (sol * match).sum()
 
         mse = mse + (prediction_final_margin - res) ** 2
 
@@ -132,7 +138,7 @@ def multilinear_regression(weights):
     #print("accuracy: " + str(correct/(incorrect+correct)))
     #print("MSE: " + str(mse))
     
-    #return correct/(incorrect+correct)
+    return correct/(incorrect+correct)
     #return mse
 
     #Take just the top 25% most positive predictions, as we are interested in what makes the model predicts wins
@@ -144,29 +150,37 @@ def multilinear_regression(weights):
     #Get these rows of test data for calculating SHAP values
     shap_rows = test_data[test_data['match_id'].isin(predictions)]
 
-    #In order to calculate the shap values, we need the mean value of each column in the training data X for the expected values
+    #Expected values
     expected_vals = X.mean()
 
-    #Create a store series to total the shap values across relevant matches
-    total_shap_vals = sol.copy()
-    for index in total_shap_vals.index:
-        if index != 'const':
-            total_shap_vals[index] = 0
+    #Store SHAP values for each feature
+    shap_store = {col: [] for col in sol.index if col != 'const'}
 
-    #Calculate SHAP values for all matches according to the formula (see iteration 2 report for further details)
-    shap_vals = sol.copy()
+    #Calculate SHAP values
     for match in shap_rows.iterrows():
         match = match[1]
         match = match.drop(columns=['final_margin', 'match_id'])
         
-        for index in shap_vals.index:
-            #Check this isn't the bias constant
+        for index in sol.index:
             if index != 'const':
-                shap_vals[index] = sol[index] * (match[index] - expected_vals[index])
-        
-        total_shap_vals = total_shap_vals + shap_vals
-    
-    total_shap_vals = total_shap_vals/num_preds
-    
-    return total_shap_vals
+                shap_val = sol[index] * (match[index] - expected_vals[index])
+                shap_store[index].append(shap_val)
+
+    output = {}
+
+    for feature, values in shap_store.items():
+        values = numpy.array(values)
+
+        output[feature] = [
+            float(values.mean()),   # The original output of an average SHAP value, maintaining for now alongside quartile plots
+            [
+                float(values.min()),    # Data for a quartile plot
+                float(numpy.percentile(values,25)),
+                float(values.mean()),
+                float(numpy.percentile(values,75)),
+                float(values.max())
+            ]
+        ]
+
+    return output
 

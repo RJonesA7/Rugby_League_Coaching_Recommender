@@ -54,19 +54,194 @@
 
         {% if output is not none %}
         <section class="output">
-            <h2>Opposition profile (z-scores)</h2>
+            <h2>SHAP Values:</h2>
+            <p>The statistics for you to target. A higher SHAP value means this stat often influenced the model to make positive predictions</p>
+            <p>Therefore, the statistics with the highest average SHAP value are most likely to be effective against the given opposition.</p>
 
+            <!-- Boxplot Section -->
+            <section class="boxplot-card">
+                <div class="boxplot-header">
+                    <h3>Box plot of SHAP values for each statistic.</h3>
+                    <div class="boxplot-controls">
+                        <label class="toggle">
+                            <input type="checkbox" id="bp_show_all" />
+                            <span>Show all</span>
+                        </label>
+                        <label class="toggle">
+                            <input type="checkbox" id="bp_show_zero" checked />
+                            <span>Zero line</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="boxplot-legend">
+                    <span class="legend-item"><span class="legend-box"></span> IQR (Q1–Q3)</span>
+                    <span class="legend-item"><span class="legend-whisker"></span> Min–Max</span>
+                    <span class="legend-item"><span class="legend-mean"></span> Mean</span>
+                </div>
+
+                <div id="boxplot_container" class="boxplot-container"></div>
+
+                <p class="boxplot-note">
+                    Scale is shared across features (computed from the data shown). Mean marker corresponds to the value in the list below.
+                </p>
+            </section>
+
+            <!-- Original numeric output -->
             <div class="stat-list">
                 {% for stat, value in output.items() %}
                 <div class="stat-row">
                     <span class="stat-key">{{ stat }}</span>
                     <span class="stat-val {{ 'pos' if value > 0 else 'neg' if value < 0 else 'zero' }}">
-                    {{ value | round(5) }}
+                        {{ value | round(5) }}
                     </span>
                 </div>
                 {% endfor %}
             </div>
         </section>
+
+        <script>
+            // box_data: { feature: [min, q1, mean, q3, max], ... }
+            const BOX_DATA = {{ box_data | tojson }};
+        </script>
+
+        <script>
+        (function() {
+            const container = document.getElementById("boxplot_container");
+            const showAllToggle = document.getElementById("bp_show_all");
+            const showZeroToggle = document.getElementById("bp_show_zero");
+
+            // Convert dict -> array with validation
+            function toRows(dataObj) {
+                const rows = [];
+                for (const [feature, stats] of Object.entries(dataObj)) {
+                    if (!Array.isArray(stats) || stats.length !== 5) continue;
+                    const [min, q1, mean, q3, max] = stats.map(Number);
+                    // Guard against NaN
+                    if ([min, q1, mean, q3, max].some(v => Number.isNaN(v))) continue;
+                    rows.push({ feature, min, q1, mean, q3, max });
+                }
+                return rows;
+            }
+
+            // Compute global scale across displayed rows
+            function computeDomain(rows) {
+                let lo = Infinity, hi = -Infinity;
+                for (const r of rows) {
+                    lo = Math.min(lo, r.min);
+                    hi = Math.max(hi, r.max);
+                }
+                if (!Number.isFinite(lo) || !Number.isFinite(hi) || lo === hi) {
+                    lo = -1; hi = 1;
+                }
+                // Add small padding for aesthetics
+                const pad = (hi - lo) * 0.05;
+                return { lo: lo - pad, hi: hi + pad };
+            }
+
+            // Map value -> percent in [0,100]
+            function pct(v, dom) {
+                return 100 * (v - dom.lo) / (dom.hi - dom.lo);
+            }
+
+            function render() {
+                container.innerHTML = "";
+
+                let rows = toRows(BOX_DATA);
+
+                // Default: show top 15 by highest mean, to avoid a giant wall of plots
+                rows.sort((a, b) => b.mean - a.mean);
+                const showAll = showAllToggle.checked;
+                const shown = showAll ? rows : rows.slice(0, 15);
+
+                const dom = computeDomain(shown);
+
+                // Optional zero line
+                const showZero = showZeroToggle.checked;
+                const zeroInRange = (dom.lo < 0 && dom.hi > 0);
+                const zeroLeft = pct(0, dom);
+
+                for (const r of shown) {
+                    const row = document.createElement("div");
+                    row.className = "bp-row";
+
+                    const label = document.createElement("div");
+                    label.className = "bp-label";
+                    label.textContent = r.feature;
+
+                    const plot = document.createElement("div");
+                    plot.className = "bp-plot";
+                    plot.setAttribute("data-feature", r.feature);
+
+                    if (showZero && zeroInRange) {
+                        const zero = document.createElement("div");
+                        zero.className = "bp-zero";
+                        zero.style.left = `${zeroLeft}%`;
+                        plot.appendChild(zero);
+                    }
+
+                    // whisker line min->max
+                    const whisker = document.createElement("div");
+                    whisker.className = "bp-whisker";
+                    const wLeft = pct(r.min, dom);
+                    const wRight = pct(r.max, dom);
+                    whisker.style.left = `${wLeft}%`;
+                    whisker.style.width = `${Math.max(0, wRight - wLeft)}%`;
+                    plot.appendChild(whisker);
+
+                    // whisker end caps
+                    const capL = document.createElement("div");
+                    capL.className = "bp-cap";
+                    capL.style.left = `${wLeft}%`;
+                    plot.appendChild(capL);
+
+                    const capR = document.createElement("div");
+                    capR.className = "bp-cap";
+                    capR.style.left = `${wRight}%`;
+                    plot.appendChild(capR);
+
+                    // box q1->q3
+                    const box = document.createElement("div");
+                    box.className = "bp-box";
+                    const bLeft = pct(r.q1, dom);
+                    const bRight = pct(r.q3, dom);
+                    box.style.left = `${bLeft}%`;
+                    box.style.width = `${Math.max(0, bRight - bLeft)}%`;
+                    plot.appendChild(box);
+
+                    // mean marker (diamond)
+                    const mean = document.createElement("div");
+                    mean.className = "bp-mean";
+                    mean.style.left = `${pct(r.mean, dom)}%`;
+                    plot.appendChild(mean);
+
+                    // tooltip-ish title
+                    plot.title = `min ${r.min.toFixed(4)} | q1 ${r.q1.toFixed(4)} | mean ${r.mean.toFixed(4)} | q3 ${r.q3.toFixed(4)} | max ${r.max.toFixed(4)}`;
+
+                    row.appendChild(label);
+                    row.appendChild(plot);
+
+                    // Colour by signed mean (diverging). Intensity based on mean relative to domain width.
+                    const intensity = Math.min(1, Math.abs(r.mean) / (dom.hi - dom.lo) * 6); // tune factor if needed
+                    const alphaStrong = 0.20 + 0.55 * intensity; // 0.20..0.75
+                    const alphaSoft   = 0.10 + 0.30 * intensity; // 0.10..0.40
+
+                    if (r.mean >= 0) {
+                    plot.style.setProperty("--accent", `rgba(80, 200, 140, ${alphaStrong})`);
+                    plot.style.setProperty("--accent-soft", `rgba(80, 200, 140, ${alphaSoft})`);
+                    } else {
+                    plot.style.setProperty("--accent", `rgba(220, 90, 90, ${alphaStrong})`);
+                    plot.style.setProperty("--accent-soft", `rgba(220, 90, 90, ${alphaSoft})`);
+                    }
+                    container.appendChild(row);
+                }
+            }
+
+            showAllToggle.addEventListener("change", render);
+            showZeroToggle.addEventListener("change", render);
+            render();
+        })();
+        </script>
         {% endif %}
 
     </main>

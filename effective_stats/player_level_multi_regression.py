@@ -214,17 +214,42 @@ def player_level_multi_regression(weights, position_group):
 
     expected_vals = X.mean()
 
-    total_shap_vals = sol.copy()
-    total_shap_vals.loc[total_shap_vals.index != "const"] = 0
+    # store SHAP values per feature per match to compute quartiles
+    shap_store = {col: [] for col in sol.index if col != "const"}
 
     for _, match in shap_X.iterrows():
-        total_shap_vals.loc[total_shap_vals.index != "const"] += (
+        # vectorised per row contribution for all features other than const
+        contrib = (
             sol.loc[sol.index != "const"]
             * (match.loc[match.index != "const"]
-               - expected_vals.loc[expected_vals.index != "const"])
+            - expected_vals.loc[expected_vals.index != "const"])
         )
 
-    total_shap_vals = total_shap_vals / num_preds
+        for col, val in contrib.items():
+            shap_store[col].append(float(val))
+
+    # Build output: feature -> [avg, [min, LQ, avg, UQ, max]]
+    output = {}
+
+    for feature, values in shap_store.items():
+        values = numpy.array(values, dtype=float)
+
+        # Defensive: should not be empty because num_preds>=1, but keep safe
+        if values.size == 0:
+            output[feature] = [0.0, [0.0, 0.0, 0.0, 0.0, 0.0]]
+            continue
+
+        avg = float(values.mean())
+        output[feature] = [
+            avg,
+            [
+                float(values.min()),
+                float(numpy.percentile(values, 25)),
+                avg,
+                float(numpy.percentile(values, 75)),
+                float(values.max()),
+            ],
+        ]
 
     print("MSE: " + str(mse))
-    return total_shap_vals
+    return output
