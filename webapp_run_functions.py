@@ -54,6 +54,94 @@ def multilinear_regression_run(oppo_rep):
     # tot_box: feature -> [avg min, avg q1, avg mean, avg q3, avg max] across folds
     return tot_avg, tot_box
 
+from effective_stats.dependent_SHAP_multilinear_regression import dependent_SHAP_multilinear_regression
+
+# Put into function to run with webapp
+def dependent_SHAP_multilinear_regression_run(oppo_rep):
+    opposition_sides = similar_teams_z_sum_filtered(oppo_rep, 1000)
+
+    # Split opposition_sides for K-Fold validation
+    opposition_sides_chunks = numpy.array_split(opposition_sides.to_frame(), 5)
+
+    tot_avg = None          # dict: feature -> float
+    tot_box = None          # dict: feature -> list[6]
+    for i in range(0, 5):
+        curr_chunk = opposition_sides_chunks[i].copy()
+        other_chunks = pandas.concat([opposition_sides_chunks[j] for j in range(0, 5) if j != i])
+
+        curr_chunk["validation"] = True
+        other_chunks["validation"] = False
+        curr_input = pandas.concat([curr_chunk, other_chunks])
+
+        fold_res = dependent_SHAP_multilinear_regression(curr_input)
+        # fold_res: feature -> [mean_shap, [min, q1, mean, q3, max]]
+
+        # Initialise accumulators on first fold
+        if tot_avg is None:
+            tot_avg = {feat: fold_res[feat][0] for feat in fold_res}
+            tot_box = {feat: fold_res[feat][1][:] for feat in fold_res}  # copy list
+        else:
+            for feat in fold_res:
+                tot_avg[feat] += fold_res[feat][0]
+                # elementwise add stats list
+                for k in range(5):
+                    tot_box[feat][k] += fold_res[feat][1][k]
+
+    # Average across folds
+    for feat in tot_avg:
+        tot_avg[feat] /= 5.0
+        for k in range(5):
+            tot_box[feat][k] /= 5.0
+
+    # Keep separate for now 
+    # tot_avg: feature -> avg mean SHAP across folds
+    # tot_box: feature -> [avg min, avg q1, avg mean, avg q3, avg max] across folds
+    return tot_avg, tot_box
+
+
+from effective_stats.ridge_regression import ridge_regression
+
+# Put into function to run with webapp
+def ridge_regression_run(oppo_rep):
+    opposition_sides = similar_teams_z_sum_filtered(oppo_rep, 1000)
+
+    # Split opposition_sides for K-Fold validation
+    opposition_sides_chunks = numpy.array_split(opposition_sides.to_frame(), 5)
+
+    tot_avg = None          # dict: feature -> float
+    tot_box = None          # dict: feature -> list[6]
+    for i in range(0, 5):
+        curr_chunk = opposition_sides_chunks[i].copy()
+        other_chunks = pandas.concat([opposition_sides_chunks[j] for j in range(0, 5) if j != i])
+
+        curr_chunk["validation"] = True
+        other_chunks["validation"] = False
+        curr_input = pandas.concat([curr_chunk, other_chunks])
+
+        fold_res = ridge_regression(curr_input)
+        # fold_res: feature -> [mean_shap, [min, q1, mean, q3, max]]
+
+        # Initialise accumulators on first fold
+        if tot_avg is None:
+            tot_avg = {feat: fold_res[feat][0] for feat in fold_res}
+            tot_box = {feat: fold_res[feat][1][:] for feat in fold_res}  # copy list
+        else:
+            for feat in fold_res:
+                tot_avg[feat] += fold_res[feat][0]
+                # elementwise add stats list
+                for k in range(5):
+                    tot_box[feat][k] += fold_res[feat][1][k]
+
+    # Average across folds
+    for feat in tot_avg:
+        tot_avg[feat] /= 5.0
+        for k in range(5):
+            tot_box[feat][k] /= 5.0
+
+    # Keep separate for now 
+    # tot_avg: feature -> avg mean SHAP across folds
+    # tot_box: feature -> [avg min, avg q1, avg mean, avg q3, avg max] across folds
+    return tot_avg, tot_box
 
 
 from similar_teams.similar_pos_groups_filtered import similar_pos_groups_filtered

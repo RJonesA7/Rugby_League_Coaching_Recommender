@@ -5,6 +5,7 @@ from similar_teams.similar_teams_z_sum_filtered import similar_teams_z_sum_filte
 from effective_stats.multilinear_regression import multilinear_regression
 from effective_stats.random_forest import rf_scikit
 from effective_stats.svc_scikit import svc_scikit
+from effective_stats.ridge_regression import ridge_regression
 
 opposition_representation = {
   "score": 0,
@@ -86,7 +87,7 @@ def compare_svc_vs_regression(
     opposition_representations: dict,
     k_values=(200, 400, 800, 1200),
     folds: int = 5,
-    include_models=("rf", "svc", "regression"),
+    include_models=("ridge", "regression"),
 ) -> pd.DataFrame:
     """
     Parameters:
@@ -113,6 +114,7 @@ def compare_svc_vs_regression(
         "svc": svc_scikit,
         "regression": multilinear_regression,
         "rf": rf_scikit,
+        'ridge': ridge_regression,
     }
 
     for rep_name, rep_dict in opposition_representations.items():
@@ -134,12 +136,18 @@ def compare_svc_vs_regression(
 
             if "regression" in include_models:
                 row["regression_accuracy"] = _kfold_mean_accuracy(opposition_sides, model_map["regression"], folds=folds)
+            
+            if 'ridge' in include_models:
+                row["ridge_accuracy"] = _kfold_mean_accuracy(opposition_sides, model_map["ridge"], folds=folds)
 
             if ("rf" in include_models) and ("regression" in include_models):
                 row["rf_minus_regression"] = row["rf_accuracy"] - row["regression_accuracy"]
 
             if ("svc" in include_models) and ("regression" in include_models):
                 row["svc_minus_regression"] = row["svc_accuracy"] - row["regression_accuracy"]
+
+            if ("ridge" in include_models) and ("regression" in include_models):
+                row["ridge_minus_regression"] = row["ridge_accuracy"] - row["regression_accuracy"]
 
             rows.append(row)
 

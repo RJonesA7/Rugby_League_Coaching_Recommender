@@ -1,4 +1,4 @@
-import pandas, numpy
+import pandas, numpy, math
 import psycopg2
 import matplotlib.pyplot as plt
 from scipy.stats import linregress
@@ -12,7 +12,7 @@ And outputs an array of tuples (stat, effectiveness) which gives
 target stats to beat the initially input opposition 
 and how effective targeting that stat will be for beating the opposition
 """
-def multilinear_regression(weights):
+def dependent_SHAP_multilinear_regression(weights):
     
     #Get the match_ids we will use to extract teams from the db
     keys = weights.index
@@ -87,13 +87,6 @@ def multilinear_regression(weights):
     ])
     """
 
-   # X is your n x p design matrix (centered if you want covariance structure)
-    U, s, Vt = numpy.linalg.svd(X, full_matrices=False)
-
-    # Eigenvalues of X^T X:
-    eigenvalues = s**2
-    print("Eigenvalues:", str(eigenvalues))
-
     #Add a constant column to X to allow for bias
     X['const'] = 1
 
@@ -157,11 +150,173 @@ def multilinear_regression(weights):
     #Get these rows of test data for calculating SHAP values
     shap_rows = test_data[test_data['match_id'].isin(predictions)]
 
-    #Expected values
-    expected_vals = X.mean()
+    # Estimate mu, Sigma for the feature distribution (excluding 'const').
+    #
+    # X was multiplied by sqrt(w) for weighted regression fitting.
+    # For the SHAP conditional distribution, we want the feature distribution in the original scale.
+    # We "unweight" by dividing by sqrt(w) to approximate the original feature samples.
+    feature_cols = [c for c in sol.index if c != "const"]
+    M = len(feature_cols)
 
-    #Store SHAP values for each feature
+    # Recover approximate unweighted feature matrix for distribution estimation
+    X_dist = X[feature_cols].div(w, axis=0)
+    X_dist = X_dist.replace([numpy.inf, -numpy.inf], numpy.nan).fillna(0)
+
+    mu = X_dist.mean(axis=0).to_numpy() # (M,)
+    Sigma = X_dist.cov().to_numpy() # (M, M)
+
+    # Numerical guard: small diagonal jitter for stability
+    Sigma = Sigma + numpy.eye(M) * 1e-8
+
+    # Dependent Kernel SHAP via Gaussian conditional expectation
+    #
+    # For linear f(x) = b0 + beta^T x:
+    # v(S) = E[f(X) | X_S = x_S*]
+    #      = b0 + beta_S^T x_S* + beta_C^T E[X_C | X_S = x_S*]
+    #
+    # If X ~ N(mu, Sigma), then:
+    # E[X_C | X_S = x_S] = mu_C + Sigma_CS Sigma_SS^{-1} (x_S - mu_S)
+    #
+    # This is exactly the Aas et al. Gaussian conditional, but we only need the conditional mean because f is linear.
+
+    # Controls (you can tune):
+    nsamples = 200   # number of sampled coalitions per explained row (excluding empty/full)
+    c = 1e6          # big weight for empty/full constraints
+
+    # Precompute arrays for speed
+    beta = numpy.array([float(sol[f]) for f in feature_cols], dtype=float)  # (M,)
+    b0 = float(sol["const"]) if "const" in sol.index else 0.0
+
+    # Kernel SHAP size sampling distribution: p(s) proportional to 1/(s*(M-s)), s=1..M-1
+    if M >= 2:
+        sizes = numpy.arange(1, M)  # 1..M-1
+        size_probs = 1.0 / (sizes * (M - sizes))
+        size_probs = size_probs / size_probs.sum()
+
+    # Combination helper without new imports (math.comb)
+    def nCk(n, k):
+        # Safe for moderate n; returns int
+        return math.comb(n, k)
+
+    def coalition_value_v_analytic(x_star_vec, S_mask):
+        """
+        x_star_vec: (M,) values at the explained instance for feature_cols
+        S_mask: (M,) boolean, True if feature included in coalition
+        returns v(S) analytically.
+        """
+        s = int(S_mask.sum())
+
+        # Empty coalition: unconditional expectation E[f(X)] = b0 + beta^T mu
+        if s == 0:
+            return float(b0 + beta @ mu)
+
+        # Full coalition: f(x*)
+        if s == M:
+            return float(b0 + beta @ x_star_vec)
+
+        idx_S = numpy.where(S_mask)[0]
+        idx_C = numpy.where(~S_mask)[0]
+
+        mu_S = mu[idx_S]
+        mu_C = mu[idx_C]
+
+        Sigma_SS = Sigma[numpy.ix_(idx_S, idx_S)]
+        Sigma_CS = Sigma[numpy.ix_(idx_C, idx_S)]
+
+        x_S = x_star_vec[idx_S]
+
+        # Conditional mean of C given S:
+        # mu_C|S = mu_C + Sigma_CS Sigma_SS^{-1} (x_S - mu_S)
+        # Use solve for numerical stability.
+        try:
+            delta = numpy.linalg.solve(Sigma_SS, (x_S - mu_S))
+        except numpy.linalg.LinAlgError:
+            Sigma_SS_j = Sigma_SS + numpy.eye(Sigma_SS.shape[0]) * 1e-6
+            delta = numpy.linalg.solve(Sigma_SS_j, (x_S - mu_S))
+
+        mu_C_given = mu_C + Sigma_CS @ delta
+
+        # Now v(S) = b0 + beta_S^T x_S + beta_C^T mu_C|S
+        beta_S = beta[idx_S]
+        beta_C = beta[idx_C]
+        return float(b0 + beta_S @ x_S + beta_C @ mu_C_given)
+
+
+    # Build the coalition matrix, solve for phi, store SHAP values
+
     shap_store = {col: [] for col in sol.index if col != 'const'}
+    
+    # WLS form (Kernel SHAP):
+    #   v ≈ Z phi, with Shapley-kernel weights on rows
+    # where Z has an intercept column and coalition indicators.
+    
+    # We compute phi per explained row and store phi_j (excluding intercept) into shap_store.
+    if M == 0:
+        # No features to attribute
+        pass
+    elif M == 1:
+        # With a single feature, the Shapley value is just f(x*) - E[f(X)] attributed to that feature
+        only_f = feature_cols[0]
+        for match in shap_rows.iterrows():
+            match = match[1]
+            x_star_series = match.drop(labels=['final_margin', 'match_id'], errors='ignore')
+            x_star_series = x_star_series.reindex(sol.index, fill_value=0)
+            x_star_val = float(x_star_series[only_f])
+            phi1 = (b0 + beta[0] * x_star_val) - (b0 + beta[0] * mu[0])
+            shap_store[only_f].append(float(phi1))
+    else:
+        for match in shap_rows.iterrows():
+            match = match[1]
+            x_star_series = match.drop(labels=['final_margin', 'match_id'], errors='ignore')
+            x_star_series = x_star_series.reindex(sol.index, fill_value=0)
+            x_star_vec = numpy.array([float(x_star_series[f]) for f in feature_cols], dtype=float)
+
+            # Sample coalitions (excluding empty/full)
+            coalition_sizes = numpy.random.choice(sizes, size=nsamples, p=size_probs)
+            coalitions = []
+            for s in coalition_sizes:
+                idx = numpy.random.choice(M, size=int(s), replace=False)
+                mask = numpy.zeros(M, dtype=bool)
+                mask[idx] = True
+                coalitions.append(mask)
+
+            # Prepend empty and append full
+            coalitions = [numpy.zeros(M, dtype=bool)] + coalitions + [numpy.ones(M, dtype=bool)]
+            L = len(coalitions)
+
+            # Build Z, v, and weights
+            Z = numpy.zeros((L, M + 1), dtype=float)
+            v_vec = numpy.zeros(L, dtype=float)
+            w_vec = numpy.zeros(L, dtype=float)
+
+            for i, mask in enumerate(coalitions):
+                Z[i, 0] = 1.0
+                Z[i, 1:] = mask.astype(float)
+
+                # Analytic coalition value
+                v_vec[i] = coalition_value_v_analytic(x_star_vec, mask)
+
+                s = int(mask.sum())
+                if s == 0 or s == M:
+                    w_vec[i] = c
+                else:
+                    # Shapley kernel: (M-1) / (C(M,s) * s * (M-s))
+                    w_vec[i] = (M - 1) / (float(nCk(M, s)) * s * (M - s))
+
+            # Weighted least squares via sqrt-weights
+            sqrt_w = numpy.sqrt(w_vec)
+            Z_w = Z * sqrt_w[:, None]
+            v_w = v_vec * sqrt_w
+
+            # Solve for phi (stable least squares)
+            phi, *_ = numpy.linalg.lstsq(Z_w, v_w, rcond=None)
+
+            # Store SHAP values (exclude intercept phi[0])
+            for j, f in enumerate(feature_cols):
+                shap_store[f].append(float(phi[j + 1]))
+
+    """
+    Legacy SHAP Calculations:
 
     #Calculate SHAP values
     for match in shap_rows.iterrows():
@@ -173,15 +328,17 @@ def multilinear_regression(weights):
                 shap_val = sol[index] * (match[index] - expected_vals[index])
                 shap_store[index].append(shap_val)
 
+    """
+
     output = {}
 
     for feature, values in shap_store.items():
         values = numpy.array(values)
 
         output[feature] = [
-            float(values.mean()),   # The original output of an average SHAP value, maintaining for now alongside quartile plots
+            float(values.mean()), # The original output of an average SHAP value, maintaining for now alongside quartile plots
             [
-                float(values.min()),    # Data for a quartile plot
+                float(values.min()), # Data for a quartile plot
                 float(numpy.percentile(values,25)),
                 float(values.mean()),
                 float(numpy.percentile(values,75)),

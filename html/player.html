@@ -73,10 +73,14 @@
           <div class="pos-output">
             <h3 class="pos-out-title">{{ pos }}</h3>
 
-            <!-- NEW: Boxplot for this position -->
+            <!-- Boxplot for this position -->
             <section class="boxplot-card">
               <div class="boxplot-header">
-                <h3>SHAP contribution distribution (top predicted wins)</h3>
+                <h2>SHAP Values:</h2>
+                <p>The statistics for you to target. A higher SHAP value means this stat often influenced the model to make positive predictions</p>
+                <p>Therefore, the statistics with the highest average SHAP value are most likely to be effective against the given opposition.</p>
+
+ 
                 <div class="boxplot-controls">
                   <label class="toggle">
                     <input type="checkbox" class="bp_show_all" data-pos="{{ pos }}">
@@ -102,7 +106,7 @@
               </p>
             </section>
 
-            <!-- Existing numeric output -->
+            <!-- Original  numeric output -->
             <div class="stat-list">
               {% for stat, value in output[pos].items() %}
                 <div class="stat-row">

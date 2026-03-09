@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-from webapp_run_functions import multilinear_regression_run, player_level_multi_regression_run
+from webapp_run_functions import multilinear_regression_run, player_level_multi_regression_run, dependent_SHAP_multilinear_regression_run, ridge_regression_run
 
 
 app = Flask(__name__, template_folder="html", static_folder="webapp_static")
@@ -203,7 +203,7 @@ def team():
 def team_post():
     values = {s: parse_float(request.form.get(s, "0")) for s in TEAM_STATS}
 
-    output = multilinear_regression_run(values)
+    output = ridge_regression_run(values)
 
     base_output = output[0]
     base_output.pop("const", None)
