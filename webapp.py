@@ -1,16 +1,29 @@
 from flask import Flask, render_template, request
 
-from webapp_run_functions import multilinear_regression_run, player_level_multi_regression_run, dependent_SHAP_multilinear_regression_run, ridge_regression_run
+from webapp_run_functions import (
+    multilinear_regression_run, 
+    player_level_multi_regression_run, dependent_SHAP_multilinear_regression_run, 
+    ridge_regression_run, principal_component_regression_run
+)
 
 
 app = Flask(__name__, template_folder="html", static_folder="webapp_static")
 
 
 TEAM_STATS = [
-    "all_run_metres", "post_contact_metres", "line_breaks", "offloads",
-    "total_passes", "kicking_metres", "penalties_conceded", "effective_tackle",
-    "completion_rate", "average_play_ball_speed"
-]
+        "all_run_metres",            # territory / volume
+        "post_contact_metres",       # physical dominance
+        "offloads",                 # expansiveness
+        "total_passes",             # structure vs direct play
+        "kicking_metres",           # territorial strategy
+        "line_breaks",              # attacking effectiveness
+        "completion_rate",          # control / discipline
+        "average_play_ball_speed",  # tempo
+        "penalties_conceded",       # discipline
+        "errors",                   # discipline (but a different kind)
+        "missed_tackles",           # defensive weakness
+        "inside_ten_metres"         # attacking pressure / field position
+    ]
 
 POSITION_STATS = {
     "middles": [
@@ -106,6 +119,7 @@ POSITION_ORDER = [
     "fullback",
 ]
 
+PC_STATS = [f"PC{i}" for i in range(1, 40)]
 
 def to_title(text: str) -> str:
     return text.replace("_", " ").strip().title()
@@ -145,9 +159,9 @@ def default_player_values() -> dict:
 def player():
     return render_template(
         "player.html",
-        position_order=POSITION_ORDER_FMT,
-        position_stats=POSITION_STATS_FMT,
-        values=format_obj(default_player_values()),
+        position_order=POSITION_ORDER,
+        position_stats=POSITION_STATS,
+        values=default_player_values(),
         output=None,
     )
 
@@ -185,25 +199,25 @@ def player_post():
 
     return render_template(
         "player.html",
-        position_order=POSITION_ORDER_FMT,
-        position_stats=POSITION_STATS_FMT,
-        values=format_obj(values),
-        output=format_obj(output), # numeric list display
-        box_data=format_obj(box_data), # keep raw numeric for JS
+        position_order=POSITION_ORDER,
+        position_stats=POSITION_STATS,
+        values=values,
+        output=output, # numeric list display
+        box_data=box_data, # keep raw numeric for JS
     )
 
 
 @app.get("/team")
 def team():
     defaults = {s: 0.0 for s in TEAM_STATS}
-    return render_template("team.html", stats=TEAM_STATS_FMT, values=format_obj(defaults), output=None)
+    return render_template("team.html", stats=TEAM_STATS, values=defaults, output=None)
 
 
 @app.post("/team")
 def team_post():
     values = {s: parse_float(request.form.get(s, "0")) for s in TEAM_STATS}
 
-    output = ridge_regression_run(values)
+    output = multilinear_regression_run(values)
 
     base_output = output[0]
     base_output.pop("const", None)
@@ -231,10 +245,61 @@ def team_post():
 
     return render_template(
         "team.html",
-        stats=TEAM_STATS_FMT,
-        values=format_obj(values),
+        stats=TEAM_STATS,
+        values=values,
         output=format_obj(base_output),
         box_data=box_output
+    )
+
+
+@app.get("/pca")
+def pca():
+    defaults = {stat: 0.0 for stat in TEAM_STATS}
+
+    return render_template(
+        "pca.html",
+        stats=TEAM_STATS,
+        values=defaults,
+        output=None,
+        loadings=None
+    )
+
+@app.post("/pca")
+def pca_post():
+
+    values = {stat: parse_float(request.form.get(stat, "0")) for stat in TEAM_STATS}
+
+    avg_output, box_output, loadings = principal_component_regression_run(values)
+
+    # Remove constant if present
+    avg_output.pop("const", None)
+    box_output.pop("const", None)
+
+    # Order box plots by mean SHAP (index 2)
+    box_output = dict(
+        sorted(
+            box_output.items(),
+            key=lambda item: item[1][2],
+            reverse=True
+        )
+    )
+
+    # Order numeric output the same way
+    avg_output = dict(
+        sorted(
+            avg_output.items(),
+            key=lambda item: item[1],
+            reverse=True
+        )
+    )
+
+    return render_template(
+        "pca.html",
+        stats=TEAM_STATS,
+        values=values,
+        output=format_obj(avg_output),
+        box_data=box_output,
+        loadings=loadings.to_html()
     )
 
 @app.get("/")

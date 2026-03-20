@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import psycopg2
 from sklearn.decomposition import PCA
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+
 
 conn = psycopg2.connect(
     dbname="nrl_data",
@@ -9,7 +11,7 @@ conn = psycopg2.connect(
     port=5432
 )
 
-def pca_stat_contributions(weights):
+def pca(weights):
     keys = [list(k) for k in list(weights.index)]
 
     conditions = "".join(
@@ -41,9 +43,34 @@ def pca_stat_contributions(weights):
     X = X.loc[:, X.nunique() > 1]
     X = X.drop(columns=["score", "half_time", "tries", "conversions", "conversions_missed"], errors="ignore")
 
-    # Standardise so PCA is not dominated by larger-scale stats
-    X = (X - X.mean()) / X.std(ddof=0)
-    X = X.replace([np.inf, -np.inf], 0).fillna(0)
+    #Additionally analyse multicollinearity via VIF
+
+    threshold = 5.0
+
+    X_vif = X.copy()
+
+    while True:
+        vif = pd.DataFrame()
+        vif["feature"] = X_vif.columns
+        vif["VIF"] = [variance_inflation_factor(X_vif.values, i) for i in range(X_vif.shape[1])]
+
+        max_vif = vif["VIF"].max()
+
+        if max_vif <= threshold:
+            break
+
+        drop_feature = vif.sort_values("VIF", ascending=False).iloc[0]
+        print(f"Dropping '{drop_feature['feature']}' with VIF = {drop_feature['VIF']:.3f}")
+
+        X_vif = X_vif.drop(columns=[drop_feature["feature"]])
+
+    # Final surviving features
+    vif = pd.DataFrame()
+    vif["feature"] = X_vif.columns
+    vif["VIF"] = [variance_inflation_factor(X_vif.values, i) for i in range(X_vif.shape[1])]
+
+    print("\nRemaining features and VIF:")
+    print(vif.sort_values("VIF", ascending=False))
 
     pca = PCA()
     pca.fit(X)
@@ -65,5 +92,8 @@ def pca_stat_contributions(weights):
 
     print("\nStatistic contribution to each principal component:")
     print(contribution_table.round(4).to_string())
+
+    #Export contributions to csv:
+    contribution_table.to_csv("pca_stat_loadings.csv")
 
     return contribution_table, explained_variance

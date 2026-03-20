@@ -24,7 +24,7 @@
                 {% for stat in stats %}
                 <div class="field">
                     <label for="{{ stat }}">
-                        <span class="stat-name">{{ stat }}</span>
+                        <span class="stat-name">{{  stat.replace('_', ' ').title() }}</span>
                         <span class="stat-value" id="{{ stat }}_val">{{ values[stat] }}</span>
                     </label>
 
@@ -91,7 +91,7 @@
             <div class="stat-list">
                 {% for stat, value in output.items() %}
                 <div class="stat-row">
-                    <span class="stat-key">{{ stat }}</span>
+                    <span class="stat-name">{{ stat.replace('_', ' ').title() }}</span>
                     <span class="stat-val {{ 'pos' if value > 0 else 'neg' if value < 0 else 'zero' }}">
                         {{ value | round(5) }}
                     </span>

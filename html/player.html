@@ -25,7 +25,7 @@
           {% for pos in position_order %}
           <section class="pos-block">
             <div class="pos-head">
-              <h2 class="pos-title">{{ pos }}</h2>
+                  <span class="stat-name">{{ pos.replace('_', ' ').title() }}</span>
               <p class="pos-subtitle">Opposition {{ pos }} group</p>
             </div>
 
@@ -34,7 +34,7 @@
               {% set field = pos ~ "__" ~ stat %}
               <div class="field">
                 <label for="{{ field }}">
-                  <span class="stat-name">{{ stat }}</span>
+                  <span class="stat-name">{{ stat.replace('_', ' ').title() }}</span>
                   <span class="stat-value" id="{{ field }}_val">{{ values[pos][stat] }}</span>
                 </label>
 
@@ -71,7 +71,7 @@
 
         {% for pos in position_order %}
           <div class="pos-output">
-            <h3 class="pos-out-title">{{ pos }}</h3>
+            <h3 class="pos-out-title">{{ pos.replace('_', ' ').title() }}</h3>
 
             <!-- Boxplot for this position -->
             <section class="boxplot-card">
@@ -110,7 +110,7 @@
             <div class="stat-list">
               {% for stat, value in output[pos].items() %}
                 <div class="stat-row">
-                  <span class="stat-key">{{ stat }}</span>
+                  <span class="stat-key">{{ stat.replace('_', ' ').title() }}</span>
                   <span class="stat-val {{ 'pos' if value > 0 else 'neg' if value < 0 else 'zero' }}">
                     {{ "%.6f"|format(value) }}
                   </span>

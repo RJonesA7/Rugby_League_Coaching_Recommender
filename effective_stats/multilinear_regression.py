@@ -12,7 +12,7 @@ And outputs an array of tuples (stat, effectiveness) which gives
 target stats to beat the initially input opposition 
 and how effective targeting that stat will be for beating the opposition
 """
-def multilinear_regression(weights):
+def multilinear_regression(weights, feature_set):
     
     #Get the match_ids we will use to extract teams from the db
     keys = weights.index
@@ -59,7 +59,10 @@ def multilinear_regression(weights):
     #Drop columns from the data with zero variance, field goals, penalties etc. will often have this and cause errors
     X = X.loc[:, X.nunique() > 1]
     #Additionally, drop the stats that can't be targeted and are completely dependent on other stats, like score.
-    X = X.drop(columns=['score', 'half_time', 'tries', 'conversions', 'conversions_missed'])
+    X = X.drop(columns=['score', 'half_time', 'tries', 'conversions', 'conversions_missed', 'line_breaks'])
+
+    #Final filtering, drop the features down to the globally calculated feature set with VIF correlation < 4
+    X = X[feature_set]
     
     #These lines areto be freely updated to try and obtain meaningful results
     #X = X.drop(columns=['missed_tackles', 'tackles_made', 'penalties_conceded', 'receipts', 'penalty_goals', 'line_breaks', 'all_run_metres'])
@@ -87,12 +90,15 @@ def multilinear_regression(weights):
     ])
     """
 
-   # X is your n x p design matrix (centered if you want covariance structure)
+    """
+    # X is your n x p design matrix (centered for covariance structure)
     U, s, Vt = numpy.linalg.svd(X, full_matrices=False)
 
     # Eigenvalues of X^T X:
     eigenvalues = s**2
     print("Eigenvalues:", str(eigenvalues))
+
+    """
 
     #Add a constant column to X to allow for bias
     X['const'] = 1

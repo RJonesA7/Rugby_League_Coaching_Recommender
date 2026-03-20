@@ -30,8 +30,18 @@ def similar_teams_z_sum_filtered(stats_dict, num_of_matches):
 
     #Filter the stats to include only those we want, minimising dimensionality to improve effectiveness of KNN. This set can be freely updated
     keep_stats = [
-        "all_run_metres", "post_contact_metres", "line_breaks", "offloads", 
-        "total_passes", "kicking_metres", "penalties_conceded", "effective_tackle", "completion_rate", "average_play_ball_speed"
+        "all_run_metres",            # territory / volume
+        "post_contact_metres",       # physical dominance
+        "offloads",                 # expansiveness
+        "total_passes",             # structure vs direct play
+        "kicking_metres",           # territorial strategy
+        "line_breaks",              # attacking effectiveness
+        "completion_rate",          # control / discipline
+        "average_play_ball_speed",  # tempo
+        "penalties_conceded",       # discipline
+        "errors",                   # discipline (but a different kind)
+        "missed_tackles",           # defensive weakness
+        "inside_ten_metres"         # attacking pressure / field position
     ]
     stats_dict = {k: v for k, v in stats_dict.items() if k in keep_stats}
     

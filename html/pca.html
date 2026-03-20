@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Rugby League Recommender System - Team Level Principal Components</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='webapp_styling.css') }}">
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <div class="brand">
+                <div class="badge"></div>
+                <div>
+                    <h1>Rugby League Recommender System</h1>
+                    <p class="subtitle">Team level opposition profile analysed through principal components</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="card">
+            <form method="post">
+                <div class="grid">
+                    {% for stat in stats %}
+                    <div class="field">
+                        <label for="{{ stat }}">
+                            <span class="stat-name">{{ stat.replace('_', ' ').title() }}</span>
+                            <span class="stat-value" id="{{ stat }}_val">{{ values[stat] }}</span>
+                        </label>
+
+                        <input
+                            type="range"
+                            id="{{ stat }}"
+                            name="{{ stat }}"
+                            min="-3"
+                            max="3"
+                            step="0.1"
+                            value="{{ values[stat] }}"
+                            oninput="document.getElementById('{{ stat }}_val').textContent = this.value"
+                        />
+                        <div class="ticks">
+                            <span>-3</span><span>0</span><span>+3</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="actions">
+                    <button class="btn" type="submit">Run</button>
+                    <a class="btn ghost" href="{{ url_for('pca') }}">Reset</a>
+                    <a class="btn ghost" href="{{ url_for('index') }}">Back to home</a>
+                </div>
+            </form>
+
+            {% if output is not none %}
+            <section class="output">
+                <h2>Principal Components to Target:</h2>
+                <p>
+                    These SHAP values are attached to principal components rather than raw match statistics.
+                    A higher SHAP value means the component often influenced the model towards stronger predicted outcomes.
+                </p>
+                <p>
+                    Because a principal component is a weighted combination of many statistics, the result is more abstract than the standard statistical output.
+                    Use the interpretation guide and stat loadings below to translate each component back into rugby meaning.
+                </p>
+
+                <div class="pc-help-wrap">
+                    <button
+                        class="btn ghost pc-help-toggle"
+                        type="button"
+                        id="pc_help_toggle"
+                        aria-expanded="false"
+                        aria-controls="pc_help_panel"
+                    >
+                        Show principal component interpretation guide
+                    </button>
+                </div>
+
+                <section class="pc-help-panel" id="pc_help_panel" hidden>
+                    <div class="pc-help-intro">
+                        <h3>How to interpret a principal component</h3>
+                        <p>
+                            A principal component is not a single stat. It is a direction through the original data formed from weighted combinations of match variables.
+                            High or low values on a component indicate that several underlying statistics are tending to move together.
+                        </p>
+                        <p>
+                            In coaching terms, this means you should not read “target PC1” as a literal instruction. Instead, treat it as:
+                            <strong>target the style of performance represented by the important loadings within that component.</strong>
+                        </p>
+                    </div>
+
+                    <div class="pc-diagram-card">
+                        <h4>Conceptual flow</h4>
+
+                        <div class="pc-flow">
+                            <div class="pc-flow-box">Match statistics</div>
+                            <div class="pc-flow-arrow">→</div>
+
+                            <div class="pc-flow-box">Principal component transformation</div>
+                            <div class="pc-flow-arrow">→</div>
+
+                            <div class="pc-flow-box">Predictive model</div>
+                            <div class="pc-flow-arrow">→</div>
+
+                            <div class="pc-flow-box">SHAP explanations</div>
+                        </div>
+
+                        <p class="pc-mini-note">
+                            Match statistics are first transformed into principal components.  
+                            The predictive model operates on these components rather than the raw statistics.  
+                            SHAP analysis then explains which components most often influenced the model’s predictions.
+                        </p>
+                    </div>
+
+                    <div class="pc-diagram-card">
+                        <h4>Reading a component</h4>
+
+                        <div class="pc-axis-demo">
+
+                            <div class="pc-axis-label left">
+                                More often caused the model to predict defeat
+                            </div>
+
+                            <div class="pc-axis-line">
+                                <span class="pc-axis-mark left"></span>
+                                <span class="pc-axis-mark centre"></span>
+                                <span class="pc-axis-mark right"></span>
+                            </div>
+
+                            <div class="pc-axis-label right">
+                                    More often caused the model to predict victory
+                            </div>
+
+                        </div>
+
+                        <p class="pc-mini-note">
+                            A high score on a component means the combination of statistics that define that component
+                            were above their typical level in historical matches.  
+                            If the SHAP value is positive, that pattern of statistics frequently pushed the model
+                            towards predicting a win. If negative, it tended to push the model towards predicting a loss.
+                        </p>
+                    </div>
+
+                    <div class="pc-help-text-block">
+                        <h4>Practical coaching interpretation</h4>
+                        <p>
+                            If a component has a high positive SHAP value, that doesn't suggest you should improve every variable inside it equally.
+                            It means the model found that opponents with that overall statistical pattern were associated with stronger predicted outcomes.
+                        </p>
+                        <p>
+                            This gives a practical way of following the model's recommendations:
+                        </p>
+                        <ol class="pc-help-list">
+                            <li>Identify the components with the strongest positive SHAP values.</li>
+                            <li>Inspect the largest positive and negative loadings for that component.</li>
+                            <li>Translate those loadings into a rugby description such as yardage, ruck control, defensive pressure, or attacking fluency.</li>
+                            <li>Use that description as the coaching message, rather than the component label itself.</li>
+                        </ol>
+                        <p>
+                            Example: if PC2 loads positively on <em>all run metres</em>, <em>average set distance</em>, and <em>kick return metres</em>, then a high value on PC2 may be interpreted as a
+                            territory and yardage profile. If that component is highly positive in SHAP terms, the recommendation is really to target that broader territorial style.
+                        </p>
+                        <p> 
+                            See below for the full table of loadings for each principal component. This will vary somewhat depending on the input.
+                        </p>
+                    </div>
+                </section>
+
+                <div class="pc-help-wrap">
+                    <button
+                        class="btn ghost pc-loadings-toggle"
+                        type="button"
+                        id="pc_loadings_toggle"
+                        aria-expanded="false"
+                        aria-controls="pc_loadings_panel"
+                    >
+                        Show full stat loading table
+                    </button>
+                </div>
+
+                <section class="pc-loadings-panel" id="pc_loadings_panel" hidden>
+                    <div class="pc-help-text-block">
+                        <h3>What the stat loadings table shows</h3>
+                        <p>
+                            Each principal component is built from the original match statistics using a set of weights called <strong>loadings</strong>.
+                            The loading value tells you how strongly a given statistic contributes to a given component.
+                        </p>
+                        <p>
+                            A large positive loading means that higher values of that statistic push the team profile towards the positive end of that component.
+                            A large negative loading means that higher values of that statistic push the team profile towards the negative end of that component.
+                        </p>
+                        <p>
+                            This table is therefore the direct bridge between abstract component labels such as <strong>PC1</strong> and actual rugby variables such as
+                            <em>all run metres</em>, <em>kicking metres</em>, or <em>completion rate</em>.
+                        </p>
+                        <p>
+                            In practice, once you identify an influential component from the SHAP output, inspect the strongest positive and negative loadings in its column to understand
+                            the kind of performance profile that component represents. Since principal components are formed from correlated variables, components are often recognisable as
+                            dimensions of a team's play. For instance, PC1 is often recognisable as a possession dominance axis, with positive loadings for time in possession and accordingly
+                            positive values for run metres and passes, but negative loadings for defensive workload stats like tackles made.
+                        </p>
+                    </div>
+
+                    {% if loadings is not none %}
+                    <div class="pc-loadings-table-wrap">
+                        {{ loadings | safe }}
+                    </div>
+                    {% else %}
+                    <div class="pc-help-text-block">
+                        <p>No loadings table was supplied.</p>
+                    </div>
+                    {% endif %}
+                </section>
+
+                <section class="boxplot-card">
+                    <div class="boxplot-header">
+                        <h3>Box plot of SHAP values for each principal component.</h3>
+                        <div class="boxplot-controls">
+                            <label class="toggle">
+                                <input type="checkbox" id="bp_show_all" />
+                                <span>Show all</span>
+                            </label>
+                            <label class="toggle">
+                                <input type="checkbox" id="bp_show_zero" checked />
+                                <span>Zero line</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="boxplot-legend">
+                        <span class="legend-item"><span class="legend-box"></span> IQR (Q1–Q3)</span>
+                        <span class="legend-item"><span class="legend-whisker"></span> Min–Max</span>
+                        <span class="legend-item"><span class="legend-mean"></span> Mean</span>
+                    </div>
+
+                    <div id="boxplot_container" class="boxplot-container"></div>
+
+                    <p class="boxplot-note">
+                        Scale is shared across components shown. Mean marker corresponds to the value in the list below.
+                    </p>
+                </section>
+
+                <div class="stat-list">
+                    {% for pc, value in output.items() %}
+                    <div class="stat-row">
+                        <span class="stat-name">{{ pc }}</span>
+                        <span class="stat-val {{ 'pos' if value > 0 else 'neg' if value < 0 else 'zero' }}">
+                            {{ value | round(5) }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <script>
+                const BOX_DATA = {{ box_data | tojson }};
+            </script>
+
+            <script>
+            (function() {
+                const container = document.getElementById("boxplot_container");
+                const showAllToggle = document.getElementById("bp_show_all");
+                const showZeroToggle = document.getElementById("bp_show_zero");
+                const helpToggle = document.getElementById("pc_help_toggle");
+                const helpPanel = document.getElementById("pc_help_panel");
+                const loadingsToggle = document.getElementById("pc_loadings_toggle");
+                const loadingsPanel = document.getElementById("pc_loadings_panel");
+
+                if (helpToggle && helpPanel) {
+                    helpToggle.addEventListener("click", function() {
+                        const isHidden = helpPanel.hasAttribute("hidden");
+                        if (isHidden) {
+                            helpPanel.removeAttribute("hidden");
+                            helpToggle.textContent = "Hide principal component interpretation guide";
+                            helpToggle.setAttribute("aria-expanded", "true");
+                        } else {
+                            helpPanel.setAttribute("hidden", "");
+                            helpToggle.textContent = "Show principal component interpretation guide";
+                            helpToggle.setAttribute("aria-expanded", "false");
+                        }
+                    });
+                }
+
+                if (loadingsToggle && loadingsPanel) {
+                    loadingsToggle.addEventListener("click", function() {
+                        const isHidden = loadingsPanel.hasAttribute("hidden");
+                        if (isHidden) {
+                            loadingsPanel.removeAttribute("hidden");
+                            loadingsToggle.textContent = "Hide full stat loading table";
+                            loadingsToggle.setAttribute("aria-expanded", "true");
+                        } else {
+                            loadingsPanel.setAttribute("hidden", "");
+                            loadingsToggle.textContent = "Show full stat loading table";
+                            loadingsToggle.setAttribute("aria-expanded", "false");
+                        }
+                    });
+                }
+
+                function toRows(dataObj) {
+                    const rows = [];
+                    for (const [feature, stats] of Object.entries(dataObj)) {
+                        if (!Array.isArray(stats) || stats.length !== 5) continue;
+                        const [min, q1, mean, q3, max] = stats.map(Number);
+                        if ([min, q1, mean, q3, max].some(v => Number.isNaN(v))) continue;
+                        rows.push({ feature, min, q1, mean, q3, max });
+                    }
+                    return rows;
+                }
+
+                function computeDomain(rows) {
+                    let lo = Infinity, hi = -Infinity;
+                    for (const r of rows) {
+                        lo = Math.min(lo, r.min);
+                        hi = Math.max(hi, r.max);
+                    }
+                    if (!Number.isFinite(lo) || !Number.isFinite(hi) || lo === hi) {
+                        lo = -1; hi = 1;
+                    }
+                    const pad = (hi - lo) * 0.05;
+                    return { lo: lo - pad, hi: hi + pad };
+                }
+
+                function pct(v, dom) {
+                    return 100 * (v - dom.lo) / (dom.hi - dom.lo);
+                }
+
+                function render() {
+                    container.innerHTML = "";
+
+                    let rows = toRows(BOX_DATA);
+                    rows.sort((a, b) => b.mean - a.mean);
+
+                    const showAll = showAllToggle.checked;
+                    const shown = showAll ? rows : rows.slice(0, 15);
+
+                    const dom = computeDomain(shown);
+                    const showZero = showZeroToggle.checked;
+                    const zeroInRange = (dom.lo < 0 && dom.hi > 0);
+                    const zeroLeft = pct(0, dom);
+
+                    for (const r of shown) {
+                        const row = document.createElement("div");
+                        row.className = "bp-row";
+
+                        const label = document.createElement("div");
+                        label.className = "bp-label";
+                        label.textContent = r.feature;
+
+                        const plot = document.createElement("div");
+                        plot.className = "bp-plot";
+                        plot.setAttribute("data-feature", r.feature);
+
+                        if (showZero && zeroInRange) {
+                            const zero = document.createElement("div");
+                            zero.className = "bp-zero";
+                            zero.style.left = `${zeroLeft}%`;
+                            plot.appendChild(zero);
+                        }
+
+                        const whisker = document.createElement("div");
+                        whisker.className = "bp-whisker";
+                        const wLeft = pct(r.min, dom);
+                        const wRight = pct(r.max, dom);
+                        whisker.style.left = `${wLeft}%`;
+                        whisker.style.width = `${Math.max(0, wRight - wLeft)}%`;
+                        plot.appendChild(whisker);
+
+                        const capL = document.createElement("div");
+                        capL.className = "bp-cap";
+                        capL.style.left = `${wLeft}%`;
+                        plot.appendChild(capL);
+
+                        const capR = document.createElement("div");
+                        capR.className = "bp-cap";
+                        capR.style.left = `${wRight}%`;
+                        plot.appendChild(capR);
+
+                        const box = document.createElement("div");
+                        box.className = "bp-box";
+                        const bLeft = pct(r.q1, dom);
+                        const bRight = pct(r.q3, dom);
+                        box.style.left = `${bLeft}%`;
+                        box.style.width = `${Math.max(0, bRight - bLeft)}%`;
+                        plot.appendChild(box);
+
+                        const mean = document.createElement("div");
+                        mean.className = "bp-mean";
+                        mean.style.left = `${pct(r.mean, dom)}%`;
+                        plot.appendChild(mean);
+
+                        plot.title = `min ${r.min.toFixed(4)} | q1 ${r.q1.toFixed(4)} | mean ${r.mean.toFixed(4)} | q3 ${r.q3.toFixed(4)} | max ${r.max.toFixed(4)}`;
+
+                        row.appendChild(label);
+                        row.appendChild(plot);
+
+                        const intensity = Math.min(1, Math.abs(r.mean) / (dom.hi - dom.lo) * 6);
+                        const alphaStrong = 0.20 + 0.55 * intensity;
+                        const alphaSoft   = 0.10 + 0.30 * intensity;
+
+                        if (r.mean >= 0) {
+                            plot.style.setProperty("--accent", `rgba(80, 200, 140, ${alphaStrong})`);
+                            plot.style.setProperty("--accent-soft", `rgba(80, 200, 140, ${alphaSoft})`);
+                        } else {
+                            plot.style.setProperty("--accent", `rgba(220, 90, 90, ${alphaStrong})`);
+                            plot.style.setProperty("--accent-soft", `rgba(220, 90, 90, ${alphaSoft})`);
+                        }
+
+                        container.appendChild(row);
+                    }
+                }
+
+                showAllToggle.addEventListener("change", render);
+                showZeroToggle.addEventListener("change", render);
+                render();
+            })();
+            </script>
+            {% endif %}
+        </main>
+    </div>
+</body>
+</html>

@@ -1,114 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Rugby League Recommender System - About</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='webapp_styling.css') }}">
-</head>
-<body>
-  <div class="page">
-    <header class="header">
-      <div class="brand">
-        <div class="badge"></div>
-        <div>
-          <h1>Rugby League Recommender System</h1>
-          <p class="subtitle">About</p>
-        </div>
-      </div>
-    </header>
+<section class="about-section">
+  <h2>What this tool does</h2>
+  <p>
+    This web app produces coaching recommendations for an upcoming match based on an
+    input profile of the opposition. The input is expressed as z-scores
+    (standardised values), so a slider value of 0 represents “league average”, +1 means “one standard
+    deviation above average”, and −1 means “one standard deviation below average”.
+  </p>
+  <p>
+    The output is a ranked set of statistics or stat-themes that the system estimates are most worth targeting
+    against that specific opposition profile.
+  </p>
+  <p>
+    The most useful insights typically come from how these recommendations <em>change</em> with different opposition profiles,
+    rather than from any single statistic in isolation.
+  </p>
+</section>
 
-    <main class="card">
-      <div class="about">
-        <section class="about-section">
-          <h2>What this tool does</h2>
-          <p>
-            This web app produces coaching recommendations for an upcoming match based on an
-            input profile of the opposition. The input is expressed as z-scores
-            (standardised values), so a slider value of 0 represents “league average”, +1 means “one standard
-            deviation above average”, and −1 means “one standard deviation below average”.
-          </p>
-          <p>
-            The output is a ranked set of statistics or stat-themes that the system estimates are most worth targeting
-            against that specific opposition profile.
-          </p>
-        </section>
+<section class="about-section">
+  <h2>How it works</h2>
 
-        <section class="about-section">
-          <h2>How it works</h2>
+  <div class="about-steps">
 
-          <div class="about-steps">
+    <div class="about-step">
+      <h3>1) Retrieve similar opposition cases</h3>
+      <p>
+        Given your opposition input, the system finds historical matches with a similar opposition profile using a
+        nearest neighbour search through a database of over 8000 NRL matches.
+      </p>
+    </div>
 
-            <div class="about-step">
-              <h3>1) Retrieve similar opposition cases</h3>
-              <p>
-                Given your opposition input, the system finds historical matches with a similar opposition profile using a
-                nearest neighbour search through a database of over 8000 NRL matches.
-              </p>
-            </div>
+    <div class="about-step">
+      <h3>2) Fit a weighted model on the fly</h3>
+      <p>
+        Using the retrieved historical cases, the app fits a weighted regression model. More similar cases receive
+        more weight, so the fitted model is tailored to the specific opposition context.
+      </p>
+    </div>
 
-            <div class="about-step">
-              <h3>2) Fit a weighted model on the fly</h3>
-              <p>
-                Using the retrieved historical cases, the app fits a weighted regression model. More similar cases receive
-                more weight, so the fitted model is tailored to the specific opposition context.
-              </p>
-            </div>
+    <div class="about-step">
+      <h3>3) Turn explanations into recommendations</h3>
+      <p>
+        The model’s predictions are explained using SHAP contribution values. Each value represents how much a statistic
+        pushed the prediction up or down <em>given all the other statistics in that match context</em>.
+      </p>
+      <p>
+        The explanations for the most positive predictions made by the model are averaged, and returned as recommendations.
+        This means the output reflects which statistics were most influential in similar successful performances, not
+        necessarily which are most important in isolation.
+      </p>
+    </div>
 
-            <div class="about-step">
-              <h3>3) Turn explanations into recommendations</h3>
-              <p>
-                The model’s predictions are explained using SHAP contribution values. The explanations for the most
-                positive predictions made by the model are averaged, and returned as recommendations.
-              </p>
-            </div>
-
-            <div class="about-step">
-              <h3>Player level</h3>
-              <p>
-                In player level mode, the same logic is applied per position group (middles, halves, etc.). The system retrieves
-                similar opposition position-group cases and fits matchup conditioned models, producing recommendations per position group.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section class="about-section">
-          <h2>How to interpret the numbers</h2>
-          <ul class="about-list">
-            <li><strong>Z-scores (inputs):</strong> relative to season averages; + means the opposition tends to do more of that thing than average.</li>
-            <li><strong>Recommendation scores (outputs):</strong> relative importance weights from the explanation layer; larger magnitude means more influence.</li>
-            <li><strong>Sign:</strong> positive vs negative indicates direction of influence under the fitted model, not a guaranteed causal effect.</li>
-          </ul>
-        </section>
-
-        <section class="about-section">
-          <h2>Limitations</h2>
-          <ul class="about-list">
-            <li>
-              <strong>Not causal:</strong> recommendations are based on patterns in historical data, not controlled experiments.
-            </li>
-            <li>
-              <strong>Feature dependence:</strong> many rugby statistics are correlated, which can make attribution methods less stable.
-            </li>
-            <li>
-              <strong>Context loss:</strong> match events, injuries, weather, and tactics aren’t fully captured in box-score stats.
-            </li>
-            <li>
-              <strong>“Similarity” is a choice:</strong> the nearest-neighbour feature set defines what “similar opposition” means.
-            </li>
-          </ul>
-        </section>
-
-        <div class="actions">
-          <a class="btn ghost" href="{{ url_for('index') }}">Back to home</a>
-        </div>
-      </div>
-    </main>
-
-    <footer class="footer">
-      <p>CS344 · Rugby League Coaching Recommender</p>
-    </footer>
+    <div class="about-step">
+      <h3>Player level</h3>
+      <p>
+        In player level mode, the same logic is applied per position group (middles, halves, etc.). The system retrieves
+        similar opposition position-group cases and fits matchup conditioned models, producing recommendations per position group.
+      </p>
+    </div>
   </div>
-</body>
-</html>
+</section>
+
+<section class="about-section">
+  <h2>How to interpret the numbers</h2>
+  <ul class="about-list">
+    <li><strong>Z-scores (inputs):</strong> relative to season averages; + means the opposition tends to do more of that thing than average.</li>
+    <li><strong>Recommendation scores (outputs):</strong> relative importance weights from the explanation layer; larger magnitude means more influence in that specific context.</li>
+    <li><strong>Sign:</strong> positive vs negative indicates direction of influence under the fitted model, not a guaranteed causal effect.</li>
+    <li>
+      <strong>Context matters:</strong> SHAP values are conditional. A statistic may be important because of how it interacts with the rest of the match profile, not because it is always beneficial on its own.
+    </li>
+    <li>
+      <strong>Focus on differences:</strong> the most meaningful insights often come from statistics whose importance is unusually high or low for a given opposition, rather than those that are always near the top.
+    </li>
+    <li>
+      <strong>Example – Tackles Made:</strong> this statistic often appears highly ranked. This does not mean “make more tackles” in isolation. Instead, it reflects how well teams cope with the expected defensive workload. Given the opposition’s attacking profile, higher values often indicate successful defensive resilience (i.e. completing tackles and preventing scores), which is strongly associated with winning.
+    </li>
+  </ul>
+</section>
+
+<section class="about-section">
+  <h2>Limitations</h2>
+  <ul class="about-list">
+    <li>
+      <strong>Not causal:</strong> recommendations are based on patterns in historical data, not controlled experiments.
+    </li>
+    <li>
+      <strong>Feature dependence:</strong> many rugby league statistics are correlated, which can make attribution methods less stable.
+    </li>
+    <li>
+      <strong>Context loss:</strong> match events, injuries, weather, and tactics aren’t fully captured in box-score stats.
+    </li>
+    <li>
+      <strong>“Similarity” is a choice:</strong> the nearest-neighbour feature set defines what “similar opposition” means.
+    </li>
+  </ul>
+</section>
